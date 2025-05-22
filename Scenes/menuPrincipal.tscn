@@ -1,0 +1,231 @@
+[gd_scene load_steps=10 format=3 uid="uid://bp47wgmvoithm"]
+
+[ext_resource type="Script" uid="uid://cvolq4n0mj5dw" path="res://Scripts/menu_principal.gd" id="1_i1nop"]
+[ext_resource type="Texture2D" uid="uid://bqympsgavtk1y" path="res://Assets/sprites/GUI/MainMenuBackground2.png" id="2_1odsn"]
+[ext_resource type="FontFile" uid="uid://cpf2nj37kmnpl" path="res://Assets/fonts/Fonts/bloodcrowc.ttf" id="3_jfxkj"]
+[ext_resource type="StyleBox" uid="uid://dvgnmsib4sn2e" path="res://Assets/fonts/BotonPressed.tres" id="4_1odsn"]
+[ext_resource type="StyleBox" uid="uid://c21j1a40qc6gn" path="res://Assets/fonts/ColorBotones.tres" id="4_80gec"]
+[ext_resource type="AudioStream" uid="uid://cctmyfjllvv3h" path="res://Assets/sound/Music/y2mate.com - LOrbrie.mp3" id="6_1odsn"]
+[ext_resource type="Texture2D" uid="uid://dh2aa6puaip6t" path="res://Assets/sprites/GUI/button.png" id="6_gl783"]
+[ext_resource type="Texture2D" uid="uid://dkyvdktchqngx" path="res://Assets/sprites/GUI/main title.png" id="8_yrsm4"]
+
+[sub_resource type="Theme" id="Theme_1odsn"]
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 239.0
+offset_top = 40.0
+offset_right = 239.0
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_i1nop")
+
+[node name="VerdaderaFormaLogo" type="Sprite2D" parent="."]
+position = Vector2(391.5, 313.5)
+scale = Vector2(0.666146, 0.663889)
+texture = ExtResource("2_1odsn")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 32.0
+offset_top = 169.0
+offset_right = 30.0
+offset_bottom = 171.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.544918, 0.517616)
+
+[node name="PanelContainer" type="PanelContainer" parent="CenterContainer"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(1150, 650)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+alignment = 1
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+alignment = 1
+
+[node name="Jugar" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer/VBoxContainer2"]
+texture_filter = 1
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+size_flags_stretch_ratio = 0.0
+theme = SubResource("Theme_1odsn")
+theme_override_constants/outline_size = 12
+theme_override_fonts/font = ExtResource("3_jfxkj")
+theme_override_font_sizes/font_size = 60
+theme_override_styles/hover = ExtResource("4_1odsn")
+theme_override_styles/pressed = ExtResource("4_1odsn")
+theme_override_styles/normal = ExtResource("4_80gec")
+text = "Jugar"
+
+[node name="Asincronico" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+theme_override_constants/outline_size = 12
+theme_override_fonts/font = ExtResource("3_jfxkj")
+theme_override_font_sizes/font_size = 60
+theme_override_styles/hover = ExtResource("4_1odsn")
+theme_override_styles/pressed = ExtResource("4_1odsn")
+theme_override_styles/normal = ExtResource("4_80gec")
+text = "Asincronia"
+
+[node name="Configuracion" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+theme_override_constants/outline_size = 12
+theme_override_fonts/font = ExtResource("3_jfxkj")
+theme_override_font_sizes/font_size = 60
+theme_override_styles/hover = ExtResource("4_1odsn")
+theme_override_styles/pressed = ExtResource("4_1odsn")
+theme_override_styles/normal = ExtResource("4_80gec")
+text = "Configuracion"
+
+[node name="Salir" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+theme_override_constants/outline_size = 12
+theme_override_fonts/font = ExtResource("3_jfxkj")
+theme_override_font_sizes/font_size = 60
+theme_override_styles/hover = ExtResource("4_1odsn")
+theme_override_styles/pressed = ExtResource("4_1odsn")
+theme_override_styles/normal = ExtResource("4_80gec")
+text = "Salir"
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="CenterContainer/PanelContainer"]
+visible = false
+top_level = true
+light_mask = 0
+clip_contents = true
+layout_mode = 2
+size_flags_stretch_ratio = 0.0
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="CenterContainer/PanelContainer/VBoxContainer3"]
+clip_contents = true
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("6_gl783")
+
+[node name="Label" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer3/TextureRect"]
+clip_contents = true
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 2.955
+offset_left = -33.0
+offset_top = -11.0
+offset_right = 15.0
+offset_bottom = -0.240021
+
+[node name="Continuar" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer3/TextureRect/Label"]
+layout_mode = 2
+offset_left = 23.0
+offset_top = 57.0
+offset_right = 407.0
+offset_bottom = 88.0
+text = "Jugar"
+flat = true
+
+[node name="TextureRect2" type="TextureRect" parent="CenterContainer/PanelContainer/VBoxContainer3"]
+layout_mode = 2
+texture = ExtResource("6_gl783")
+
+[node name="Label2" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer3/TextureRect2"]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Continuar" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer3/TextureRect2/Label2"]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Asincrónico"
+flat = true
+
+[node name="TextureRect3" type="TextureRect" parent="CenterContainer/PanelContainer/VBoxContainer3"]
+layout_mode = 2
+texture = ExtResource("6_gl783")
+
+[node name="Label3" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer3/TextureRect3"]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Continuar" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer3/TextureRect3/Label3"]
+layout_mode = 2
+offset_left = -7.0
+offset_top = 43.0
+offset_right = 377.0
+offset_bottom = 89.0
+text = "Configuración"
+flat = true
+
+[node name="TextureRect4" type="TextureRect" parent="CenterContainer/PanelContainer/VBoxContainer3"]
+layout_mode = 2
+texture = ExtResource("6_gl783")
+
+[node name="Label3" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer3/TextureRect4"]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Continuar" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer3/TextureRect4/Label3"]
+layout_mode = 2
+offset_left = -7.0
+offset_top = 43.0
+offset_right = 377.0
+offset_bottom = 89.0
+text = "Salir"
+flat = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_1odsn")
+autoplay = true
+
+[node name="MainTitle" type="Sprite2D" parent="."]
+position = Vector2(397, 342)
+scale = Vector2(0.627083, 0.721296)
+texture = ExtResource("8_yrsm4")
+
+[connection signal="pressed" from="CenterContainer/PanelContainer/VBoxContainer/VBoxContainer2/Jugar" to="." method="_on_jugar_pressed"]
+[connection signal="pressed" from="CenterContainer/PanelContainer/VBoxContainer/VBoxContainer2/Jugar" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="CenterContainer/PanelContainer/VBoxContainer/VBoxContainer2/Asincronico" to="." method="_on_asincronico_pressed"]
+[connection signal="pressed" from="CenterContainer/PanelContainer/VBoxContainer/VBoxContainer2/Asincronico" to="." method="_on_button_2_pressed"]
+[connection signal="pressed" from="CenterContainer/PanelContainer/VBoxContainer/VBoxContainer2/Configuracion" to="." method="_on_configuracion_pressed"]
+[connection signal="pressed" from="CenterContainer/PanelContainer/VBoxContainer/VBoxContainer2/Configuracion" to="." method="_on_button_3_pressed"]
+[connection signal="pressed" from="CenterContainer/PanelContainer/VBoxContainer/VBoxContainer2/Salir" to="." method="_on_salir_pressed"]

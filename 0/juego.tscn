@@ -1,0 +1,60 @@
+[gd_scene load_steps=8 format=3 uid="uid://cg8wwm58jovu2"]
+
+[ext_resource type="Texture2D" uid="uid://dj5b34lm1v86b" path="res://0/fotosPrueba1/hombrelobo.webp" id="1_bpi8g"]
+[ext_resource type="Script" uid="uid://dour2elyxnqdv" path="res://Scripts/juego.gd" id="1_hblkt"]
+[ext_resource type="Script" uid="uid://pmrn8lcbxxpx" path="res://Scripts/character_body_2d.gd" id="3_sbygf"]
+[ext_resource type="Texture2D" uid="uid://s65xh3tv66p1" path="res://0/fotosPrueba1/Rocky Roads/Objects/apple.png" id="4_ubyp4"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hblkt"]
+resource_local_to_scene = true
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ubyp4"]
+size = Vector2(74, 104)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ll0et"]
+size = Vector2(1126, 116)
+
+[node name="Juego" type="Node2D"]
+script = ExtResource("1_hblkt")
+
+[node name="Hombrelobo" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(523, 323)
+scale = Vector2(0.481445, 0.421875)
+texture = ExtResource("1_bpi8g")
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="."]
+visible = false
+offset_left = 468.0
+offset_top = 458.0
+offset_right = 700.0
+offset_bottom = 563.0
+
+[node name="Volver" type="Button" parent="VBoxContainer2"]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+text = "Volver"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_hblkt")
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+position = Vector2(7, -114)
+script = ExtResource("3_sbygf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+position = Vector2(238, 468)
+shape = SubResource("RectangleShape2D_ubyp4")
+
+[node name="Apple" type="Sprite2D" parent="CharacterBody2D"]
+position = Vector2(239, 466.25)
+scale = Vector2(4.25, 6.15625)
+texture = ExtResource("4_ubyp4")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(580, 593)
+shape = SubResource("RectangleShape2D_ll0et")
+
+[connection signal="pressed" from="VBoxContainer2/Volver" to="." method="_on_volver_pressed"]

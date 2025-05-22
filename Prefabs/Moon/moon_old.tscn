@@ -1,0 +1,253 @@
+[gd_scene load_steps=54 format=3 uid="uid://dekfej2mci4ub"]
+
+[ext_resource type="Script" uid="uid://b6qvahj5d0lo7" path="res://Scripts/moon.gd" id="1_00cq0"]
+[ext_resource type="Texture2D" uid="uid://dirphaqbf8h7d" path="res://0/fotosPrueba1/moon/Moon_Phase_1.png" id="2_lbos3"]
+[ext_resource type="Script" uid="uid://nabju1wh1iks" path="res://Scripts/rayo.gd" id="2_lsi32"]
+[ext_resource type="Texture2D" uid="uid://c17d3o65jukcl" path="res://0/fotosPrueba1/moon/Moon_Phase_2.png" id="3_2xat7"]
+[ext_resource type="Texture2D" uid="uid://ins10jiigwqd" path="res://0/fotosPrueba1/moon/Moon_Phase_3.png" id="4_65qkk"]
+[ext_resource type="Texture2D" uid="uid://cc8snak3l0xk0" path="res://0/fotosPrueba1/moon/Moon_Phase_4.png" id="5_sdpqq"]
+[ext_resource type="Texture2D" uid="uid://dqjd5j2kfhejl" path="res://0/fotosPrueba1/moon/Moon_Phase_5.png" id="6_itbsd"]
+[ext_resource type="Texture2D" uid="uid://wt4s3dk5iroq" path="res://0/fotosPrueba1/moon/Moon_Phase_6.png" id="7_17nox"]
+[ext_resource type="Texture2D" uid="uid://ck00lc7jvd24j" path="res://0/fotosPrueba1/moon/Moon_Phase_7.png" id="8_ccsoj"]
+[ext_resource type="Texture2D" uid="uid://bdosnhlfb5ewj" path="res://0/fotosPrueba1/moon/Moon_Phase_8.png" id="9_d03f0"]
+[ext_resource type="Texture2D" uid="uid://colfkqcdctgid" path="res://0/fotosPrueba1/rayo de luna/1_0.png" id="11_16kps"]
+[ext_resource type="Texture2D" uid="uid://dci4ru21tlnxa" path="res://0/fotosPrueba1/rayo de luna/1_1.png" id="12_u2jof"]
+[ext_resource type="Texture2D" uid="uid://cei7o5r6kb8q" path="res://0/fotosPrueba1/rayo de luna/1_2.png" id="13_e42e1"]
+[ext_resource type="Texture2D" uid="uid://cshpr0oek27of" path="res://0/fotosPrueba1/rayo de luna/1_3.png" id="14_xmum5"]
+[ext_resource type="Texture2D" uid="uid://b21h0ra8sofd5" path="res://0/fotosPrueba1/rayo de luna/1_4.png" id="15_gxgps"]
+[ext_resource type="Texture2D" uid="uid://o45ki8i6pkdu" path="res://0/fotosPrueba1/rayo de luna/1_5.png" id="16_b4tg0"]
+[ext_resource type="Texture2D" uid="uid://qu6qecl4xaeo" path="res://0/fotosPrueba1/rayo de luna/1_6.png" id="17_ejup7"]
+[ext_resource type="Texture2D" uid="uid://dvg5gk3imsjbf" path="res://0/fotosPrueba1/rayo de luna/1_7.png" id="18_8vauf"]
+[ext_resource type="Texture2D" uid="uid://hw531sgh634n" path="res://0/fotosPrueba1/rayo de luna/1_8.png" id="19_d231o"]
+[ext_resource type="Texture2D" uid="uid://74esmj0g4vjl" path="res://0/fotosPrueba1/rayo de luna/1_9.png" id="20_dt0a4"]
+[ext_resource type="Texture2D" uid="uid://beriqgic22obg" path="res://0/fotosPrueba1/rayo de luna/1_10.png" id="21_xxp5k"]
+[ext_resource type="Texture2D" uid="uid://cb8e4x2lnc6do" path="res://0/fotosPrueba1/rayo de luna/1_11.png" id="22_5tx5x"]
+[ext_resource type="Texture2D" uid="uid://diq2q7v7fs8m1" path="res://0/fotosPrueba1/rayo de luna/1_12.png" id="23_prutl"]
+[ext_resource type="Texture2D" uid="uid://8u8sxi2g6ode" path="res://0/fotosPrueba1/rayo de luna/1_13.png" id="24_ff5ff"]
+[ext_resource type="Texture2D" uid="uid://cxssekunepkuq" path="res://0/fotosPrueba1/rayo de luna/1_14.png" id="25_63if1"]
+[ext_resource type="Texture2D" uid="uid://b8yppstq2p38q" path="res://0/fotosPrueba1/rayo de luna/1_15.png" id="26_douei"]
+[ext_resource type="Texture2D" uid="uid://c10hw1uxgigjx" path="res://0/fotosPrueba1/rayo de luna/1_16.png" id="27_y05ye"]
+[ext_resource type="Texture2D" uid="uid://r0fyqnc68ov8" path="res://0/fotosPrueba1/rayo de luna/1_17.png" id="28_uummd"]
+[ext_resource type="Texture2D" uid="uid://bff3le1o13ksn" path="res://0/fotosPrueba1/rayo de luna/1_18.png" id="29_h8vcg"]
+[ext_resource type="Texture2D" uid="uid://fpmb7cc2r2k0" path="res://0/fotosPrueba1/rayo de luna/1_19.png" id="30_amhr7"]
+[ext_resource type="Texture2D" uid="uid://dmt02ykulbmgc" path="res://0/fotosPrueba1/rayo de luna/1_20.png" id="31_rkit0"]
+[ext_resource type="Texture2D" uid="uid://bl123rhldtca7" path="res://0/fotosPrueba1/rayo de luna/1_21.png" id="32_ky6nv"]
+[ext_resource type="Texture2D" uid="uid://ckali5iac0dvy" path="res://0/fotosPrueba1/rayo de luna/1_22.png" id="33_oqx4i"]
+[ext_resource type="Texture2D" uid="uid://dbqes7rnopgc1" path="res://0/fotosPrueba1/rayo de luna/1_23.png" id="34_yymlq"]
+[ext_resource type="Texture2D" uid="uid://cv8lj1von8665" path="res://0/fotosPrueba1/rayo de luna/1_24.png" id="35_0vwrl"]
+[ext_resource type="Texture2D" uid="uid://bc8vyrxtxq2me" path="res://0/fotosPrueba1/rayo de luna/1_25.png" id="36_8uonq"]
+[ext_resource type="Texture2D" uid="uid://civlo4fmiattb" path="res://0/fotosPrueba1/rayo de luna/1_26.png" id="37_6ar0l"]
+[ext_resource type="Texture2D" uid="uid://t6fbcr5by6ve" path="res://0/fotosPrueba1/rayo de luna/1_27.png" id="38_e2phq"]
+[ext_resource type="Texture2D" uid="uid://mqaw0ekyihxm" path="res://0/fotosPrueba1/rayo de luna/1_28.png" id="39_4qdi6"]
+[ext_resource type="Texture2D" uid="uid://snp7fwy4j85h" path="res://0/fotosPrueba1/rayo de luna/1_29.png" id="40_rs8qn"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fjjew"]
+atlas = ExtResource("2_lbos3")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nxnlu"]
+atlas = ExtResource("3_2xat7")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jq1wv"]
+atlas = ExtResource("4_65qkk")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_seern"]
+atlas = ExtResource("5_sdpqq")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cn2id"]
+atlas = ExtResource("6_itbsd")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rrdl0"]
+atlas = ExtResource("7_17nox")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5mdvk"]
+atlas = ExtResource("8_ccsoj")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_abge7"]
+atlas = ExtResource("9_d03f0")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hhp5y"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fjjew")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nxnlu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jq1wv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_seern")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cn2id")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rrdl0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5mdvk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_abge7")
+}],
+"loop": true,
+"name": &"floatar",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lbos3"]
+size = Vector2(642, 661)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fxdj6"]
+atlas = ExtResource("11_16kps")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xh5fd"]
+atlas = ExtResource("12_u2jof")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_16kps"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_16kps")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_u2jof")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_e42e1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_xmum5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_gxgps")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_b4tg0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_ejup7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_8vauf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_d231o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_dt0a4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_xxp5k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_5tx5x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_prutl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_ff5ff")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_63if1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_douei")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_y05ye")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_uummd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("29_h8vcg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("30_amhr7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("31_rkit0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("32_ky6nv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("33_oqx4i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("34_yymlq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("35_0vwrl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("36_8uonq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("37_6ar0l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("38_e2phq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("39_4qdi6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("40_rs8qn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fxdj6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xh5fd")
+}],
+"loop": true,
+"name": &"caere",
+"speed": 60.0
+}]
+
+[node name="Moon" type="Node2D"]
+position = Vector2(407, 371)
+script = ExtResource("1_00cq0")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(10, 10)
+sprite_frames = SubResource("SpriteFrames_hhp5y")
+animation = &"floatar"
+autoplay = "floatar"
+
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
+visible = false
+
+[node name="Rayos" type="Node2D" parent="."]
+
+[node name="RayoSpawn" type="Timer" parent="Rayos"]
+autostart = true
+
+[node name="Rayo" type="Area2D" parent="Rayos"]
+script = ExtResource("2_lsi32")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rayos/Rayo"]
+position = Vector2(-1, -2.5)
+shape = SubResource("RectangleShape2D_lbos3")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Rayos/Rayo"]
+position = Vector2(487, 204)
+scale = Vector2(3.4, 2)
+sprite_frames = SubResource("SpriteFrames_16kps")
+animation = &"caere"

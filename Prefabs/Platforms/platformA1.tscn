@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://7eduktatctps"]
+
+[ext_resource type="Texture2D" uid="uid://cvk3jl2l85fvk" path="res://Assets/sprites/Map/plataform128.png" id="1_2icok"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7mk6g"]
+size = Vector2(112, 30)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_rnmht"]
+polygon = PackedVector2Array(32, -20, 48, -8, 48, 0, 24, 24, -40, 24, -64, 8, -64, -8, -48, -20)
+
+[node name="PlatformA1" type="Node2D"]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+texture = ExtResource("1_2icok")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_7mk6g")
+one_way_collision = true
+one_way_collision_margin = 8.0
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="StaticBody2D"]
+position = Vector2(8, 0)
+occluder = SubResource("OccluderPolygon2D_rnmht")

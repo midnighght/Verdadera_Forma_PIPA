@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://brtyrcego6vmv"]
+
+[ext_resource type="Texture2D" uid="uid://bb8w8k8btteis" path="res://fotosPrueba1/ajolote.png" id="1_6j48p"]
+
+[node name="Escena3" type="Node2D"]
+
+[node name="Ajolote" type="Sprite2D" parent="."]
+position = Vector2(247, 125)
+texture = ExtResource("1_6j48p")
