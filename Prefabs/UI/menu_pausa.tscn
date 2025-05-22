@@ -1,8 +1,8 @@
 [gd_scene load_steps=9 format=3 uid="uid://cwjnun1tytdmm"]
 
 [ext_resource type="Script" uid="uid://cmghae80vdcu4" path="res://Scripts/menu_pausa.gd" id="1_7dldy"]
-[ext_resource type="Shader" uid="uid://bf6q7j4kt1yux" path="res://fonts/Menu.gdshader" id="2_pq2yk"]
-[ext_resource type="Texture2D" uid="uid://dh2aa6puaip6t" path="res://PIPA Verdadera Forma/button.png" id="3_pq2yk"]
+[ext_resource type="Shader" uid="uid://bf6q7j4kt1yux" path="res://Assets/fonts/Menu.gdshader" id="2_pq2yk"]
+[ext_resource type="Texture2D" uid="uid://dh2aa6puaip6t" path="res://Assets/sprites/GUI/button.png" id="3_pq2yk"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mumad"]
 shader = ExtResource("2_pq2yk")
