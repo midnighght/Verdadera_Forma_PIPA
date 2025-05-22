@@ -1,5 +1,37 @@
-[gd_scene format=3 uid="uid://4nd0pv24mqk8"]
+[gd_scene load_steps=4 format=3 uid="uid://4nd0pv24mqk8"]
+
+[ext_resource type="Texture2D" uid="uid://xqu0fou4dnxt" path="res://Assets/sprites/Moon/lunasprite.png" id="1_swcsj"]
+
+[sub_resource type="Gradient" id="Gradient_esaw7"]
+offsets = PackedFloat32Array(0, 0.162319, 0.518841, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.1, 0.0858167, 0.077, 1, 0.15, 0.115, 0, 0.941176, 0.126667, 0.2, 0, 0.784314)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_xtkht"]
+gradient = SubResource("Gradient_esaw7")
+width = 512
+height = 512
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
 
 [node name="Moon" type="Node2D"]
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
+visible = false
+enabled = false
+metadata/_edit_lock_ = true
+
+[node name="Shadow Cast Base" type="PointLight2D" parent="."]
+position = Vector2(-208, -1312)
+scale = Vector2(10, 10)
+blend_mode = 1
+texture = SubResource("GradientTexture2D_xtkht")
+
+[node name="Light Cast" type="PointLight2D" parent="Shadow Cast Base"]
+scale = Vector2(1, 1)
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_xtkht")
+
+[node name="Moon" type="Sprite2D" parent="."]
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("1_swcsj")
