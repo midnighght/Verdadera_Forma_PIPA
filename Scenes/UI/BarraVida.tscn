@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://dn7v2jcfybul5"]
+
+[ext_resource type="Texture2D" uid="uid://olevtwhs2m6y" path="res://0/img/fondo_barra.png" id="1_77nau"]
+[ext_resource type="Texture2D" uid="uid://b1bygpn6h1pqc" path="res://0/img/borde_barra.png" id="2_i6j3y"]
+[ext_resource type="Texture2D" uid="uid://dlp5vw6lqwpus" path="res://0/img/progreso_barra.png" id="3_2exxp"]
+[ext_resource type="Script" uid="uid://cit72nv6lqqj8" path="res://Scenes/UI/texture_progress_bar.gd" id="4_wgxfv"]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+offset_left = 111.0
+offset_top = 106.0
+offset_right = 408.0
+offset_bottom = 146.0
+max_value = 1000.0
+value = 1000.0
+texture_under = ExtResource("1_77nau")
+texture_over = ExtResource("2_i6j3y")
+texture_progress = ExtResource("3_2exxp")
+script = ExtResource("4_wgxfv")

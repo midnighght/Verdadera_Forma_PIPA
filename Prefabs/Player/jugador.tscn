@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://b154j5rcla61x"]
+[gd_scene load_steps=14 format=3 uid="uid://b154j5rcla61x"]
 
 [ext_resource type="Script" uid="uid://c8y5d52uvufop" path="res://Prefabs/Player/jugador.gd" id="1_oua2g"]
 [ext_resource type="Texture2D" uid="uid://csfwbjq1kt7h2" path="res://0/fotosPrueba1/AssetsAtrapaManzanas/Jugador/idle/player-idle-1.png" id="1_x1a6r"]
@@ -11,9 +11,6 @@
 [ext_resource type="Texture2D" uid="uid://bf14efadofmai" path="res://0/fotosPrueba1/AssetsAtrapaManzanas/Jugador/run/player-run-4.png" id="8_bnm2g"]
 [ext_resource type="Texture2D" uid="uid://debnqql6360lv" path="res://0/fotosPrueba1/AssetsAtrapaManzanas/Jugador/run/player-run-5.png" id="9_wu5nh"]
 [ext_resource type="Texture2D" uid="uid://cxg8lr6imv6gy" path="res://0/fotosPrueba1/AssetsAtrapaManzanas/Jugador/run/player-run-6.png" id="10_y2gsv"]
-[ext_resource type="Texture2D" uid="uid://ikk26mi3fgtx" path="res://0/fotosPrueba1/BARRADEVIDAESTASI4.png" id="12_1bknw"]
-[ext_resource type="Texture2D" uid="uid://blgyegs5lgux8" path="res://0/fotosPrueba1/BARRADEVIDAESTAS2I.png" id="13_fr03m"]
-[ext_resource type="Texture2D" uid="uid://c3n2wtltleg10" path="res://0/fotosPrueba1/BARRADEVIDAESTASI3.png" id="14_yy7ku"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hf4tf"]
 
@@ -79,23 +76,3 @@ texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_c2yei")
 animation = &"Iddle"
 speed_scale = 4.0
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer"]
-position = Vector2(61, 675)
-texture = ExtResource("12_1bknw")
-
-[node name="Sprite2D2" type="Sprite2D" parent="CanvasLayer"]
-position = Vector2(193, 675)
-texture = ExtResource("13_fr03m")
-
-[node name="Sprite2D3" type="Sprite2D" parent="CanvasLayer"]
-position = Vector2(301, 675)
-texture = ExtResource("14_yy7ku")
-
-[node name="TextureProgressBar" type="TextureProgressBar" parent="CanvasLayer"]
-offset_left = 153.0
-offset_top = 427.0
-offset_right = 193.0
-offset_bottom = 467.0
