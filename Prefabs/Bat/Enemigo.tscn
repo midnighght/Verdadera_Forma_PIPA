@@ -25,11 +25,11 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_hxdoq"]
-size = Vector2(289, 162)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_okatw"]
 size = Vector2(293, 155)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hxdoq"]
+size = Vector2(289, 162)
 
 [node name="Enemigo" type="Node2D"]
 script = ExtResource("1_okatw")
@@ -41,15 +41,17 @@ sprite_frames = SubResource("SpriteFrames_2mqn1")
 autoplay = "default"
 frame_progress = 0.550292
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2(-0.5, 1)
-shape = SubResource("RectangleShape2D_hxdoq")
-
 [node name="colisionJugador" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="colisionJugador"]
 position = Vector2(-0.5, 4.5)
 shape = SubResource("RectangleShape2D_okatw")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+visible = false
+position = Vector2(-0.5, 1)
+shape = SubResource("RectangleShape2D_hxdoq")
 
 [connection signal="body_entered" from="colisionJugador" to="." method="_on_colision_jugador_body_entered"]

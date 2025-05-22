@@ -16,7 +16,7 @@ var tiempo_para_cambio: float = 0.0
 func _ready():
 	cambiar_direccion()
 	tiempo_para_cambio = randf_range(1.0, cambio_direccion_tiempo)
-	sprite.play("volar")
+	sprite.play("default")
 
 func _physics_process(delta):
 	# Temporizador y cambio de dirección

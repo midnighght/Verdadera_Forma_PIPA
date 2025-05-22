@@ -4,7 +4,7 @@ extends Control
 
 
 func _on_jugar_pressed() -> void:
-	get_tree().change_scene_to_file("res://Scripts/juego.tscn")
+	get_tree().change_scene_to_file("res://Scenes/juego.tscn")
 
 
 func _on_asincronico_pressed() -> void:
@@ -12,7 +12,7 @@ func _on_asincronico_pressed() -> void:
 
 
 func _on_configuracion_pressed() -> void:
-	get_tree().change_scene_to_file("res://Scripts/opciones.tscn")
+	get_tree().change_scene_to_file("res://Prefabs/UI/opciones.tscn")
 
 
 func _on_salir_pressed() -> void:

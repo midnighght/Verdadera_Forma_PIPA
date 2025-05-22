@@ -12,7 +12,7 @@ func _ready():
 
 
 func _on_volver_pressed() -> void:
-	get_tree().change_scene_to_file("res://menuPrincipal.tscn")
+	get_tree().change_scene_to_file("res://Scenes/menuPrincipal.tscn")
 
 
 func _on_confirmar_pressed() -> void:
