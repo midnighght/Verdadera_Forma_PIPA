@@ -52,7 +52,7 @@ offset_right = -2.0
 offset_bottom = 5.0
 
 [node name="Enemigo" parent="." instance=ExtResource("6_b83u4")]
-position = Vector2(1168, -64)
+position = Vector2(1134, 278)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_k4uls")
@@ -60,7 +60,7 @@ volume_db = -5.433
 autoplay = true
 
 [node name="Moon" parent="." instance=ExtResource("9_apw7y")]
-position = Vector2(200, -480)
+position = Vector2(1875, -43)
 
 [node name="PlatformA1" parent="." instance=ExtResource("10_r5jw4")]
 position = Vector2(1580, 582)

@@ -15,6 +15,10 @@ run/main_scene="uid://bp47wgmvoithm"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+GlobalConfig="*res://Scripts/GlobalConfig.gd"
+
 [display]
 
 window/size/viewport_width=1280
