@@ -1,0 +1,89 @@
+[gd_scene load_steps=12 format=3 uid="uid://dhk2lo4tw3igv"]
+
+[ext_resource type="Texture2D" uid="uid://bb038eylfetak" path="res://Assets/sprites/The Dawn/Layers/2.png" id="1_y0l0u"]
+[ext_resource type="Texture2D" uid="uid://or5pa0ceklen" path="res://Assets/sprites/The Dawn/Layers/3.png" id="2_1m00l"]
+[ext_resource type="Texture2D" uid="uid://dla526uf3cf8b" path="res://Assets/sprites/The Dawn/Layers/4.png" id="3_fmbe6"]
+[ext_resource type="Texture2D" uid="uid://bwcslto80kfdw" path="res://Assets/sprites/The Dawn/Layers/5.png" id="4_oyv52"]
+[ext_resource type="Texture2D" uid="uid://boem0a1i26pxt" path="res://Assets/sprites/The Dawn/Layers/7.png" id="5_r05w1"]
+[ext_resource type="Texture2D" uid="uid://deekfupn12eig" path="res://Assets/sprites/The Dawn/Layers/8.png" id="6_27sa0"]
+[ext_resource type="PackedScene" uid="uid://4nd0pv24mqk8" path="res://Prefabs/Moon/Moon.tscn" id="7_27sa0"]
+[ext_resource type="PackedScene" uid="uid://bbhbyc5imq54j" path="res://Prefabs/Platforms/platformA3.tscn" id="8_hf7ff"]
+[ext_resource type="PackedScene" uid="uid://xbkqp5rf11x0" path="res://Prefabs/Platforms/platformA2.tscn" id="9_8kjai"]
+[ext_resource type="PackedScene" uid="uid://7eduktatctps" path="res://Prefabs/Platforms/platformA1.tscn" id="10_vb3dy"]
+[ext_resource type="PackedScene" uid="uid://b154j5rcla61x" path="res://Prefabs/Player/jugador.tscn" id="11_ntqcy"]
+
+[node name="CityBackground" type="Node2D"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+offset_left = -2048.0
+offset_top = -2104.0
+offset_right = -1984.0
+offset_bottom = -2040.0
+scale = Vector2(64, 64)
+color = Color(0.64, 0.64, 0.64, 1)
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+layer = -32
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.1, 0.1)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+texture = ExtResource("1_y0l0u")
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.2, 0.2)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
+texture = ExtResource("2_1m00l")
+
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.25, 0.25)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer3"]
+texture = ExtResource("3_fmbe6")
+
+[node name="ParallaxLayer4" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.5, 0.5)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer4"]
+texture = ExtResource("4_oyv52")
+
+[node name="ParallaxLayer5" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.75, 0.75)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer5"]
+texture = ExtResource("5_r05w1")
+
+[node name="ParallaxLayer6" type="ParallaxLayer" parent="ParallaxBackground"]
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer6"]
+texture = ExtResource("6_27sa0")
+
+[node name="Moon" parent="." instance=ExtResource("7_27sa0")]
+position = Vector2(-704, -320)
+metadata/_edit_lock_ = true
+
+[node name="PlatformA1" parent="." instance=ExtResource("8_hf7ff")]
+position = Vector2(-592, 160)
+
+[node name="PlatformA2" parent="." instance=ExtResource("9_8kjai")]
+position = Vector2(-224, 344)
+
+[node name="PlatformA3" parent="." instance=ExtResource("8_hf7ff")]
+position = Vector2(192, 208)
+
+[node name="PlatformA4" parent="." instance=ExtResource("10_vb3dy")]
+position = Vector2(744, 288)
+
+[node name="Jugador" parent="." instance=ExtResource("11_ntqcy")]
+position = Vector2(-1, 0)
+scale = Vector2(4, 4)
+
+[node name="Camera2D" type="Camera2D" parent="Jugador"]
+position = Vector2(-2.25, -1083)
+offset = Vector2(0, -512)
+zoom = Vector2(0.78, 0.78)
+limit_top = 0
+limit_bottom = 2000
