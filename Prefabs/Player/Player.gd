@@ -113,8 +113,10 @@ func _physics_process(_delta):
 		
 	if nextToWall():
 		if onWallRight:
+			animationPlayer.play("Hanging")
 			sprite.set_flip_h(true)
 		if onWallLeft:
+			animationPlayer.play("Hanging")
 			sprite.set_flip_h(false)
 	
 	

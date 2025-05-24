@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://de1dg1tfntqd0"]
+[gd_scene load_steps=7 format=3 uid="uid://de1dg1tfntqd0"]
 
 [ext_resource type="PackedScene" uid="uid://bbhbyc5imq54j" path="res://Prefabs/Platforms/platformA3.tscn" id="1_tnq4l"]
 [ext_resource type="PackedScene" uid="uid://4nd0pv24mqk8" path="res://Prefabs/Moon/Moon.tscn" id="1_wqdgv"]
@@ -8,9 +8,6 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tnq4l"]
 size = Vector2(136, 36.8737)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_wqdgv"]
-size = Vector2(8897, 2.58517)
 
 [node name="TestPlay" type="Node2D"]
 
@@ -51,16 +48,12 @@ scale = Vector2(35.4701, 1.71605)
 
 [node name="RigidBody2D" type="StaticBody2D" parent="."]
 position = Vector2(960, 792)
+collision_layer = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
 position = Vector2(-580, -320)
 scale = Vector2(1, 39.92)
 shape = SubResource("RectangleShape2D_tnq4l")
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="RigidBody2D"]
-position = Vector2(3439.5, -844.4)
-scale = Vector2(1, 39.92)
-shape = SubResource("RectangleShape2D_wqdgv")
 
 [node name="PlatformA8" parent="." instance=ExtResource("2_wqdgv")]
 position = Vector2(3512, 792)
