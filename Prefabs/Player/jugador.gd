@@ -1,11 +1,17 @@
 extends CharacterBody2D
 
 var is_hidden: bool = false
-var health: int = 3
+@onready var health_bar = $BarraDeVida2
 
+var max_health = 1000
+var current_health = 1000
 
 
 func _ready():
+	print("READY")
+	health_bar.max_value = max_health
+	health_bar.value = current_health
+	
 	pass
 	
 func _process(delta):
@@ -30,11 +36,11 @@ func check_shelter():
 	
 	
 func take_damage(amount: int):
-	if !is_hidden:
-		health -= amount
-		$AnimationPlayer.play("hurt")
-		if health <= 0:
-			die()
+	current_health = max(current_health - amount, 0)
+	health_bar.value = current_health
+	$AnimationPlayer.play("hurt")
+	if current_health <= 0:
+		die()
 
 func die():
 	# Lógica de muerte
@@ -56,7 +62,7 @@ func _physics_process(delta):
 		
 	
 	if !is_on_floor():
-		velocity.y += 100
+		velocity.y += 1000*delta
 	
 	move_and_slide()
 	if velocity.x !=0:

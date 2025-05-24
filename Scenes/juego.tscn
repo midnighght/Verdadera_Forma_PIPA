@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://cfxj8vjesif61"]
+[gd_scene load_steps=18 format=3 uid="uid://cfxj8vjesif61"]
 
 [ext_resource type="Script" uid="uid://dour2elyxnqdv" path="res://Scripts/juego.gd" id="1_hblkt"]
 [ext_resource type="PackedScene" uid="uid://b154j5rcla61x" path="res://Prefabs/Player/jugador.tscn" id="2_hblkt"]
@@ -10,7 +10,6 @@
 [ext_resource type="AudioStream" uid="uid://cctmyfjllvv3h" path="res://Assets/sound/Music/y2mate.com - LOrbrie.mp3" id="8_k4uls"]
 [ext_resource type="PackedScene" uid="uid://dekfej2mci4ub" path="res://Prefabs/Moon/moon_old.tscn" id="9_apw7y"]
 [ext_resource type="PackedScene" uid="uid://bbhbyc5imq54j" path="res://Prefabs/Platforms/platformA3.tscn" id="10_r5jw4"]
-[ext_resource type="PackedScene" uid="uid://dn7v2jcfybul5" path="res://Scenes/UI/BarraVida.tscn" id="11_is4ij"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3lnup"]
 size = Vector2(811, 44.5)
@@ -76,6 +75,7 @@ texture = ExtResource("2_sbygf")
 [node name="Jugador" parent="." instance=ExtResource("2_hblkt")]
 position = Vector2(276, 488)
 scale = Vector2(4, 4)
+script = null
 
 [node name="Camera2D" type="Camera2D" parent="Jugador"]
 position = Vector2(94, -957)
@@ -226,5 +226,3 @@ position = Vector2(200, -480)
 
 [node name="PlatformA1" parent="." instance=ExtResource("10_r5jw4")]
 position = Vector2(1944, 440)
-
-[node name="BarraDeVida" parent="." instance=ExtResource("11_is4ij")]
