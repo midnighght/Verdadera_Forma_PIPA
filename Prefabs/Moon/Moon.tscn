@@ -16,6 +16,7 @@ fill_to = Vector2(0.5, 0)
 
 [node name="Moon" type="Node2D"]
 
+<<<<<<< Updated upstream
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
 visible = false
 enabled = false
@@ -23,15 +24,35 @@ metadata/_edit_lock_ = true
 
 [node name="Shadow Cast Base" type="PointLight2D" parent="."]
 position = Vector2(-208, -1312)
+=======
+[node name="Light Dynamics" type="Node2D" parent="."]
+
+[node name="Light Cast" type="PointLight2D" parent="Light Dynamics"]
+>>>>>>> Stashed changes
 scale = Vector2(10, 10)
 blend_mode = 1
 texture = SubResource("GradientTexture2D_xtkht")
 
+<<<<<<< Updated upstream
 [node name="Light Cast" type="PointLight2D" parent="Shadow Cast Base"]
 scale = Vector2(1, 1)
 shadow_enabled = true
+=======
+[node name="Shadow Cast Base" type="PointLight2D" parent="Light Dynamics"]
+scale = Vector2(10, 10)
+energy = 3.2
+blend_mode = 1
+range_layer_min = -64
+>>>>>>> Stashed changes
 texture = SubResource("GradientTexture2D_xtkht")
 
 [node name="Moon" type="Sprite2D" parent="."]
+position = Vector2(0, 1300)
 scale = Vector2(0.75, 0.75)
 texture = ExtResource("1_swcsj")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(1, 0, 0, 1)

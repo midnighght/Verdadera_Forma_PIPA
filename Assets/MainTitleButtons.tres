@@ -1,0 +1,7 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://brhg7qm8u6tf"]
+
+[ext_resource type="FontFile" uid="uid://cpf2nj37kmnpl" path="res://Assets/fonts/Fonts/bloodcrowc.ttf" id="1_0cael"]
+
+[resource]
+default_font = ExtResource("1_0cael")
+default_font_size = 50

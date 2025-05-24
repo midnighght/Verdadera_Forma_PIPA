@@ -1,0 +1,79 @@
+[gd_scene load_steps=8 format=3 uid="uid://de1dg1tfntqd0"]
+
+[ext_resource type="PackedScene" uid="uid://bbhbyc5imq54j" path="res://Prefabs/Platforms/platformA3.tscn" id="1_tnq4l"]
+[ext_resource type="PackedScene" uid="uid://4nd0pv24mqk8" path="res://Prefabs/Moon/Moon.tscn" id="1_wqdgv"]
+[ext_resource type="PackedScene" uid="uid://xbkqp5rf11x0" path="res://Prefabs/Platforms/platformA2.tscn" id="2_wqdgv"]
+[ext_resource type="PackedScene" uid="uid://7eduktatctps" path="res://Prefabs/Platforms/platformA1.tscn" id="3_g0num"]
+[ext_resource type="PackedScene" uid="uid://cduiuhtkc03h8" path="res://Prefabs/Player/Player.tscn" id="4_bv12a"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tnq4l"]
+size = Vector2(136, 36.8737)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wqdgv"]
+size = Vector2(8897, 2.58517)
+
+[node name="TestPlay" type="Node2D"]
+
+[node name="CanvasLayer -32" type="CanvasLayer" parent="."]
+layer = -32
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer -32"]
+offset_left = -160.0
+offset_top = -280.0
+offset_right = 2120.0
+offset_bottom = 1304.0
+
+[node name="Moon" parent="CanvasLayer -32" instance=ExtResource("1_wqdgv")]
+position = Vector2(250, -1100)
+
+[node name="PlatformA1" parent="." instance=ExtResource("1_tnq4l")]
+position = Vector2(2888, 704)
+
+[node name="PlatformA2" parent="." instance=ExtResource("1_tnq4l")]
+position = Vector2(1232, 920)
+
+[node name="PlatformA3" parent="." instance=ExtResource("2_wqdgv")]
+position = Vector2(1688, 376)
+
+[node name="PlatformA4" parent="." instance=ExtResource("3_g0num")]
+position = Vector2(1960, 656)
+
+[node name="PlatformA5" parent="." instance=ExtResource("3_g0num")]
+position = Vector2(376, 552)
+scale = Vector2(1, 39.92)
+
+[node name="PlatformA6" parent="." instance=ExtResource("2_wqdgv")]
+position = Vector2(920, 448)
+
+[node name="PlatformA7" parent="." instance=ExtResource("1_tnq4l")]
+position = Vector2(1120, 1016)
+scale = Vector2(35.4701, 1.71605)
+
+[node name="RigidBody2D" type="StaticBody2D" parent="."]
+position = Vector2(960, 792)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+position = Vector2(-580, -320)
+scale = Vector2(1, 39.92)
+shape = SubResource("RectangleShape2D_tnq4l")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="RigidBody2D"]
+position = Vector2(3439.5, -844.4)
+scale = Vector2(1, 39.92)
+shape = SubResource("RectangleShape2D_wqdgv")
+
+[node name="PlatformA8" parent="." instance=ExtResource("2_wqdgv")]
+position = Vector2(3512, 792)
+
+[node name="PlatformA9" parent="." instance=ExtResource("3_g0num")]
+position = Vector2(3576, 400)
+
+[node name="PlatformA10" parent="." instance=ExtResource("2_wqdgv")]
+position = Vector2(4008, 504)
+
+[node name="PlatformA11" parent="." instance=ExtResource("1_tnq4l")]
+position = Vector2(4608, 776)
+
+[node name="Player" parent="." instance=ExtResource("4_bv12a")]
+position = Vector2(960, 792)
+MOON_PATH = NodePath("../CanvasLayer -32/Moon")
