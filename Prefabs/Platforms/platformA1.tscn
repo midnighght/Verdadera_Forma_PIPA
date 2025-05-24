@@ -11,7 +11,7 @@ polygon = PackedVector2Array(49, -9, 50, -8, 50, 3, 24, 24, -40, 24, -64, 8, -64
 [node name="PlatformA1" type="Node2D"]
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
-collision_layer = 3
+collision_layer = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
 texture = ExtResource("1_2icok")

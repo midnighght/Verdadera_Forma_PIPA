@@ -1,8 +1,8 @@
 [gd_scene load_steps=54 format=3 uid="uid://dekfej2mci4ub"]
 
-[ext_resource type="Script" uid="uid://b6qvahj5d0lo7" path="res://Scripts/moon.gd" id="1_00cq0"]
+[ext_resource type="Script" uid="uid://b6qvahj5d0lo7" path="res://0/versiones antiguas de cosas/moon.gd" id="1_00cq0"]
 [ext_resource type="Texture2D" uid="uid://dirphaqbf8h7d" path="res://0/fotosPrueba1/moon/Moon_Phase_1.png" id="2_lbos3"]
-[ext_resource type="Script" uid="uid://nabju1wh1iks" path="res://Scripts/rayo.gd" id="2_lsi32"]
+[ext_resource type="Script" uid="uid://nabju1wh1iks" path="res://0/versiones antiguas de cosas/rayo.gd" id="2_lsi32"]
 [ext_resource type="Texture2D" uid="uid://c17d3o65jukcl" path="res://0/fotosPrueba1/moon/Moon_Phase_2.png" id="3_2xat7"]
 [ext_resource type="Texture2D" uid="uid://ins10jiigwqd" path="res://0/fotosPrueba1/moon/Moon_Phase_3.png" id="4_65qkk"]
 [ext_resource type="Texture2D" uid="uid://cc8snak3l0xk0" path="res://0/fotosPrueba1/moon/Moon_Phase_4.png" id="5_sdpqq"]

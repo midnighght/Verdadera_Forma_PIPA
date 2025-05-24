@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dour2elyxnqdv" path="res://Scripts/juego.gd" id="1_2gloq"]
 [ext_resource type="Texture2D" uid="uid://gm3dvfrkhsge" path="res://0/fotosPrueba1/AssetsAtrapaManzanas/bosque.png" id="2_3l8v7"]
-[ext_resource type="PackedScene" uid="uid://b154j5rcla61x" path="res://Prefabs/Player/jugador.tscn" id="3_f01mw"]
+[ext_resource type="PackedScene" uid="uid://b154j5rcla61x" path="res://0/versiones antiguas de cosas/jugador.tscn" id="3_f01mw"]
 [ext_resource type="Texture2D" uid="uid://bb8w8k8btteis" path="res://0/fotosPrueba1/ajolote.png" id="4_hjnv8"]
 [ext_resource type="Texture2D" uid="uid://cbr7l3rflfxa8" path="res://0/fotosPrueba1/brackeys_platformer_assets/sprites/platforms.png" id="5_ryyok"]
 [ext_resource type="PackedScene" uid="uid://cwjnun1tytdmm" path="res://Prefabs/UI/menu_pausa.tscn" id="6_a7yfb"]

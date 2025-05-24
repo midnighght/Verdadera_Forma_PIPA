@@ -88,7 +88,7 @@ func _physics_process(_delta):
 		onWallLeft  = false
 	elif onRightWall():
 		onWallRight = true
-		motion.y = 0
+		motion.y = 0 # THIS BROKE IDK WHY BUT IT STILL WORKS FINE FOR GAMEPLAY
 	elif onLeftWall():
 		onWallLeft = true
 		motion.y = 0
@@ -105,6 +105,7 @@ func _physics_process(_delta):
 		isHidden = false
 	
 #--------------------SANITY--------------------
+	SANITY = clamp(SANITY, 0, MAX_SANITY)
 	SANITY -= SANITY_DRAIN_PASSIVE
 	if !isHidden:
 		SANITY -= SANITY_DRAIN_MOON

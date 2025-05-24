@@ -13,6 +13,7 @@ config_version=5
 config/name="TrabajoPipa"
 run/main_scene="uid://de1dg1tfntqd0"
 config/features=PackedStringArray("4.4", "Forward Plus")
+config/icon="res://icon.svg"
 
 [display]
 
@@ -74,3 +75,10 @@ attack_cancel={
 "deadzone": 0.2,
 "events": []
 }
+
+[layer_names]
+
+2d_physics/layer_1="Player"
+2d_physics/layer_2="Platforms"
+2d_physics/layer_3="Walls"
+2d_physics/layer_4="Items"
