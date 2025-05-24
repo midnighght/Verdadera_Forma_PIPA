@@ -19,16 +19,19 @@ script = ExtResource("1_ocknv")
 [node name="VerdaderaFormaLogo" type="Sprite2D" parent="."]
 texture = ExtResource("2_lp8xn")
 centered = false
+metadata/_edit_lock_ = true
 
 [node name="MainTitle" type="Sprite2D" parent="VerdaderaFormaLogo"]
 texture = ExtResource("3_jwxmb")
 centered = false
+metadata/_edit_lock_ = true
 
 [node name="MenuButtons" type="CenterContainer" parent="."]
 layout_mode = 0
 offset_top = 576.0
 offset_right = 1920.0
 offset_bottom = 1088.0
+metadata/_edit_lock_ = true
 
 [node name="PanelContainer" type="PanelContainer" parent="MenuButtons"]
 self_modulate = Color(1, 1, 1, 0)
@@ -89,116 +92,6 @@ text = "Juego Cruzado"
 icon = ExtResource("5_s1n8u")
 flat = true
 icon_alignment = 1
-
-[node name="VBoxContainerRight" type="VBoxContainer" parent="MenuButtons/PanelContainer"]
-visible = false
-top_level = true
-light_mask = 0
-clip_contents = true
-layout_mode = 2
-size_flags_stretch_ratio = 0.0
-alignment = 1
-
-[node name="TextureRect" type="TextureRect" parent="MenuButtons/PanelContainer/VBoxContainerRight"]
-clip_contents = true
-layout_mode = 2
-size_flags_vertical = 3
-texture = ExtResource("5_s1n8u")
-
-[node name="Label" type="Label" parent="MenuButtons/PanelContainer/VBoxContainerRight/TextureRect"]
-clip_contents = true
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 2.955
-offset_left = -33.0
-offset_top = -11.0
-offset_right = 15.0
-offset_bottom = -0.240021
-
-[node name="Continuar" type="Button" parent="MenuButtons/PanelContainer/VBoxContainerRight/TextureRect/Label"]
-layout_mode = 2
-offset_left = 23.0
-offset_top = 57.0
-offset_right = 407.0
-offset_bottom = 88.0
-text = "Jugar"
-flat = true
-
-[node name="TextureRect2" type="TextureRect" parent="MenuButtons/PanelContainer/VBoxContainerRight"]
-layout_mode = 2
-texture = ExtResource("5_s1n8u")
-
-[node name="Label2" type="Label" parent="MenuButtons/PanelContainer/VBoxContainerRight/TextureRect2"]
-clip_contents = true
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Continuar" type="Button" parent="MenuButtons/PanelContainer/VBoxContainerRight/TextureRect2/Label2"]
-clip_contents = true
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Asincrónico"
-flat = true
-
-[node name="TextureRect3" type="TextureRect" parent="MenuButtons/PanelContainer/VBoxContainerRight"]
-layout_mode = 2
-texture = ExtResource("5_s1n8u")
-
-[node name="Label3" type="Label" parent="MenuButtons/PanelContainer/VBoxContainerRight/TextureRect3"]
-clip_contents = true
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Continuar" type="Button" parent="MenuButtons/PanelContainer/VBoxContainerRight/TextureRect3/Label3"]
-layout_mode = 2
-offset_left = -7.0
-offset_top = 43.0
-offset_right = 377.0
-offset_bottom = 89.0
-text = "Configuración"
-flat = true
-
-[node name="TextureRect4" type="TextureRect" parent="MenuButtons/PanelContainer/VBoxContainerRight"]
-layout_mode = 2
-texture = ExtResource("5_s1n8u")
-
-[node name="Label3" type="Label" parent="MenuButtons/PanelContainer/VBoxContainerRight/TextureRect4"]
-clip_contents = true
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Continuar" type="Button" parent="MenuButtons/PanelContainer/VBoxContainerRight/TextureRect4/Label3"]
-layout_mode = 2
-offset_left = -7.0
-offset_top = 43.0
-offset_right = 377.0
-offset_bottom = 89.0
-text = "Salir"
-flat = true
-
-[node name="TextureRect3" type="TextureRect" parent="MenuButtons/PanelContainer"]
-visible = false
-layout_mode = 2
-size_flags_vertical = 3
-texture = ExtResource("5_s1n8u")
-stretch_mode = 3
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_pruqj")
