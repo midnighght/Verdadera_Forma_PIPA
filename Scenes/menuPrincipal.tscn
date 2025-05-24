@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bp47wgmvoithm"]
+[gd_scene load_steps=10 format=3 uid="uid://dw7fpgnvtwad4"]
 
 [ext_resource type="Script" uid="uid://cvolq4n0mj5dw" path="res://Scripts/menu_principal.gd" id="1_i1nop"]
 [ext_resource type="Texture2D" uid="uid://bqympsgavtk1y" path="res://Assets/sprites/GUI/MainMenuBackground2.png" id="2_1odsn"]
@@ -222,10 +222,10 @@ position = Vector2(397, 342)
 scale = Vector2(0.627083, 0.721296)
 texture = ExtResource("8_yrsm4")
 
-[connection signal="pressed" from="CenterContainer/PanelContainer/VBoxContainer/VBoxContainer2/Jugar" to="." method="_on_jugar_pressed"]
 [connection signal="pressed" from="CenterContainer/PanelContainer/VBoxContainer/VBoxContainer2/Jugar" to="." method="_on_button_pressed"]
-[connection signal="pressed" from="CenterContainer/PanelContainer/VBoxContainer/VBoxContainer2/Asincronico" to="." method="_on_asincronico_pressed"]
+[connection signal="pressed" from="CenterContainer/PanelContainer/VBoxContainer/VBoxContainer2/Jugar" to="." method="_on_jugar_pressed"]
 [connection signal="pressed" from="CenterContainer/PanelContainer/VBoxContainer/VBoxContainer2/Asincronico" to="." method="_on_button_2_pressed"]
-[connection signal="pressed" from="CenterContainer/PanelContainer/VBoxContainer/VBoxContainer2/Configuracion" to="." method="_on_configuracion_pressed"]
+[connection signal="pressed" from="CenterContainer/PanelContainer/VBoxContainer/VBoxContainer2/Asincronico" to="." method="_on_asincronico_pressed"]
 [connection signal="pressed" from="CenterContainer/PanelContainer/VBoxContainer/VBoxContainer2/Configuracion" to="." method="_on_button_3_pressed"]
+[connection signal="pressed" from="CenterContainer/PanelContainer/VBoxContainer/VBoxContainer2/Configuracion" to="." method="_on_configuracion_pressed"]
 [connection signal="pressed" from="CenterContainer/PanelContainer/VBoxContainer/VBoxContainer2/Salir" to="." method="_on_salir_pressed"]
