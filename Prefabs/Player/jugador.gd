@@ -1,38 +1,20 @@
 extends CharacterBody2D
 
-#const GRAVITY = 60
-#const MAXFALLSPEED = 1500
-#const MAXSPEED = 680
-#const JUMPFORCE = 1500
-#const ACCELERATION = 80
-#const FRICTION = 0.4
-#const AIR_FRICTION = 0.05
-#const WALLJUMP = 1000
+var is_hidden: bool = false
+var health: int = 3
+@onready var health_bar = $TextureProgressBar
+var max_health = 1000
+var current_health = 1000
 
-#movement constants
-const UP = Vector2(0,-1)
-@export var GRAVITY: int
-@export var MAXFALLSPEED: int
-@export var MAXSPEED: int
-@export var JUMPFORCE: int
-@export var WALLJUMP: int
-@export var ACCELERATION: int
-@export var FRICTION: float
-@export var AIR_FRICTION: float
-var motion = Vector2()
-var onWallRight = false
-var onWallLeft = false
 
-#sanity & moon mechanic constants
-var isHidden: bool = false
-@export var MOON_PATH: NodePath
-@onready var moon = get_node(MOON_PATH)
-@export var SANITY: int
-@export var PASSIVE_SANITY_DRAIN: int
- 
-#animation constants
-@onready var sprite = $Sprite
-@onready var animationPlayer = $AnimationPlayer
+func _ready():
+	health_bar.max_value = max_health
+	health_bar.value = current_health
+	pass
+	
+func _process(delta):
+	check_shelter()
+	pass
 
 func _input(event):
 	if event.is_action_pressed("ui_cancel"):
@@ -42,9 +24,41 @@ func _physics_process(_delta):
 	# Input
 	var x_input = Input.get_action_strength("right") - Input.get_action_strength("left")
 	
-	# Gravity
-	if onWallRight or onWallLeft:
-		motion.y = GRAVITY * 1.2
+	
+	
+func take_damage(amount: int):
+	if !is_hidden:
+		current_health -= amount
+		$AnimationPlayer.play("hurt")
+		
+		if health <= 0:
+			die()
+
+func die():
+	# Lógica de muerte
+	queue_free()
+	
+	
+
+var speed := 400
+@onready var animated_sprite_2d = $AnimatedSprite2D
+
+func _physics_process(delta):
+	var inputVel = Input.get_axis("ui_left","ui_right")
+	var saltar = Input.get_action_strength("ui_accept")
+	velocity.x = inputVel * speed
+	
+	if saltar !=0 and is_on_floor():
+		velocity.y =0
+		velocity.y -= saltar * 2000
+		
+	
+	if !is_on_floor():
+		velocity.y += 100
+	
+	move_and_slide()
+	if velocity.x !=0:
+		animated_sprite_2d.play("run")
 	else:
 		motion.y += GRAVITY
 	

@@ -76,6 +76,6 @@ func _on_colision_jugador_body_entered(body: Node2D) -> void:
 	if body.is_in_group("jugador"):
 		# Reaccionar al jugador (huir o perseguir)
 		var direccion_jugador = (body.global_position - global_position).normalized()
-		direccion_actual = -direccion_jugador  # Para huir
+		direccion_actual = direccion_jugador  # Para huir
 		tiempo_para_cambio = cambio_direccion_tiempo * 0.5
-		body.take_damage(-100);
+		

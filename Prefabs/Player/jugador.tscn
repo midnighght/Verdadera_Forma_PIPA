@@ -11,9 +11,9 @@
 [ext_resource type="Texture2D" uid="uid://bf14efadofmai" path="res://0/fotosPrueba1/AssetsAtrapaManzanas/Jugador/run/player-run-4.png" id="8_bnm2g"]
 [ext_resource type="Texture2D" uid="uid://debnqql6360lv" path="res://0/fotosPrueba1/AssetsAtrapaManzanas/Jugador/run/player-run-5.png" id="9_wu5nh"]
 [ext_resource type="Texture2D" uid="uid://cxg8lr6imv6gy" path="res://0/fotosPrueba1/AssetsAtrapaManzanas/Jugador/run/player-run-6.png" id="10_y2gsv"]
-[ext_resource type="Texture2D" uid="uid://olevtwhs2m6y" path="res://0/img/fondo_barra.png" id="12_idnai"]
-[ext_resource type="Texture2D" uid="uid://b1bygpn6h1pqc" path="res://0/img/borde_barra.png" id="13_d1h30"]
-[ext_resource type="Texture2D" uid="uid://dlp5vw6lqwpus" path="res://0/img/progreso_barra.png" id="14_pa8if"]
+[ext_resource type="Texture2D" uid="uid://davolscrke4jk" path="res://0/img/fondo_barra.png" id="12_idnai"]
+[ext_resource type="Texture2D" uid="uid://cjmr63c1tsk3" path="res://0/img/borde_barra.png" id="13_d1h30"]
+[ext_resource type="Texture2D" uid="uid://baeb0gbt7di6f" path="res://0/img/progreso_barra.png" id="14_pa8if"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hf4tf"]
 
@@ -80,16 +80,15 @@ sprite_frames = SubResource("SpriteFrames_c2yei")
 animation = &"Iddle"
 speed_scale = 4.0
 
-[node name="BarraDeVida2" type="TextureProgressBar" parent="."]
+[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
 z_index = 10
-offset_left = -15.5
-offset_top = 27.125
-offset_right = 281.5
-offset_bottom = 65.125
-scale = Vector2(0.281935, 0.250265)
-size_flags_horizontal = 4
+offset_left = -16.5
+offset_top = 22.375
+offset_right = 280.5
+offset_bottom = 62.375
+scale = Vector2(0.338011, 0.260923)
 max_value = 1000.0
-value = 1000.0
+value = 500.0
 texture_under = ExtResource("12_idnai")
 texture_over = ExtResource("13_d1h30")
 texture_progress = ExtResource("14_pa8if")
