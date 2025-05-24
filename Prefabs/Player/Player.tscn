@@ -173,6 +173,7 @@ drag_bottom_margin = 1.0
 editor_draw_drag_margin = true
 
 [node name="Sprite" type="Sprite2D" parent="."]
+texture_filter = 1
 position = Vector2(0, -76)
 scale = Vector2(3.5, 3.5)
 texture = ExtResource("2_1cl7s")
