@@ -1,140 +1,146 @@
-extends KinematicBody2D
+extends CharacterBody2D
 
-signal life_changed
-signal dead
+#const GRAVITY = 60
+#const MAXFALLSPEED = 1500
+#const MAXSPEED = 680
+#const JUMPFORCE = 1500
+#const ACCELERATION = 80
+#const FRICTION = 0.4
+#const AIR_FRICTION = 0.05
+#const WALLJUMP = 1000
 
-@export var run_speed: int
-@export var jump_speed: int
-@export var gravity: int
-@export var climb_speed: int
+#movement constants
+const UP = Vector2(0,-1)
+@export var GRAVITY: int
+@export var MAXFALLSPEED: int
+@export var MAXSPEED: int
+@export var JUMPFORCE: int
+@export var WALLJUMP: int
+@export var ACCELERATION: int
+@export var FRICTION: float
+@export var AIR_FRICTION: float
+var motion = Vector2()
+var onWallRight = false
+var onWallLeft = false
 
-enum {IDLE, RUN, JUMP, HURT, DEAD, CROUCH, CLIMB}
-var state
-var anim
-var new_anim
-var velocity = Vector2()
-var life
-var can_jump = TRUE
-var is_on_ladder = false
+#sanity & moon mechanic constants
+var isHidden: bool = false
+@export var MOON_PATH: NodePath
+@onready var moon = get_node(MOON_PATH)
+@export var SANITY: int
+@export var PASSIVE_SANITY_DRAIN: int
+ 
+#animation constants
+@onready var sprite = $Sprite
+@onready var animationPlayer = $AnimationPlayer
 
-func _ready():
-	change_state(IDLE)
+func _input(event):
+	if event.is_action_pressed("ui_cancel"):
+		get_tree().quit()
 
-func start(pos):
-	position = pos
-	show()
-	life = 3
-	emit_signal('life_changed', life)
-	change_state(IDLE)
-
-func change_state(new_state):
-	state = new_state
-	# print("changing to ", state)
-	match state:
-		IDLE:
-			new_anim = 'idle'
-		RUN:
-			new_anim = 'run'
-		CROUCH:
-			new_anim = 'crouch'
-		HURT:
-			new_anim = 'hurt'
-			velocity.y = -200
-			velocity.x = -100 * sign(velocity.x)
-			life -= 1
-			emit_signal('life_changed', life)
-			yield(get_tree().create_timer(0.5), 'timeout')
-			change_state(IDLE)
-			if life <= 0:
-				change_state(DEAD)
-		JUMP:
-			new_anim = 'jump_up'
-			jump_count = 1
-		CLIMB:
-			new_anim = 'climb'
-		DEAD:
-			hide()
-			emit_signal('dead')
-
-func get_input():
-	if state == HURT:
-		return
-	velocity.x = 0
-	var right = Input.is_action_pressed('right')
-	var left = Input.is_action_pressed('left')
-	var jump = Input.is_action_just_pressed('jump')
-	var down = Input.is_action_pressed('crouch')
-	var climb = Input.is_action_pressed('climb')
-
-	if climb and state != CLIMB and is_on_ladder:
-		change_state(CLIMB)
-	if state == CLIMB:
-		if climb:
-			velocity.y = -climb_speed
-		elif down:
-			velocity.y = climb_speed
+func _physics_process(_delta):
+	# Input
+	var x_input = Input.get_action_strength("right") - Input.get_action_strength("left")
+	
+	# Gravity
+	if onWallRight or onWallLeft:
+		motion.y = GRAVITY * 1.2
+	else:
+		motion.y += GRAVITY
+	
+	# Motion Clamping
+	motion.x = clamp(motion.x,-MAXSPEED,MAXSPEED)
+	motion.y = min(motion.y,MAXFALLSPEED)
+	
+	# X movement
+	if x_input != 0:
+		motion.x += x_input * ACCELERATION
+		sprite.flip_h = x_input < 0
+	elif is_on_floor():
+		motion.x = lerp(motion.x,0.0,FRICTION)
+	
+	# Jumping Mechanincs
+	if Input.is_action_pressed("jump"):
+		if is_on_floor():
+			motion.y = -JUMPFORCE
+		elif onWallRight:
+			motion.y = -JUMPFORCE
+			motion.x = -WALLJUMP
+			onWallRight = false #maybe redundant
+		elif onWallLeft:
+			motion.y = -JUMPFORCE
+			motion.x = WALLJUMP
+			onWallLeft = false #maybe redundant
+		motion.x = lerp(motion.x,0.0,AIR_FRICTION)
+	
+	# onWall State Handler
+	if is_on_floor() or !nextToWall():
+		onWallRight = false
+		onWallLeft  = false
+	elif onRightWall():
+		onWallRight = true
+		motion.y = 0
+	elif onLeftWall():
+		onWallLeft = true
+		motion.y = 0
+		
+	# Moon position tracking
+	#$MoonRay.target_position = (moon.global_position - global_position).normalized() * 1600
+	var moon_target_position = Vector2(moon.global_position.x-960,moon.global_position.y-global_position.y)
+	$MoonRayTop.target_position = moon_target_position
+	$MoonRayBottom.target_position = moon_target_position
+	
+	if inShadow():
+		isHidden = true
+	else:
+		isHidden = false
+	
+	# Animations
+	if is_on_floor():
+		if x_input == 0:
+			animationPlayer.play("Idle")
 		else:
-			velocity.y = 0
-			$AnimationPlayer.play("climb")
-	if state == CLIMB and not is_on_ladder:
-		change_state(IDLE)
-	if down and is_on_floor():
-		change_state(CROUCH)
-	if !down and state == CROUCH:
-		change_state(IDLE)
-	if right:
-		velocity.x += run_speed
-		$Sprite.flip_h = false
-	if left:
-		velocity.x -= run_speed
-		$Sprite.flip_h = true
-	if jump and state == JUMP and jump_count < max_jumps:
-		new_anim = 'jump_up'
-		velocity.y = jump_speed / 1.5
-		jump_count += 1
-	if jump and is_on_floor():
-		$JumpSound.play()
-		change_state(JUMP)
-		velocity.y = jump_speed
-	if state in [IDLE, CROUCH] and velocity.x != 0:
-		change_state(RUN)
-	if state == RUN and velocity.x == 0:
-		change_state(IDLE)
-	if state in [IDLE, RUN] and !is_on_floor():
-		change_state(JUMP)
-
-func _physics_process(delta):
-	if state != CLIMB:
-		velocity.y += gravity * delta
-	get_input()
-	if new_anim != anim:
-		anim = new_anim
-		$AnimationPlayer.play(anim)
-
-	velocity = move_and_slide(velocity, Vector2(0, -1))
-	if state == HURT:
-		return
-	for idx in range(get_slide_count()):
-		var collision = get_slide_collision(idx)
-		if collision.collider.name == 'Danger':
-			hurt()
-		if collision.collider.is_in_group('enemies'):
-			var player_feet = (position + $CollisionShape2D.shape.extents).y
-			if player_feet < collision.collider.position.y:
-				collision.collider.take_damage()
-				velocity.y = -200
-			else:
-				hurt()
-
-	if state == JUMP and velocity.y > 0:
-		new_anim = 'jump_down'
-	if state == JUMP and is_on_floor():
-		change_state(IDLE)
-		$Dust.emitting = true
-	if position.y > 1000:
-		change_state(DEAD)
-
-func hurt():
-	if state != HURT:
-		$HurtSound.play()
-		change_state(HURT)
+			animationPlayer.play("Runing")
+	elif not nextToWall():
+		if motion.y < -200:
+			animationPlayer.play("Jumping")
+		elif motion.y > -201 and motion.y < 201:
+			animationPlayer.play("air")
+		elif motion.y > 200:
+			animationPlayer.play("Falling")
+	else:
+		animationPlayer.play("Idle")
+		
+	if nextToWall():
+		if onWallRight:
+			sprite.set_flip_h(true)
+		if onWallLeft:
+			sprite.set_flip_h(false)
+	
+	
+	# move and slide (movement collisions physics)
+	velocity = motion
+	move_and_slide()
+	motion = velocity
+	
+# Functions
+func nextToWall():
+	return $RightWall.is_colliding() or $LeftWall.is_colliding()
+	
+func onRightWall():
+	if $RightWall.is_colliding():
+		# if player not moving, walls wont be detected
+		# AVOIDS WALL JUMP WHEN ON CORNERS
+		if Input.get_action_strength("right") > 0 or motion.x > 150:
+			return true
+	else:
+		return false
+func onLeftWall():
+	if $LeftWall.is_colliding():
+		if Input.get_action_strength("left") > 0 or motion.x < -150:
+			return true
+	else:
+		return false
+		
+func inShadow():
+	return $MoonRayTop.is_colliding() and $MoonRayBottom.is_colliding()
