@@ -1,5 +1,7 @@
 extends CharacterBody2D
-
+const SPEED=300
+const JUMP_VELOCITY=-400
+#var gravity=ProyectSettings.getSettings(physics/2D/default_gravity)
 var is_hidden: bool = false
 @onready var health_bar = $BarraDeVida2
 
