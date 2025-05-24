@@ -2,10 +2,14 @@ extends CharacterBody2D
 
 var is_hidden: bool = false
 var health: int = 3
-
+@onready var health_bar = $TextureProgressBar
+var max_health = 1000
+var current_health = 1000
 
 
 func _ready():
+	health_bar.max_value = max_health
+	health_bar.value = current_health
 	pass
 	
 func _process(delta):
@@ -31,8 +35,9 @@ func check_shelter():
 	
 func take_damage(amount: int):
 	if !is_hidden:
-		health -= amount
+		current_health -= amount
 		$AnimationPlayer.play("hurt")
+		
 		if health <= 0:
 			die()
 
