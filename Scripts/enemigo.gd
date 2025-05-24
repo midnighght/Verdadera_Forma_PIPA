@@ -11,7 +11,7 @@ var tiempo_para_cambio: float = 0.0
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
-@onready var area_deteccion: Area2D = $Area2D
+
 
 func _ready():
 	cambiar_direccion()
@@ -68,11 +68,9 @@ func actualizar_apariencia():
 	rotation = 0
 	
 	# Animaciones
-	if velocidad.length() < 10:
-		sprite.play("reposo")
-	else:
-		sprite.play("volar")
-		
+	##if velocidad.length() < 10:
+		##sprite.play("reposo")
+	
 
 func _on_colision_jugador_body_entered(body: Node2D) -> void:
 	if body.is_in_group("jugador"):
@@ -80,3 +78,4 @@ func _on_colision_jugador_body_entered(body: Node2D) -> void:
 		var direccion_jugador = (body.global_position - global_position).normalized()
 		direccion_actual = -direccion_jugador  # Para huir
 		tiempo_para_cambio = cambio_direccion_tiempo * 0.5
+		body.take_damage(-100);

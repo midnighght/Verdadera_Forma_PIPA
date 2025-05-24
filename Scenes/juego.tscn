@@ -75,6 +75,7 @@ texture = ExtResource("2_sbygf")
 [node name="Jugador" parent="." instance=ExtResource("2_hblkt")]
 position = Vector2(276, 488)
 scale = Vector2(4, 4)
+script = null
 
 [node name="Camera2D" type="Camera2D" parent="Jugador"]
 position = Vector2(94, -957)

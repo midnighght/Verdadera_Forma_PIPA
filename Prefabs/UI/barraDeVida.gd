@@ -1,13 +1,14 @@
 extends CharacterBody2D
 
-const Speed = 119
-const Gravedad= 20
+const Speed = 200
+const Gravedad= 25
 const Jump=-500
 @export var jump2=-150
-@export var salud=5
+
+@export var salud=1000
 @onready var anim= $AnimatedSprite2D
 var inmune: bool=false
-@onready var barra= $CanvasLayer/TextureProgressBar
+@onready var barra= $BarraDeVida
 
 func _ready():
 	
