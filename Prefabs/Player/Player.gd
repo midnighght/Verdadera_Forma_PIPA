@@ -27,8 +27,10 @@ var onWallLeft = false
 var isHidden: bool = false
 @export var MOON_PATH: NodePath
 @onready var moon = get_node(MOON_PATH)
-@export var SANITY: int
-@export var PASSIVE_SANITY_DRAIN: int
+@export var MAX_SANITY: int
+@export var SANITY: float
+@export var SANITY_DRAIN_PASSIVE: float
+@export var SANITY_DRAIN_MOON: float
  
 #animation constants
 @onready var sprite = $Sprite
@@ -39,6 +41,7 @@ func _input(event):
 		get_tree().quit()
 
 func _physics_process(_delta):
+#--------------------MOVEMENT--------------------
 	# Input
 	var x_input = Input.get_action_strength("right") - Input.get_action_strength("left")
 	
@@ -73,6 +76,12 @@ func _physics_process(_delta):
 			onWallLeft = false #maybe redundant
 		motion.x = lerp(motion.x,0.0,AIR_FRICTION)
 	
+	# move and slide (movement collisions physics)
+	velocity = motion
+	move_and_slide()
+	motion = velocity
+
+#--------------------STATES--------------------
 	# onWall State Handler
 	if is_on_floor() or !nextToWall():
 		onWallRight = false
@@ -85,15 +94,20 @@ func _physics_process(_delta):
 		motion.y = 0
 		
 	# Moon position tracking
-	#$MoonRay.target_position = (moon.global_position - global_position).normalized() * 1600
 	var moon_target_position = Vector2(moon.global_position.x-960,moon.global_position.y-global_position.y)
 	$MoonRayTop.target_position = moon_target_position
 	$MoonRayBottom.target_position = moon_target_position
 	
+	# hidden state tracking
 	if inShadow():
 		isHidden = true
 	else:
 		isHidden = false
+	
+#--------------------SANITY--------------------
+	SANITY -= SANITY_DRAIN_PASSIVE
+	if !isHidden:
+		SANITY -= SANITY_DRAIN_MOON
 	
 	# Animations
 	if is_on_floor():
@@ -118,12 +132,6 @@ func _physics_process(_delta):
 		if onWallLeft:
 			animationPlayer.play("Hanging")
 			sprite.set_flip_h(false)
-	
-	
-	# move and slide (movement collisions physics)
-	velocity = motion
-	move_and_slide()
-	motion = velocity
 	
 # Functions
 func nextToWall():

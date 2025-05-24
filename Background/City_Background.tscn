@@ -1,11 +1,11 @@
 [gd_scene load_steps=12 format=3 uid="uid://dhk2lo4tw3igv"]
 
-[ext_resource type="Texture2D" uid="uid://bb038eylfetak" path="res://Assets/sprites/The Dawn/Layers/2.png" id="1_y0l0u"]
-[ext_resource type="Texture2D" uid="uid://or5pa0ceklen" path="res://Assets/sprites/The Dawn/Layers/3.png" id="2_1m00l"]
-[ext_resource type="Texture2D" uid="uid://dla526uf3cf8b" path="res://Assets/sprites/The Dawn/Layers/4.png" id="3_fmbe6"]
-[ext_resource type="Texture2D" uid="uid://bwcslto80kfdw" path="res://Assets/sprites/The Dawn/Layers/5.png" id="4_oyv52"]
-[ext_resource type="Texture2D" uid="uid://boem0a1i26pxt" path="res://Assets/sprites/The Dawn/Layers/7.png" id="5_r05w1"]
-[ext_resource type="Texture2D" uid="uid://deekfupn12eig" path="res://Assets/sprites/The Dawn/Layers/8.png" id="6_27sa0"]
+[ext_resource type="Texture2D" uid="uid://bwmg0ibsx7bfm" path="res://Assets/sprites/The Dawn/Layers/2.png" id="1_y0l0u"]
+[ext_resource type="Texture2D" uid="uid://cy6sfv5oyjcfn" path="res://Assets/sprites/The Dawn/Layers/3.png" id="2_1m00l"]
+[ext_resource type="Texture2D" uid="uid://dht6ytcks4dkh" path="res://Assets/sprites/The Dawn/Layers/4.png" id="3_fmbe6"]
+[ext_resource type="Texture2D" uid="uid://7tda8iqjm2ih" path="res://Assets/sprites/The Dawn/Layers/5.png" id="4_oyv52"]
+[ext_resource type="Texture2D" uid="uid://nyi31nbdj13a" path="res://Assets/sprites/The Dawn/Layers/7.png" id="5_r05w1"]
+[ext_resource type="Texture2D" uid="uid://wl4i13hd763y" path="res://Assets/sprites/The Dawn/Layers/8.png" id="6_27sa0"]
 [ext_resource type="PackedScene" uid="uid://bbhbyc5imq54j" path="res://Prefabs/Platforms/platformA3.tscn" id="8_hf7ff"]
 [ext_resource type="PackedScene" uid="uid://xbkqp5rf11x0" path="res://Prefabs/Platforms/platformA2.tscn" id="9_8kjai"]
 [ext_resource type="PackedScene" uid="uid://4nd0pv24mqk8" path="res://Prefabs/Moon/Moon.tscn" id="10_27sa0"]
@@ -78,3 +78,4 @@ position = Vector2(-500, -500)
 
 [node name="Player" parent="." instance=ExtResource("11_27sa0")]
 visible = false
+SANITY = 0.0
