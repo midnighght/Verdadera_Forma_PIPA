@@ -79,3 +79,4 @@ func _on_colision_jugador_body_entered(body: Node2D) -> void:
 		direccion_actual = direccion_jugador  # Para huir
 		tiempo_para_cambio = cambio_direccion_tiempo * 0.5
 		
+		
