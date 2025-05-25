@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dhk2lo4tw3igv"]
+[gd_scene load_steps=11 format=3 uid="uid://dhk2lo4tw3igv"]
 
 [ext_resource type="Texture2D" uid="uid://bwmg0ibsx7bfm" path="res://Assets/sprites/The Dawn/Layers/2.png" id="1_y0l0u"]
 [ext_resource type="Texture2D" uid="uid://cy6sfv5oyjcfn" path="res://Assets/sprites/The Dawn/Layers/3.png" id="2_1m00l"]
@@ -10,7 +10,6 @@
 [ext_resource type="PackedScene" uid="uid://xbkqp5rf11x0" path="res://Prefabs/Platforms/platformA2.tscn" id="9_8kjai"]
 [ext_resource type="PackedScene" uid="uid://4nd0pv24mqk8" path="res://Prefabs/Moon/Moon.tscn" id="10_27sa0"]
 [ext_resource type="PackedScene" uid="uid://7eduktatctps" path="res://Prefabs/Platforms/platformA1.tscn" id="10_vb3dy"]
-[ext_resource type="PackedScene" uid="uid://cduiuhtkc03h8" path="res://Prefabs/Player/Urlu.tscn" id="11_27sa0"]
 
 [node name="CityBackground" type="Node2D"]
 
@@ -75,7 +74,3 @@ position = Vector2(744, 288)
 
 [node name="Moon" parent="." instance=ExtResource("10_27sa0")]
 position = Vector2(-500, -500)
-
-[node name="Player" parent="." instance=ExtResource("11_27sa0")]
-visible = false
-SANITY = 0.0

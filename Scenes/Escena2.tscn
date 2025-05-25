@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://cbr7l3rflfxa8" path="res://0/fotosPrueba1/brackeys_platformer_assets/sprites/platforms.png" id="5_ryyok"]
 [ext_resource type="PackedScene" uid="uid://cwjnun1tytdmm" path="res://Prefabs/UI/menu_pausa.tscn" id="6_a7yfb"]
 [ext_resource type="Texture2D" uid="uid://c1iix6oa5s5bb" path="res://Assets/sprites/Map/plataform512.png" id="6_ta02p"]
-[ext_resource type="PackedScene" uid="uid://c7mkfxab57x27" path="res://Prefabs/Bat/Enemigo.tscn" id="7_yd140"]
+[ext_resource type="PackedScene" uid="uid://c7mkfxab57x27" path="res://Prefabs/Bat/Bat.tscn" id="7_yd140"]
 [ext_resource type="Texture2D" uid="uid://cvk3jl2l85fvk" path="res://Assets/sprites/Map/plataform128.png" id="7_ykg05"]
 [ext_resource type="AudioStream" uid="uid://cctmyfjllvv3h" path="res://Assets/sound/Music/y2mate.com - LOrbrie.mp3" id="8_qjpul"]
 

@@ -35,12 +35,35 @@ var is_hidden: bool = false
 #animation constants
 @onready var sprite = $Sprite
 @onready var animationPlayer = $AnimationPlayer
+@onready var sprite_overlay = $SpriteOverlay
+@onready var sprite_underlay = $SpriteOverlay/SpriteUnderlay
+
+#attack state
+var is_attacking: bool = false
 
 func _input(event):
 	if event.is_action_pressed("ui_cancel"):
 		get_tree().quit()
+		
+	if event is InputEventMouseButton and event.is_action_pressed("attack"):
+		if is_on_floor():
+			is_attacking = true
+	elif event is InputEventMouseButton and event.is_action_pressed("attack_cancel"):
+		is_attacking = false
 
 func _physics_process(_delta):
+	#--------------------ATTACK STATE--------------------
+	if is_attacking:
+		#sprite.visible = false
+		animationPlayer.play("attack")
+		sprite_overlay.visible = true
+		motion = Vector2.ZERO
+		var direction = (Vector2(get_global_mouse_position().x, get_global_mouse_position().y + 24 * cos(sprite_overlay.rotation - 0.349)) - global_position).angle() + 0.349
+		direction = clamp(direction,-0.6981, 0.5236)
+		sprite_overlay.rotation = direction
+		sprite_underlay.rotation = -direction
+		return
+	
 #--------------------MOVEMENT--------------------
 	# Input
 	var x_input = Input.get_action_strength("right") - Input.get_action_strength("left")
@@ -116,7 +139,9 @@ func _physics_process(_delta):
 	if SANITY <= 0:
 		die()
 
-	# Animations
+#--------------------Animations--------------------
+	#sprite.visible = true
+	sprite_overlay.visible = false
 	if is_on_floor():
 		if x_input == 0:
 			animationPlayer.play("Idle")
