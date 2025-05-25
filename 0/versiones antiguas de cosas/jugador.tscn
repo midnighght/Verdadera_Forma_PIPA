@@ -11,9 +11,9 @@
 [ext_resource type="Texture2D" uid="uid://bf14efadofmai" path="res://0/fotosPrueba1/AssetsAtrapaManzanas/Jugador/run/player-run-4.png" id="8_bnm2g"]
 [ext_resource type="Texture2D" uid="uid://debnqql6360lv" path="res://0/fotosPrueba1/AssetsAtrapaManzanas/Jugador/run/player-run-5.png" id="9_wu5nh"]
 [ext_resource type="Texture2D" uid="uid://cxg8lr6imv6gy" path="res://0/fotosPrueba1/AssetsAtrapaManzanas/Jugador/run/player-run-6.png" id="10_y2gsv"]
-[ext_resource type="Texture2D" uid="uid://davolscrke4jk" path="res://0/img/fondo_barra.png" id="12_idnai"]
-[ext_resource type="Texture2D" uid="uid://cjmr63c1tsk3" path="res://0/img/borde_barra.png" id="13_d1h30"]
-[ext_resource type="Texture2D" uid="uid://baeb0gbt7di6f" path="res://0/img/progreso_barra.png" id="14_pa8if"]
+[ext_resource type="Texture2D" uid="uid://davolscrke4jk" path="res://Assets/sprites/fondo_barra.png" id="12_idnai"]
+[ext_resource type="Texture2D" uid="uid://cjmr63c1tsk3" path="res://Assets/sprites/borde_barra.png" id="13_d1h30"]
+[ext_resource type="Texture2D" uid="uid://baeb0gbt7di6f" path="res://Assets/sprites/progreso_barra.png" id="14_pa8if"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hf4tf"]
 

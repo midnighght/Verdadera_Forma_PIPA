@@ -12,19 +12,11 @@ func _ready():
 	health_bar.value = current_health
 	pass
 	
-func _process(delta):
-	check_shelter()
-	pass
 
 func _input(event):
 	if event.is_action_pressed("ui_cancel"):
 		get_tree().quit()
 
-func _physics_process(_delta):
-	# Input
-	var x_input = Input.get_action_strength("right") - Input.get_action_strength("left")
-	
-	
 	
 func take_damage(amount: int):
 	if !is_hidden:

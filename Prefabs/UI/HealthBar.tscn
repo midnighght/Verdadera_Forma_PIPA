@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://t1klvxoc0lvk"]
+
+[ext_resource type="Script" uid="uid://b67eufxk374tv" path="res://Prefabs/UI/health_bar.gd" id="1_45bpc"]
+[ext_resource type="Texture2D" uid="uid://davolscrke4jk" path="res://Assets/sprites/fondo_barra.png" id="2_8ibko"]
+[ext_resource type="Texture2D" uid="uid://cjmr63c1tsk3" path="res://Assets/sprites/borde_barra.png" id="3_lwrsk"]
+[ext_resource type="Texture2D" uid="uid://baeb0gbt7di6f" path="res://Assets/sprites/progreso_barra.png" id="4_sdauf"]
+
+[node name="HealthBar" type="Node2D"]
+script = ExtResource("1_45bpc")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -148.5
+offset_right = 148.5
+offset_bottom = 38.0
+grow_horizontal = 2
+max_value = 360.0
+value = 360.0
+rounded = true
+texture_under = ExtResource("2_8ibko")
+texture_over = ExtResource("3_lwrsk")
+texture_progress = ExtResource("4_sdauf")

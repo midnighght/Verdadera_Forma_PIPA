@@ -4,9 +4,9 @@
 [ext_resource type="Texture2D" uid="uid://o7ity7nboa1o" path="res://Assets/sprites/FreeKnight_v1/120x80_PNGSheets/_Jump.png" id="3_5virf"]
 [ext_resource type="Texture2D" uid="uid://mv6fsiyu3qys" path="res://Assets/sprites/FreeKnight_v1/120x80_PNGSheets/_Fall.png" id="4_ip1bf"]
 [ext_resource type="Texture2D" uid="uid://bl1xl8547h1m1" path="res://Assets/sprites/FreeKnight_v1/120x80_PNGSheets/_Run.png" id="5_4rw4d"]
-[ext_resource type="Script" uid="uid://bxr7yj1yl710t" path="res://Prefabs/Player/Player.gd" id="6_4rw4d"]
+[ext_resource type="Script" uid="uid://bxr7yj1yl710t" path="res://Prefabs/Player/Urlu.gd" id="6_4rw4d"]
 [ext_resource type="PackedScene" uid="uid://4nd0pv24mqk8" path="res://Prefabs/Moon/Moon.tscn" id="7_ae6jo"]
-[ext_resource type="Texture2D" uid="uid://b5c5lv2h8tmwh" path="res://Assets/sprites/player/sprite sheet.png" id="8_xo5gc"]
+[ext_resource type="Texture2D" path="res://Assets/sprites/player/sprite sheet.png" id="8_xo5gc"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hnr8y"]
 atlas = ExtResource("4_ip1bf")

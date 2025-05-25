@@ -1,6 +1,6 @@
 extends Node2D
 
-@export var cure_value: int = 20
+@export var cure_value: int = 50
 #@export var PLAYER_PATH: NodePath
 #@onready var player = get_node(PLAYER_PATH)
 @onready var area: Area2D = $Area2D

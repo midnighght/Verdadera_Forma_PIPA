@@ -1,30 +1,30 @@
 extends CharacterBody2D
 
 #const GRAVITY = 60
-#const MAXFALLSPEED = 1500
-#const MAXSPEED = 680
-#const JUMPFORCE = 1500
+#const MAX_FALL_SPEED = 1500
+#const MAX_SPEED = 680
+#const JUMP_FORCE = 1500
 #const ACCELERATION = 80
 #const FRICTION = 0.4
 #const AIR_FRICTION = 0.05
-#const WALLJUMP = 1000
+#const WALL_JUMP_FORCE = 1000
 
 #movement constants
 const UP = Vector2(0,-1)
-@export var GRAVITY: int
-@export var MAXFALLSPEED: int
-@export var MAXSPEED: int
-@export var JUMPFORCE: int
-@export var WALLJUMP: int
-@export var ACCELERATION: int
-@export var FRICTION: float
-@export var AIR_FRICTION: float
+@export var GRAVITY: int = 60
+@export var MAX_FALL_SPEED: int = 1500
+@export var MAX_SPEED: int = 680
+@export var JUMP_FORCE: int = 1500
+@export var WALL_JUMP_FORCE: int = 1000
+@export var ACCELERATION: int = 80
+@export var FRICTION: float = 0.4
+@export var AIR_FRICTION: float = 0.05
 var motion = Vector2()
-var onWallRight = false
-var onWallLeft = false
+var on_wall_right = false
+var on_wall_left = false
 
 #sanity & moon mechanic constants
-var isHidden: bool = false
+var is_hidden: bool = false
 @export var MOON_PATH: NodePath
 @onready var moon = get_node(MOON_PATH)
 @export var MAX_SANITY: int
@@ -46,14 +46,14 @@ func _physics_process(_delta):
 	var x_input = Input.get_action_strength("right") - Input.get_action_strength("left")
 	
 	# Gravity
-	if onWallRight or onWallLeft:
+	if on_wall_right or on_wall_left:
 		motion.y = GRAVITY * 1.2
 	else:
 		motion.y += GRAVITY
 	
 	# Motion Clamping
-	motion.x = clamp(motion.x,-MAXSPEED,MAXSPEED)
-	motion.y = min(motion.y,MAXFALLSPEED)
+	motion.x = clamp(motion.x,-MAX_SPEED,MAX_SPEED)
+	motion.y = min(motion.y,MAX_FALL_SPEED)
 	
 	# X movement
 	if x_input != 0:
@@ -65,15 +65,15 @@ func _physics_process(_delta):
 	# Jumping Mechanincs
 	if Input.is_action_pressed("jump"):
 		if is_on_floor():
-			motion.y = -JUMPFORCE
-		elif onWallRight:
-			motion.y = -JUMPFORCE
-			motion.x = -WALLJUMP
-			onWallRight = false #maybe redundant
-		elif onWallLeft:
-			motion.y = -JUMPFORCE
-			motion.x = WALLJUMP
-			onWallLeft = false #maybe redundant
+			motion.y = -JUMP_FORCE
+		elif on_wall_right:
+			motion.y = -JUMP_FORCE
+			motion.x = -WALL_JUMP_FORCE
+			on_wall_right = false #maybe redundant
+		elif on_wall_left:
+			motion.y = -JUMP_FORCE
+			motion.x = WALL_JUMP_FORCE
+			on_wall_left = false #maybe redundant
 		motion.x = lerp(motion.x,0.0,AIR_FRICTION)
 	
 	# move and slide (movement collisions physics)
@@ -84,13 +84,13 @@ func _physics_process(_delta):
 #--------------------STATES--------------------
 	# onWall State Handler
 	if is_on_floor() or !nextToWall():
-		onWallRight = false
-		onWallLeft  = false
+		on_wall_right = false
+		on_wall_left  = false
 	elif onRightWall():
-		onWallRight = true
+		on_wall_right = true
 		motion.y = 0 # THIS BROKE IDK WHY BUT IT STILL WORKS FINE FOR GAMEPLAY
 	elif onLeftWall():
-		onWallLeft = true
+		on_wall_left = true
 		motion.y = 0
 		
 	# Moon position tracking
@@ -100,16 +100,22 @@ func _physics_process(_delta):
 	
 	# hidden state tracking
 	if inShadow():
-		isHidden = true
+		is_hidden = true
 	else:
-		isHidden = false
+		is_hidden = false
 	
 #--------------------SANITY--------------------
-	SANITY = clamp(SANITY, 0, MAX_SANITY)
-	SANITY -= SANITY_DRAIN_PASSIVE
-	if !isHidden:
-		SANITY -= SANITY_DRAIN_MOON
+	# Constant passive damage
+	take_damage(SANITY_DRAIN_PASSIVE)
 	
+	# If not under cover take moon damage every tick
+	if !is_hidden:
+		take_damage(SANITY_DRAIN_MOON)
+
+	# Check if dead
+	if SANITY <= 0:
+		die()
+
 	# Animations
 	if is_on_floor():
 		if x_input == 0:
@@ -127,14 +133,14 @@ func _physics_process(_delta):
 		animationPlayer.play("Idle")
 		
 	if nextToWall():
-		if onWallRight:
+		if on_wall_right:
 			animationPlayer.play("Hanging")
 			sprite.set_flip_h(true)
-		if onWallLeft:
+		if on_wall_left:
 			animationPlayer.play("Hanging")
 			sprite.set_flip_h(false)
 	
-# Functions
+#--------------------Functions--------------------
 func nextToWall():
 	return $RightWall.is_colliding() or $LeftWall.is_colliding()
 	
@@ -155,3 +161,13 @@ func onLeftWall():
 		
 func inShadow():
 	return $MoonRayTop.is_colliding() and $MoonRayBottom.is_colliding()
+	
+func take_damage(damage: float):
+	SANITY -= damage
+	SANITY = clamp(SANITY, 0, MAX_SANITY) #keep value in range
+#	$AnimationPlayer.play("hurt")
+
+func die():
+	# Lógica de muerte
+	#queue_free()
+	pass

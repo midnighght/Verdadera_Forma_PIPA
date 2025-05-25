@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://davolscrke4jk"
-path="res://.godot/imported/fondo_barra.png-3923647211bdb3dba46942db1d82b20b.ctex"
+uid="uid://cjmr63c1tsk3"
+path="res://.godot/imported/borde_barra.png-31b7a8994aac8878d1c5c8b63346e227.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://0/img/fondo_barra.png"
-dest_files=["res://.godot/imported/fondo_barra.png-3923647211bdb3dba46942db1d82b20b.ctex"]
+source_file="res://Assets/sprites/borde_barra.png"
+dest_files=["res://.godot/imported/borde_barra.png-31b7a8994aac8878d1c5c8b63346e227.ctex"]
 
 [params]
 

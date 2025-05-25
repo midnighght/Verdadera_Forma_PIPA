@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://csi1g6qvjtciu"]
 
-[ext_resource type="Script" uid="uid://cvolq4n0mj5dw" path="res://Scripts/menu_principal.gd" id="1_i1nop"]
+[ext_resource type="Script" uid="uid://cvolq4n0mj5dw" path="res://Scripts/MainTitle.gd" id="1_i1nop"]
 [ext_resource type="Texture2D" uid="uid://bqympsgavtk1y" path="res://Assets/sprites/GUI/MainMenuBackground2.png" id="2_1odsn"]
 [ext_resource type="FontFile" uid="uid://cpf2nj37kmnpl" path="res://Assets/fonts/Fonts/bloodcrowc.ttf" id="3_jfxkj"]
 [ext_resource type="StyleBox" uid="uid://dvgnmsib4sn2e" path="res://Assets/fonts/BotonPressed.tres" id="4_1odsn"]
@@ -236,11 +236,10 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 0)
 
-[connection signal="pressed" from="CenterContainer/PanelContainer/VBoxContainer/VBoxContainer2/Jugar" to="." method="_on_jugar_pressed"]
 [connection signal="pressed" from="CenterContainer/PanelContainer/VBoxContainer/VBoxContainer2/Jugar" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="CenterContainer/PanelContainer/VBoxContainer/VBoxContainer2/Jugar" to="." method="_on_jugar_pressed"]
-[connection signal="pressed" from="CenterContainer/PanelContainer/VBoxContainer/VBoxContainer2/Asincronico" to="." method="_on_button_2_pressed"]
 [connection signal="pressed" from="CenterContainer/PanelContainer/VBoxContainer/VBoxContainer2/Asincronico" to="." method="_on_asincronico_pressed"]
-[connection signal="pressed" from="CenterContainer/PanelContainer/VBoxContainer/VBoxContainer2/Configuracion" to="." method="_on_button_3_pressed"]
+[connection signal="pressed" from="CenterContainer/PanelContainer/VBoxContainer/VBoxContainer2/Asincronico" to="." method="_on_button_2_pressed"]
 [connection signal="pressed" from="CenterContainer/PanelContainer/VBoxContainer/VBoxContainer2/Configuracion" to="." method="_on_configuracion_pressed"]
+[connection signal="pressed" from="CenterContainer/PanelContainer/VBoxContainer/VBoxContainer2/Configuracion" to="." method="_on_button_3_pressed"]
 [connection signal="pressed" from="CenterContainer/PanelContainer/VBoxContainer/VBoxContainer2/Salir" to="." method="_on_salir_pressed"]
