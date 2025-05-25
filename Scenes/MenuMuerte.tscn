@@ -1,0 +1,143 @@
+[gd_scene load_steps=10 format=3 uid="uid://jiqi1qkcoow7"]
+
+[ext_resource type="Script" uid="uid://dtfhvramlduoh" path="res://Scripts/menu_muerte.gd" id="1_bbfob"]
+[ext_resource type="Shader" uid="uid://bf6q7j4kt1yux" path="res://Assets/fonts/Menu.gdshader" id="1_lddad"]
+[ext_resource type="Texture2D" uid="uid://dh2aa6puaip6t" path="res://Assets/sprites/GUI/button.png" id="2_bbfob"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hekmr"]
+shader = ExtResource("1_lddad")
+shader_parameter/lod = 0.0
+
+[sub_resource type="Animation" id="Animation_6rupy"]
+resource_name = "MenuInGame"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:material:shader_parameter/lod")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0.0, 0.855]
+}
+
+[sub_resource type="Animation" id="Animation_iefth"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:material:shader_parameter/lod")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.15, 0, 0.15, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_eyy4y"]
+_data = {
+&"MenuInGame": SubResource("Animation_6rupy"),
+&"RESET": SubResource("Animation_iefth")
+}
+
+[sub_resource type="GDScript" id="GDScript_hnpcl"]
+script/source = "extends AnimationPlayer
+"
+
+[sub_resource type="LabelSettings" id="LabelSettings_btegd"]
+
+[node name="MenuMuerte" type="Node2D"]
+script = ExtResource("1_bbfob")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_hekmr")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_eyy4y")
+}
+script = SubResource("GDScript_hnpcl")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+top_level = true
+light_mask = 0
+clip_contents = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -192.0
+offset_top = -196.0
+offset_right = 192.0
+offset_bottom = 196.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(177, 210)
+size_flags_stretch_ratio = 0.0
+alignment = 1
+
+[node name="TextureRect2" type="TextureRect" parent="VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("2_bbfob")
+
+[node name="Label2" type="Label" parent="VBoxContainer/TextureRect2"]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MenuPrincipal" type="Button" parent="VBoxContainer/TextureRect2/Label2"]
+layout_mode = 0
+offset_left = 44.0
+offset_top = 27.0
+offset_right = 330.0
+offset_bottom = 106.0
+text = "Menu Principal"
+
+[node name="TextureRect3" type="TextureRect" parent="VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("2_bbfob")
+
+[node name="Label3" type="Label" parent="VBoxContainer/TextureRect3"]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Salir" type="Button" parent="VBoxContainer/TextureRect3"]
+layout_mode = 0
+offset_left = 27.0
+offset_top = 18.0
+offset_right = 324.0
+offset_bottom = 100.0
+text = "Salir"
+
+[node name="Label2" type="Label" parent="."]
+clip_contents = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 43.0
+offset_top = 132.0
+offset_right = 1222.0
+offset_bottom = 228.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "MORISTES"
+label_settings = SubResource("LabelSettings_btegd")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="VBoxContainer/TextureRect2/Label2/MenuPrincipal" to="." method="_on_menu_principal_pressed"]
+[connection signal="pressed" from="VBoxContainer/TextureRect3/Salir" to="." method="_on_salir_pressed"]

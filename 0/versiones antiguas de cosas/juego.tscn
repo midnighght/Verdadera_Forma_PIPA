@@ -1,53 +1,14 @@
-[gd_scene load_steps=18 format=3 uid="uid://cfxj8vjesif61"]
+[gd_scene load_steps=10 format=3 uid="uid://cfxj8vjesif61"]
 
 [ext_resource type="Script" uid="uid://dour2elyxnqdv" path="res://Scripts/juego.gd" id="1_hblkt"]
 [ext_resource type="PackedScene" uid="uid://b154j5rcla61x" path="res://0/versiones antiguas de cosas/jugador.tscn" id="2_hblkt"]
 [ext_resource type="Texture2D" uid="uid://gm3dvfrkhsge" path="res://0/fotosPrueba1/AssetsAtrapaManzanas/bosque.png" id="2_sbygf"]
-[ext_resource type="Texture2D" uid="uid://cbr7l3rflfxa8" path="res://0/fotosPrueba1/brackeys_platformer_assets/sprites/platforms.png" id="4_3lnup"]
 [ext_resource type="PackedScene" uid="uid://cwjnun1tytdmm" path="res://Prefabs/UI/menu_pausa.tscn" id="5_b83u4"]
-[ext_resource type="Texture2D" uid="uid://bb8w8k8btteis" path="res://0/fotosPrueba1/ajolote.png" id="5_ll0et"]
 [ext_resource type="PackedScene" uid="uid://c7mkfxab57x27" path="res://Prefabs/Bat/Enemigo.tscn" id="6_b83u4"]
 [ext_resource type="AudioStream" uid="uid://cctmyfjllvv3h" path="res://Assets/sound/Music/y2mate.com - LOrbrie.mp3" id="8_k4uls"]
-[ext_resource type="PackedScene" uid="uid://dekfej2mci4ub" path="res://0/versiones antiguas de cosas/moon_old.tscn" id="9_apw7y"]
+[ext_resource type="PackedScene" uid="uid://dekfej2mci4ub" path="res://Prefabs/Moon/moon_old.tscn" id="9_apw7y"]
+[ext_resource type="PackedScene" uid="uid://d228vcly20ups" path="res://Scenes/caerNivel.tscn" id="9_f0at8"]
 [ext_resource type="PackedScene" uid="uid://bbhbyc5imq54j" path="res://Prefabs/Platforms/platformA3.tscn" id="10_r5jw4"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_3lnup"]
-size = Vector2(811, 44.5)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_3lnup"]
-atlas = ExtResource("4_3lnup")
-region = Rect2(0, 0, 16, 10)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_k4uls"]
-atlas = ExtResource("4_3lnup")
-region = Rect2(16, 0, 16, 10)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_apw7y"]
-atlas = ExtResource("4_3lnup")
-region = Rect2(32, 0, 16, 10)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_x4qup"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_3lnup")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_k4uls")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_apw7y")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_sbygf"]
-size = Vector2(1296.5, 162)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_apw7y"]
-size = Vector2(465, 138)
 
 [node name="Juego" type="Node2D"]
 script = ExtResource("1_hblkt")
@@ -72,7 +33,7 @@ texture = ExtResource("2_sbygf")
 position = Vector2(1290, -1)
 texture = ExtResource("2_sbygf")
 
-[node name="Jugador" parent="." instance=ExtResource("2_hblkt")]
+[node name="Jugador" parent="." groups=["jugador"] instance=ExtResource("2_hblkt")]
 position = Vector2(276, 488)
 scale = Vector2(4, 4)
 script = null
@@ -81,128 +42,6 @@ script = null
 position = Vector2(94, -957)
 limit_top = 0
 limit_bottom = 2000
-
-[node name="StaticBody2D2" type="StaticBody2D" parent="."]
-
-[node name="Ajolote" type="Sprite2D" parent="StaticBody2D2"]
-modulate = Color(100, 100, 100, 1)
-visibility_layer = 32
-position = Vector2(2712, 845.625)
-scale = Vector2(10.0185, 1.49763)
-texture = ExtResource("5_ll0et")
-
-[node name="Ajolote" type="Sprite2D" parent="StaticBody2D2/Ajolote"]
-modulate = Color(100, 100, 100, 1)
-position = Vector2(1109.01, 1047.55)
-scale = Vector2(2.36969, 0.484227)
-texture = ExtResource("5_ll0et")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
-position = Vector2(1696, 533.25)
-shape = SubResource("RectangleShape2D_3lnup")
-
-[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="StaticBody2D2/CollisionShape2D"]
-texture_filter = 1
-position = Vector2(-336, 26.75)
-scale = Vector2(10.2818, 10.5892)
-sprite_frames = SubResource("SpriteFrames_x4qup")
-frame_progress = 0.480136
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="StaticBody2D2/CollisionShape2D/AnimatedSprite2D2"]
-texture_filter = 1
-position = Vector2(11.576, -0.0509644)
-scale = Vector2(0.886028, 1.01803)
-sprite_frames = SubResource("SpriteFrames_x4qup")
-
-[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="StaticBody2D2/CollisionShape2D/AnimatedSprite2D2"]
-texture_filter = 1
-position = Vector2(22.439, -0.104165)
-scale = Vector2(0.90818, 0.977308)
-sprite_frames = SubResource("SpriteFrames_x4qup")
-frame_progress = 0.480136
-
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
-
-[node name="Ajolote" type="Sprite2D" parent="StaticBody2D"]
-modulate = Color(100, 100, 100, 1)
-position = Vector2(638, 636.75)
-scale = Vector2(2.36969, 0.484227)
-texture = ExtResource("5_ll0et")
-
-[node name="Ajolote" type="Sprite2D" parent="StaticBody2D/Ajolote"]
-modulate = Color(100, 100, 100, 1)
-position = Vector2(1109.01, 1047.55)
-scale = Vector2(2.36969, 0.484227)
-texture = ExtResource("5_ll0et")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(642, 639)
-shape = SubResource("RectangleShape2D_sbygf")
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="StaticBody2D"]
-texture_filter = 1
-position = Vector2(60, 610)
-scale = Vector2(10, 10)
-sprite_frames = SubResource("SpriteFrames_x4qup")
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="StaticBody2D/AnimatedSprite2D"]
-texture_filter = 1
-position = Vector2(48.7, 0.0999966)
-scale = Vector2(1.83045, 1.0296)
-sprite_frames = SubResource("SpriteFrames_x4qup")
-
-[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="StaticBody2D/AnimatedSprite2D"]
-texture_filter = 1
-position = Vector2(68.5, -0.20001)
-scale = Vector2(1.87621, 0.988422)
-sprite_frames = SubResource("SpriteFrames_x4qup")
-frame_progress = 0.480136
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="StaticBody2D/AnimatedSprite2D/AnimatedSprite2D2"]
-texture_filter = 1
-position = Vector2(11.576, -0.0509644)
-scale = Vector2(0.886028, 1.01803)
-sprite_frames = SubResource("SpriteFrames_x4qup")
-
-[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="StaticBody2D/AnimatedSprite2D/AnimatedSprite2D2"]
-texture_filter = 1
-position = Vector2(22.439, -0.104165)
-scale = Vector2(0.90818, 0.977308)
-sprite_frames = SubResource("SpriteFrames_x4qup")
-frame_progress = 0.480136
-
-[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="StaticBody2D"]
-texture_filter = 1
-position = Vector2(180, 609)
-scale = Vector2(10.25, 9.59999)
-sprite_frames = SubResource("SpriteFrames_x4qup")
-frame_progress = 0.480136
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="StaticBody2D/AnimatedSprite2D2"]
-texture_filter = 1
-position = Vector2(11.576, -0.0509644)
-scale = Vector2(0.886028, 1.01803)
-sprite_frames = SubResource("SpriteFrames_x4qup")
-
-[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="StaticBody2D/AnimatedSprite2D2"]
-texture_filter = 1
-position = Vector2(22.439, -0.104165)
-scale = Vector2(0.90818, 0.977308)
-sprite_frames = SubResource("SpriteFrames_x4qup")
-frame_progress = 0.480136
-
-[node name="StaticBody2D3" type="StaticBody2D" parent="."]
-visible = false
-position = Vector2(111, 94)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3"]
-position = Vector2(686, 186)
-shape = SubResource("RectangleShape2D_apw7y")
-
-[node name="Ajolote" type="Sprite2D" parent="StaticBody2D3"]
-position = Vector2(689.625, 183)
-scale = Vector2(0.851664, 0.440063)
-texture = ExtResource("5_ll0et")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 process_mode = 3
@@ -214,7 +53,7 @@ offset_right = -2.0
 offset_bottom = 5.0
 
 [node name="Enemigo" parent="." instance=ExtResource("6_b83u4")]
-position = Vector2(1168, -64)
+position = Vector2(1134, 278)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_k4uls")
@@ -222,7 +61,58 @@ volume_db = -5.433
 autoplay = true
 
 [node name="Moon" parent="." instance=ExtResource("9_apw7y")]
-position = Vector2(200, -480)
+position = Vector2(1875, -43)
 
 [node name="PlatformA1" parent="." instance=ExtResource("10_r5jw4")]
-position = Vector2(1944, 440)
+position = Vector2(1580, 582)
+
+[node name="PlatformA2" parent="PlatformA1" instance=ExtResource("10_r5jw4")]
+position = Vector2(-1342, -2)
+
+[node name="PlatformA2" parent="PlatformA1/PlatformA2" instance=ExtResource("10_r5jw4")]
+position = Vector2(1399, -230)
+
+[node name="PlatformA3" parent="PlatformA1" instance=ExtResource("10_r5jw4")]
+position = Vector2(-884, -2)
+
+[node name="PlatformA4" parent="PlatformA1" instance=ExtResource("10_r5jw4")]
+position = Vector2(-445, -1)
+
+[node name="PlatformA4" parent="PlatformA1/PlatformA4" instance=ExtResource("10_r5jw4")]
+position = Vector2(919, 1)
+
+[node name="PlatformA4" parent="PlatformA1/PlatformA4/PlatformA4" instance=ExtResource("10_r5jw4")]
+position = Vector2(458, 1)
+
+[node name="PlatformA4" parent="PlatformA1/PlatformA4/PlatformA4/PlatformA4" instance=ExtResource("10_r5jw4")]
+position = Vector2(450, 1)
+
+[node name="PlatformA1" parent="PlatformA1" instance=ExtResource("10_r5jw4")]
+position = Vector2(3127, 2)
+
+[node name="PlatformA2" parent="PlatformA1/PlatformA1" instance=ExtResource("10_r5jw4")]
+position = Vector2(-1342, -2)
+
+[node name="PlatformA3" parent="PlatformA1/PlatformA1" instance=ExtResource("10_r5jw4")]
+position = Vector2(-884, -2)
+
+[node name="PlatformA4" parent="PlatformA1/PlatformA1" instance=ExtResource("10_r5jw4")]
+position = Vector2(-445, -1)
+
+[node name="PlatformA4" parent="PlatformA1/PlatformA1/PlatformA4" instance=ExtResource("10_r5jw4")]
+position = Vector2(919, 1)
+
+[node name="PlatformA4" parent="PlatformA1/PlatformA1/PlatformA4/PlatformA4" instance=ExtResource("10_r5jw4")]
+position = Vector2(458, 1)
+
+[node name="PlatformA4" parent="PlatformA1/PlatformA1/PlatformA4/PlatformA4/PlatformA4" instance=ExtResource("10_r5jw4")]
+position = Vector2(450, 1)
+
+[node name="CaerNivel" parent="." instance=ExtResource("9_f0at8")]
+position = Vector2(555, 303)
+
+[node name="PlatformA2" parent="." instance=ExtResource("10_r5jw4")]
+position = Vector2(2677, 345)
+
+[node name="PlatformA2" parent="PlatformA2" instance=ExtResource("10_r5jw4")]
+position = Vector2(1335, -6)

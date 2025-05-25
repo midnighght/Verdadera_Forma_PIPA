@@ -32,6 +32,7 @@ size = Vector2(293, 155)
 size = Vector2(289, 162)
 
 [node name="Enemigo" type="Node2D"]
+position = Vector2(427, 288)
 script = ExtResource("1_okatw")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

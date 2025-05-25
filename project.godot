@@ -15,6 +15,10 @@ run/main_scene="uid://cfxj8vjesif61"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+GlobalConfig="*res://Scripts/GlobalConfig.gd"
+
 [display]
 
 window/size/viewport_width=1920
@@ -25,6 +29,10 @@ window/size/resizable=false
 
 version_control/plugin_name="GitPlugin"
 version_control/autoload_on_startup=true
+
+[global_group]
+
+jugador=""
 
 [input]
 

@@ -70,7 +70,7 @@ position = Vector2(153, 427)
 scale = Vector2(8, 8)
 script = ExtResource("1_t3nv0")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["jugador"]]
 position = Vector2(-3, 6)
 shape = SubResource("RectangleShape2D_hf4tf")
 
