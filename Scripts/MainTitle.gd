@@ -7,7 +7,7 @@ func _on_multiplayer_pressed() -> void:
 	pass
 
 func _on_config_pressed() -> void:
-	get_tree().change_scene_to_file("res://Scenes/opciones.tscn")
+	get_tree().change_scene_to_file("res://Prefabs/UI/opciones.tscn")
 
 func _on_quit_pressed() -> void:
 	get_tree().quit()

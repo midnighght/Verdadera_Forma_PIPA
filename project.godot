@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="TrabajoPipa"
-run/main_scene="uid://de1dg1tfntqd0"
+run/main_scene="uid://bp47wgmvoithm"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 

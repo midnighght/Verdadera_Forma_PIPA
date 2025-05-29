@@ -45,7 +45,7 @@ func _on_confirmar_pressed() -> void:
 	GlobalConfig.aplicar_config(Opciones)
 
 func _on_volver_pressed() -> void:
-	get_tree().change_scene_to_file("res://Scenes/menuPrincipal.tscn")
+	get_tree().change_scene_to_file("res://Scenes/MainTitle.tscn")
 
 	
 

@@ -7,15 +7,15 @@ Change log
 Done
 - Rework Player
 	- change movement coding
-    	- made wall jumps
-    	- improved whole movement system
-    	- addes proper export variables
+		- made wall jumps
+		- improved whole movement system
+		- addes proper export variables
 	- add ray cast to light
-    	- added shadow detection for whole player body
+		- added shadow detection for whole player body
 - rework UI
-    - rework main title buttons
-    - deleted useless signals
-    - organized screen layout
+	- rework main title buttons
+	- deleted useless signals
+	- organized screen layout
 - Improved Project settings
   - made resulotion the HD standard
   - added custom inputs for movement
@@ -30,7 +30,7 @@ To Do
 	- improve madness bar
 		- make new sprites
 		- make global variables
-    - rework main title buttons
+	- rework main title buttons
 - make items
 	- make basic antidote prefab
 - build wagon level gen system
