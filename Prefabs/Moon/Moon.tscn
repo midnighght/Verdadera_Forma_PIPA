@@ -1,5 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://4nd0pv24mqk8"]
+[gd_scene load_steps=5 format=3 uid="uid://4nd0pv24mqk8"]
 
+[ext_resource type="Script" uid="uid://dwymjbe0m5eqo" path="res://Prefabs/Moon/moon.gd" id="1_esaw7"]
 [ext_resource type="Texture2D" uid="uid://xqu0fou4dnxt" path="res://Assets/sprites/Moon/lunasprite.png" id="1_swcsj"]
 
 [sub_resource type="Gradient" id="Gradient_esaw7"]
@@ -15,6 +16,7 @@ fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.5, 0)
 
 [node name="Moon" type="Node2D"]
+script = ExtResource("1_esaw7")
 
 [node name="Light Dynamics" type="Node2D" parent="."]
 
@@ -42,3 +44,5 @@ visible = false
 offset_right = 40.0
 offset_bottom = 40.0
 color = Color(1, 0, 0, 1)
+
+[node name="Timer" type="Timer" parent="."]
