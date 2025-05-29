@@ -19,9 +19,9 @@ const UP = Vector2(0,-1)
 @export var ACCELERATION: int = 80
 @export var FRICTION: float = 0.4
 @export var AIR_FRICTION: float = 0.05
-var motion = Vector2()
-var on_wall_right = false
-var on_wall_left = false
+var motion: Vector2
+var on_wall_right: bool = false
+var on_wall_left: bool = false
 
 #sanity & moon mechanic constants
 var is_hidden: bool = false
@@ -52,16 +52,29 @@ func _input(event):
 		is_attacking = false
 
 func _physics_process(_delta):
+	#--------------------SANITY--------------------
+	# Constant passive damage
+	take_damage(SANITY_DRAIN_PASSIVE)
+	
+	# If not under cover take moon damage every tick
+	if !is_hidden:
+		take_damage(SANITY_DRAIN_MOON)
+
+	# Check if dead
+	if SANITY <= 0:
+		die()
+
 	#--------------------ATTACK STATE--------------------
 	if is_attacking:
-		#sprite.visible = false
 		animationPlayer.play("attack")
 		sprite_overlay.visible = true
 		motion = Vector2.ZERO
-		var direction = (Vector2(get_global_mouse_position().x, get_global_mouse_position().y + 24 * cos(sprite_overlay.rotation - 0.349)) - global_position).angle() + 0.349
-		direction = clamp(direction,-0.6981, 0.5236)
-		sprite_overlay.rotation = direction
-		sprite_underlay.rotation = -direction
+		var relative_mouse_vector: float = (
+			get_global_mouse_position() - (global_position) + # Mouse position relative to Urlu + Offset in the sprite
+			Vector2(cos(sprite_overlay.rotation) + 1.80940565, 
+					sin(sprite_overlay.rotation) + 1.80940565) * 38.07886553 ).angle()
+		#var direction = (relative_mouse_vector).angle() - deg_to_rad(20)
+		handle_dynamic_attack_sprite(sprite.flip_h, relative_mouse_vector, 0, -60)
 		return
 	
 #--------------------MOVEMENT--------------------
@@ -70,20 +83,20 @@ func _physics_process(_delta):
 	
 	# Gravity
 	if on_wall_right or on_wall_left:
-		motion.y = GRAVITY * 1.2
+		motion.y  = GRAVITY * 1.2
 	else:
 		motion.y += GRAVITY
 	
 	# Motion Clamping
-	motion.x = clamp(motion.x,-MAX_SPEED,MAX_SPEED)
-	motion.y = min(motion.y,MAX_FALL_SPEED)
+	motion.x = clamp(motion.x, -MAX_SPEED, MAX_SPEED)
+	motion.y = min  (motion.y,  MAX_FALL_SPEED)
 	
 	# X movement
 	if x_input != 0:
 		motion.x += x_input * ACCELERATION
 		sprite.flip_h = x_input < 0
 	elif is_on_floor():
-		motion.x = lerp(motion.x,0.0,FRICTION)
+		motion.x = lerp(motion.x, 0.0, FRICTION)
 	
 	# Jumping Mechanincs
 	if Input.is_action_pressed("jump"):
@@ -96,8 +109,8 @@ func _physics_process(_delta):
 		elif on_wall_left:
 			motion.y = -JUMP_FORCE
 			motion.x = WALL_JUMP_FORCE
-			on_wall_left = false #maybe redundant
-		motion.x = lerp(motion.x,0.0,AIR_FRICTION)
+			on_wall_left  = false #maybe redundant
+		motion.x = lerp(motion.x, 0.0, AIR_FRICTION)
 	
 	# move and slide (movement collisions physics)
 	velocity = motion
@@ -113,12 +126,12 @@ func _physics_process(_delta):
 		on_wall_right = true
 		motion.y = 0 # THIS BROKE IDK WHY BUT IT STILL WORKS FINE FOR GAMEPLAY
 	elif onLeftWall():
-		on_wall_left = true
+		on_wall_left  = true
 		motion.y = 0
 		
 	# Moon position tracking
 	var moon_target_position = Vector2(moon.global_position.x-960,moon.global_position.y-global_position.y)
-	$MoonRayTop.target_position = moon_target_position
+	$MoonRayTop.target_position    = moon_target_position
 	$MoonRayBottom.target_position = moon_target_position
 	
 	# hidden state tracking
@@ -127,20 +140,7 @@ func _physics_process(_delta):
 	else:
 		is_hidden = false
 	
-#--------------------SANITY--------------------
-	# Constant passive damage
-	take_damage(SANITY_DRAIN_PASSIVE)
-	
-	# If not under cover take moon damage every tick
-	if !is_hidden:
-		take_damage(SANITY_DRAIN_MOON)
-
-	# Check if dead
-	if SANITY <= 0:
-		die()
-
 #--------------------Animations--------------------
-	#sprite.visible = true
 	sprite_overlay.visible = false
 	if is_on_floor():
 		if x_input == 0:
@@ -196,3 +196,29 @@ func die():
 	# Lógica de muerte
 	#queue_free()
 	pass
+	
+func handle_dynamic_attack_sprite(state: bool, direction: float, min_rot_DEG: int, max_rot_DEG: int):
+	var flip: int
+	if !state:
+		flip = 1
+		#sprite_overlay.flip_h      = false # Correct Overlay Transformation 
+		#sprite_overlay.offset.x    = 10
+		#sprite_overlay.position.x  = 9
+		#sprite_underlay.flip_h     = false # Correct Underlay Transformation 
+		#sprite_underlay.offset.x   = 6
+		#sprite_underlay.position.x = -28
+	else:
+		flip = -1
+	sprite_overlay.flip_h      = state # Correct Overlay Transformation 
+	sprite_overlay.offset.x    = 10*flip
+	sprite_overlay.position.x  = 9*flip
+	sprite_underlay.flip_h     = state # Correct Underlay Transformation 
+	sprite_underlay.offset.x   = 6*flip
+	sprite_underlay.position.x = -28*flip
+	# Limit direction range
+	direction = clamp(direction,deg_to_rad(min(min_rot_DEG,max_rot_DEG)),
+								deg_to_rad(max(min_rot_DEG,max_rot_DEG)))
+	direction += deg_to_rad(20) # Angle of bow in the sprite itself
+	# Set rotation
+	sprite_overlay.rotation  =  direction
+	sprite_underlay.rotation = -direction
