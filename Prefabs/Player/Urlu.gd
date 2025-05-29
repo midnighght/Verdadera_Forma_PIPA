@@ -108,7 +108,7 @@ func _physics_process(_delta):
 			on_wall_right = false #maybe redundant
 		elif on_wall_left:
 			motion.y = -JUMP_FORCE
-			motion.x = WALL_JUMP_FORCE
+			motion.x =  WALL_JUMP_FORCE
 			on_wall_left  = false #maybe redundant
 		motion.x = lerp(motion.x, 0.0, AIR_FRICTION)
 	
