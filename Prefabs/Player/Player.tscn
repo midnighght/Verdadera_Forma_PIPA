@@ -22,9 +22,14 @@ region = Rect2(120, 0, 120, 80)
 atlas = ExtResource("4_ip1bf")
 region = Rect2(240, 0, 120, 80)
 
+<<<<<<< Updated upstream
 [sub_resource type="AtlasTexture" id="AtlasTexture_ae6jo"]
 atlas = ExtResource("2_hnr8y")
 region = Rect2(0, 0, 120, 80)
+=======
+[node name="Player" parent="." groups=["jugador"] instance=ExtResource("2_op78j")]
+MOON_PATH = NodePath("../CanvasLayer -32/Moon")
+>>>>>>> Stashed changes
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xo5gc"]
 atlas = ExtResource("2_hnr8y")

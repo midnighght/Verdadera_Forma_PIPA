@@ -6,7 +6,7 @@ func _on_salir_pressed() -> void:
 
 
 func _on_menu_principal_pressed() -> void:
-	var escena = load("res://Scenes/menuPrincipal.tscn")
+	var escena = load("res://Scenes/MainTitle.tscn")
 	if escena:
 		get_tree().change_scene_to_packed(escena)
 	else:

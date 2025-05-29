@@ -1,0 +1,91 @@
+[gd_scene load_steps=10 format=3 uid="uid://de1dg1tfntqd0"]
+
+[ext_resource type="PackedScene" uid="uid://bbhbyc5imq54j" path="res://Prefabs/Platforms/platformA3.tscn" id="1_tnq4l"]
+[ext_resource type="PackedScene" uid="uid://xbkqp5rf11x0" path="res://Prefabs/Platforms/platformA2.tscn" id="2_wqdgv"]
+[ext_resource type="PackedScene" uid="uid://7eduktatctps" path="res://Prefabs/Platforms/platformA1.tscn" id="3_g0num"]
+[ext_resource type="PackedScene" uid="uid://d0kmghqqc55qm" path="res://Prefabs/Player/Player.tscn" id="4_bv12a"]
+[ext_resource type="PackedScene" uid="uid://c7mkfxab57x27" path="res://Prefabs/Bat/Bat.tscn" id="6_g0num"]
+[ext_resource type="PackedScene" uid="uid://dpwjy3dah64mh" path="res://Prefabs/Items/Antidote.tscn" id="7_bv12a"]
+[ext_resource type="PackedScene" uid="uid://cwjnun1tytdmm" path="res://Prefabs/UI/menu_pausa.tscn" id="7_hqhcl"]
+[ext_resource type="PackedScene" uid="uid://d228vcly20ups" path="res://Scenes/caerNivel.tscn" id="8_hqhcl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tnq4l"]
+size = Vector2(136, 25.4509)
+
+[node name="TestPlay" type="Node2D"]
+
+[node name="platforms" type="Node2D" parent="."]
+
+[node name="PlatformA5" parent="platforms" instance=ExtResource("3_g0num")]
+position = Vector2(376, 552)
+scale = Vector2(1, 39.92)
+
+[node name="RigidBody2D" type="StaticBody2D" parent="platforms"]
+position = Vector2(960, 600)
+collision_layer = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="platforms/RigidBody2D"]
+position = Vector2(-580, -92.0005)
+scale = Vector2(1, 39.92)
+shape = SubResource("RectangleShape2D_tnq4l")
+
+[node name="PlatformA1" parent="platforms" instance=ExtResource("1_tnq4l")]
+position = Vector2(2888, 704)
+
+[node name="PlatformA2" parent="platforms" instance=ExtResource("1_tnq4l")]
+position = Vector2(1232, 920)
+
+[node name="PlatformA3" parent="platforms" instance=ExtResource("2_wqdgv")]
+position = Vector2(1688, 376)
+
+[node name="PlatformA4" parent="platforms" instance=ExtResource("3_g0num")]
+position = Vector2(1960, 656)
+
+[node name="PlatformA6" parent="platforms" instance=ExtResource("2_wqdgv")]
+position = Vector2(920, 448)
+
+[node name="PlatformA7" parent="platforms" instance=ExtResource("1_tnq4l")]
+position = Vector2(1120, 1016)
+scale = Vector2(35.4701, 1.71605)
+
+[node name="PlatformA8" parent="platforms" instance=ExtResource("2_wqdgv")]
+position = Vector2(3512, 792)
+
+[node name="PlatformA9" parent="platforms" instance=ExtResource("3_g0num")]
+position = Vector2(3576, 400)
+
+[node name="PlatformA10" parent="platforms" instance=ExtResource("2_wqdgv")]
+position = Vector2(4008, 504)
+
+[node name="PlatformA11" parent="platforms" instance=ExtResource("1_tnq4l")]
+position = Vector2(4608, 776)
+
+[node name="Player" parent="." groups=["jugador"] instance=ExtResource("4_bv12a")]
+position = Vector2(960, 600)
+
+[node name="Antidote" parent="." instance=ExtResource("7_bv12a")]
+position = Vector2(1064, 840)
+
+[node name="Antidote2" parent="." instance=ExtResource("7_bv12a")]
+position = Vector2(1344, 848)
+
+[node name="Antidote3" parent="." instance=ExtResource("7_bv12a")]
+position = Vector2(1960, 576)
+
+[node name="Antidote4" parent="." instance=ExtResource("7_bv12a")]
+position = Vector2(1624, 304)
+
+[node name="Antidote5" parent="." instance=ExtResource("7_bv12a")]
+position = Vector2(824, 376)
+
+[node name="Bat" parent="." instance=ExtResource("6_g0num")]
+position = Vector2(1576, 592)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+process_mode = 3
+
+[node name="MenuPausa" parent="CanvasLayer" instance=ExtResource("7_hqhcl")]
+metadata/_edit_use_anchors_ = true
+
+[node name="CaerNivel" parent="." instance=ExtResource("8_hqhcl")]
+position = Vector2(-1096, 757)

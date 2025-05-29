@@ -1,0 +1,110 @@
+[gd_scene load_steps=7 format=3 uid="uid://bp47wgmvoithm"]
+
+[ext_resource type="Script" uid="uid://cvolq4n0mj5dw" path="res://Scripts/MainTitle.gd" id="1_ocknv"]
+[ext_resource type="Texture2D" uid="uid://bqympsgavtk1y" path="res://Assets/sprites/GUI/MainMenuBackground2.png" id="2_lp8xn"]
+[ext_resource type="Texture2D" uid="uid://dkyvdktchqngx" path="res://Assets/sprites/GUI/main title.png" id="3_jwxmb"]
+[ext_resource type="Theme" uid="uid://brhg7qm8u6tf" path="res://Assets/MainTitleButtons.tres" id="4_xqvo5"]
+[ext_resource type="Texture2D" uid="uid://dh2aa6puaip6t" path="res://Assets/sprites/GUI/button.png" id="5_s1n8u"]
+[ext_resource type="AudioStream" uid="uid://cctmyfjllvv3h" path="res://Assets/sound/Music/y2mate.com - LOrbrie.mp3" id="6_pruqj"]
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ocknv")
+
+[node name="VerdaderaFormaLogo" type="Sprite2D" parent="."]
+texture = ExtResource("2_lp8xn")
+centered = false
+metadata/_edit_lock_ = true
+
+[node name="MainTitle" type="Sprite2D" parent="VerdaderaFormaLogo"]
+texture = ExtResource("3_jwxmb")
+centered = false
+metadata/_edit_lock_ = true
+
+[node name="MenuButtons" type="CenterContainer" parent="."]
+layout_mode = 0
+offset_top = 576.0
+offset_right = 1920.0
+offset_bottom = 1088.0
+metadata/_edit_lock_ = true
+
+[node name="PanelContainer" type="PanelContainer" parent="MenuButtons"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MenuButtons/PanelContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="VBoxContainerLeft" type="VBoxContainer" parent="MenuButtons/PanelContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+alignment = 1
+
+[node name="Config" type="Button" parent="MenuButtons/PanelContainer/HBoxContainer/VBoxContainerLeft"]
+layout_mode = 2
+theme = ExtResource("4_xqvo5")
+theme_override_colors/font_hover_color = Color(0.439216, 0.14902, 0.105882, 1)
+text = "Configuración"
+icon = ExtResource("5_s1n8u")
+flat = true
+icon_alignment = 1
+
+[node name="Quit" type="Button" parent="MenuButtons/PanelContainer/HBoxContainer/VBoxContainerLeft"]
+layout_mode = 2
+theme = ExtResource("4_xqvo5")
+theme_override_colors/font_hover_color = Color(0.439216, 0.14902, 0.105882, 1)
+text = "Salir"
+icon = ExtResource("5_s1n8u")
+flat = true
+icon_alignment = 1
+
+[node name="VBoxContainerSpacer" type="VBoxContainer" parent="MenuButtons/PanelContainer/HBoxContainer"]
+custom_minimum_size = Vector2(960, 0)
+layout_mode = 2
+
+[node name="VBoxContainerRight" type="VBoxContainer" parent="MenuButtons/PanelContainer/HBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Singleplayer" type="Button" parent="MenuButtons/PanelContainer/HBoxContainer/VBoxContainerRight"]
+texture_filter = 1
+layout_mode = 2
+size_flags_stretch_ratio = 0.0
+theme = ExtResource("4_xqvo5")
+theme_override_colors/font_hover_color = Color(0.439216, 0.14902, 0.105882, 1)
+text = "Un Jugador"
+icon = ExtResource("5_s1n8u")
+flat = true
+icon_alignment = 1
+
+[node name="Multiplayer" type="Button" parent="MenuButtons/PanelContainer/HBoxContainer/VBoxContainerRight"]
+layout_mode = 2
+theme = ExtResource("4_xqvo5")
+theme_override_colors/font_hover_color = Color(0.439216, 0.14902, 0.105882, 1)
+text = "Juego Cruzado"
+icon = ExtResource("5_s1n8u")
+flat = true
+icon_alignment = 1
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_pruqj")
+autoplay = true
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 1925.0
+offset_bottom = 1088.0
+mouse_filter = 2
+color = Color(0, 0, 0, 0)
+
+[connection signal="pressed" from="MenuButtons/PanelContainer/HBoxContainer/VBoxContainerLeft/Config" to="." method="_on_config_pressed"]
+[connection signal="pressed" from="MenuButtons/PanelContainer/HBoxContainer/VBoxContainerLeft/Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="MenuButtons/PanelContainer/HBoxContainer/VBoxContainerRight/Singleplayer" to="." method="_on_singleplayer_pressed"]
+[connection signal="pressed" from="MenuButtons/PanelContainer/HBoxContainer/VBoxContainerRight/Multiplayer" to="." method="_on_multiplayer_pressed"]

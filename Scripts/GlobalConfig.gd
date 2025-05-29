@@ -1,6 +1,6 @@
 extends Node
 
-var brillo := 1.0
+var brillo := 1.0  # Valor entre 0 (oscuro) y 1 (claro)
 var volumen := 1.0
 var config_path := "user://config.cfg"
 var config := ConfigFile.new()
@@ -26,9 +26,10 @@ func cargar_config():
 	else:
 		print("No se encontró configuración previa, usando valores por defecto")
 
-func aplicar_config(opciones_node):
-	# Aplica brillo (modulate alfa) y volumen (AudioServer)
+func aplicar_config(color_rect_node):
+	# Ajusta volumen en bus 0
 	AudioServer.set_bus_volume_db(0, linear_to_db(volumen))
-	var color = opciones_node.modulate
-	color.a = brillo
-	opciones_node.modulate = color
+	# Ajusta brillo modificando color.a del ColorRect (invirtiendo para lógica intuitiva)
+	var color = color_rect_node.color
+	color.a = 1.0 - brillo  # Invertir para que brillo=1 sea claro (alfa=0)
+	color_rect_node.color = color
