@@ -1,16 +1,17 @@
 extends Node2D
-var estado: bool
-@onready var tiempo= $Timer
+
+@onready var tiempo = $Timer
 @onready var luz = $"Light Dynamics"
+var encendida = false
+
 func _ready():
 	luz.visible = false
-	tiempo.start(20)
+	tiempo.wait_time = 20
+	tiempo.one_shot = false  # se repetirá automáticamente
 	tiempo.timeout.connect(_on_timer_timeout)
+	tiempo.start()
 
-
-##funcion para señal de lo que pase una vez que 
-##ya haya pasado el tiempo
 func _on_timer_timeout():
-	luz.visible = true
-	print("LUZ")
-	
+	encendida = !encendida         # alterna el estado
+	luz.visible = encendida
+	print("LUZ:", encendida)
