@@ -214,6 +214,9 @@ position = Vector2(-28, -26)
 texture = ExtResource("4_6ocgn")
 offset = Vector2(6, 10)
 
+[node name="BowOrigin" type="Node2D" parent="SpriteOverlay"]
+position = Vector2(-9, -37)
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
 shape = SubResource("5")

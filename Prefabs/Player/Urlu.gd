@@ -1,30 +1,24 @@
 extends CharacterBody2D
-
-#const GRAVITY = 60
-#const MAX_FALL_SPEED = 1500
-#const MAX_SPEED = 680
-#const JUMP_FORCE = 1500
-#const ACCELERATION = 80
-#const FRICTION = 0.4
-#const AIR_FRICTION = 0.05
-#const WALL_JUMP_FORCE = 1000
-
+#region ----------CONSTANTS & VAR DECLARATIONS----------
 #movement constants
-const UP = Vector2(0,-1)
-@export var GRAVITY: int = 60
-@export var MAX_FALL_SPEED: int = 1500
-@export var MAX_SPEED: int = 680
-@export var JUMP_FORCE: int = 1500
-@export var WALL_JUMP_FORCE: int = 1000
-@export var ACCELERATION: int = 80
-@export var FRICTION: float = 0.4
-@export var AIR_FRICTION: float = 0.05
+@export var GRAVITY: 			 int  =   60
+@export var MAX_FALL_SPEED: 	 int  = 1500
+@export var JUMP_FORCE: 		 int  = 1500
+@export var WALL_JUMP_FORCE:	 int  = 1000
+@export var MAX_SPEED:			 int  =  680
+@export var ACCELERATION:		 int  =   80
+@export var FRICTION:			float =    0.4
+@export var AIR_FRICTION:		float =    0.05
+const UP = Vector2(0,-1) #gravity
 var motion: Vector2
-var on_wall_right: bool = false
-var on_wall_left: bool = false
+
+#states variable declarations
+var on_wall_right:	bool = false
+var on_wall_left:	bool = false
+var is_attacking:	bool = false
+var is_hidden:		bool = false
 
 #sanity & moon mechanic constants
-var is_hidden: bool = false
 @export var MOON_PATH: NodePath
 @onready var moon = get_node(MOON_PATH)
 @export var MAX_SANITY: int
@@ -32,14 +26,14 @@ var is_hidden: bool = false
 @export var SANITY_DRAIN_PASSIVE: float
 @export var SANITY_DRAIN_MOON: float
  
-#animation constants
-@onready var sprite = $Sprite
-@onready var animationPlayer = $AnimationPlayer
-@onready var sprite_overlay = $SpriteOverlay
-@onready var sprite_underlay = $SpriteOverlay/SpriteUnderlay
+#animation nodes
+@onready var sprite 			= $Sprite
+@onready var animationPlayer 	= $AnimationPlayer
+@onready var sprite_overlay 	= $SpriteOverlay
+@onready var sprite_underlay 	= $SpriteOverlay/SpriteUnderlay
+@onready var bow_origin 		= $SpriteOverlay/BowOrigin
 
-#attack state
-var is_attacking: bool = false
+#endregion
 
 func _input(event):
 	if event.is_action_pressed("ui_cancel"):
@@ -52,7 +46,7 @@ func _input(event):
 		is_attacking = false
 
 func _physics_process(_delta):
-	#--------------------SANITY--------------------
+#region ---------------------SANITY---------------------
 	# Constant passive damage
 	take_damage(SANITY_DRAIN_PASSIVE)
 	
@@ -63,21 +57,20 @@ func _physics_process(_delta):
 	# Check if dead
 	if SANITY <= 0:
 		die()
+	#endregion
 
-	#--------------------ATTACK STATE--------------------
+#region ------------------ATTACK STATE------------------
 	if is_attacking:
 		animationPlayer.play("attack")
 		sprite_overlay.visible = true
 		motion = Vector2.ZERO
-		var relative_mouse_vector: float = (
-			get_global_mouse_position() - (global_position) + # Mouse position relative to Urlu + Offset in the sprite
-			Vector2(cos(sprite_overlay.rotation) + 1.80940565, 
-					sin(sprite_overlay.rotation) + 1.80940565) * 38.07886553 ).angle()
-		#var direction = (relative_mouse_vector).angle() - deg_to_rad(20)
-		handle_dynamic_attack_sprite(sprite.flip_h, relative_mouse_vector, 0, -60)
+		var relative_mouse_vector: Vector2 = (get_global_mouse_position() - bow_origin.global_position)
+		#print(bow_origin.global_position, " ", global_position)
+		handle_dynamic_attack_sprite(sprite.flip_h, relative_mouse_vector, -15, 60)
 		return
+	#endregion
 	
-#--------------------MOVEMENT--------------------
+#region --------------------MOVEMENT--------------------
 	# Input
 	var x_input = Input.get_action_strength("right") - Input.get_action_strength("left")
 	
@@ -116,8 +109,9 @@ func _physics_process(_delta):
 	velocity = motion
 	move_and_slide()
 	motion = velocity
+#endregion
 
-#--------------------STATES--------------------
+#region ---------------------STATES---------------------
 	# onWall State Handler
 	if is_on_floor() or !nextToWall():
 		on_wall_right = false
@@ -139,8 +133,9 @@ func _physics_process(_delta):
 		is_hidden = true
 	else:
 		is_hidden = false
-	
-#--------------------Animations--------------------
+	#endregion
+
+#region -------------------ANIMATIONS-------------------
 	sprite_overlay.visible = false
 	if is_on_floor():
 		if x_input == 0:
@@ -164,8 +159,9 @@ func _physics_process(_delta):
 		if on_wall_left:
 			animationPlayer.play("Hanging")
 			sprite.set_flip_h(false)
-	
-#--------------------Functions--------------------
+	#endregion
+
+#region ----------------STATE  Functions----------------
 func nextToWall():
 	return $RightWall.is_colliding() or $LeftWall.is_colliding()
 	
@@ -186,39 +182,47 @@ func onLeftWall():
 		
 func inShadow():
 	return $MoonRayTop.is_colliding() and $MoonRayBottom.is_colliding()
-	
+#endregion
+
+#region ----------------Other  Functions----------------
 func take_damage(damage: float):
 	SANITY -= damage
 	SANITY = clamp(SANITY, 0, MAX_SANITY) #keep value in range
 #	$AnimationPlayer.play("hurt")
 
 func die():
-	# Lógica de muerte
 	#queue_free()
 	pass
 	
-func handle_dynamic_attack_sprite(state: bool, direction: float, min_rot_DEG: int, max_rot_DEG: int):
+func handle_dynamic_attack_sprite(state: bool, direction: Vector2, min_rot_DEG: int, max_rot_DEG: int):
 	var flip: int
+	var angle: float = direction.angle()
+	
 	if !state:
 		flip = 1
-		#sprite_overlay.flip_h      = false # Correct Overlay Transformation 
-		#sprite_overlay.offset.x    = 10
-		#sprite_overlay.position.x  = 9
-		#sprite_underlay.flip_h     = false # Correct Underlay Transformation 
-		#sprite_underlay.offset.x   = 6
-		#sprite_underlay.position.x = -28
+		# Limit angle range
+		if angle < 0:
+			angle = clamp(angle, deg_to_rad(-max_rot_DEG), 0)
+		else:
+			angle = clamp(angle, 0, deg_to_rad(-min_rot_DEG))
 	else:
 		flip = -1
+		# Limit angle range
+		if angle < 0:
+			angle = clamp(angle, deg_to_rad(-180), deg_to_rad(max_rot_DEG-180))
+		else:
+			angle = clamp(angle, deg_to_rad(180+min_rot_DEG), deg_to_rad(180))
+		angle += deg_to_rad(180-(max_rot_DEG-min_rot_DEG)/2)
+	
+	#print(rad_to_deg(angle))
+	angle += deg_to_rad(20)
+	sprite_overlay.rotation  =  angle
+	sprite_underlay.rotation = -angle
 	sprite_overlay.flip_h      = state # Correct Overlay Transformation 
-	sprite_overlay.offset.x    = 10*flip
-	sprite_overlay.position.x  = 9*flip
+	sprite_overlay.offset.x    = 10 * flip
+	sprite_overlay.position.x  = 9  * flip
 	sprite_underlay.flip_h     = state # Correct Underlay Transformation 
-	sprite_underlay.offset.x   = 6*flip
-	sprite_underlay.position.x = -28*flip
-	# Limit direction range
-	direction = clamp(direction,deg_to_rad(min(min_rot_DEG,max_rot_DEG)),
-								deg_to_rad(max(min_rot_DEG,max_rot_DEG)))
-	direction += deg_to_rad(20) # Angle of bow in the sprite itself
-	# Set rotation
-	sprite_overlay.rotation  =  direction
-	sprite_underlay.rotation = -direction
+	sprite_underlay.offset.x   = 6  * flip
+	sprite_underlay.position.x =-28 * flip
+
+#endregion
