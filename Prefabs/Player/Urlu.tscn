@@ -1,7 +1,8 @@
-[gd_scene load_steps=16 format=3 uid="uid://cduiuhtkc03h8"]
+[gd_scene load_steps=17 format=3 uid="uid://cduiuhtkc03h8"]
 
 [ext_resource type="Script" uid="uid://bxr7yj1yl710t" path="res://Prefabs/Player/Urlu.gd" id="2"]
 [ext_resource type="Texture2D" uid="uid://cnjvs06qlfurs" path="res://Assets/sprites/knight_sheet.png" id="2_1cl7s"]
+[ext_resource type="PackedScene" uid="uid://pl26cmw1v6uk" path="res://Prefabs/Player/Arrow.tscn" id="2_6ocgn"]
 [ext_resource type="Texture2D" uid="uid://baf7enqf8wsen" path="res://Assets/sprites/Urlu/UrluAttackTop.png" id="3_86q58"]
 [ext_resource type="Texture2D" uid="uid://dh7ou6jwtft4o" path="res://Assets/sprites/Urlu/UrluAttackChal.png" id="4_6ocgn"]
 
@@ -162,12 +163,10 @@ height = 128.0
 size = Vector2(64, 48)
 
 [node name="Urlu" type="CharacterBody2D" groups=["Player"]]
-collision_mask = 31
+collision_mask = 159
 script = ExtResource("2")
-MAX_SANITY = 360
-SANITY = 360.0
 SANITY_DRAIN_PASSIVE = 0.35
-SANITY_DRAIN_MOON = 1.0
+ARROW_PATH = ExtResource("2_6ocgn")
 
 [node name="Camera2D(old)" type="Camera2D" parent="."]
 visible = false
@@ -217,12 +216,10 @@ offset = Vector2(6, 10)
 [node name="BowOrigin" type="Node2D" parent="SpriteOverlay"]
 position = Vector2(-9, -37)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
+[node name="CollisionShape2D_P" type="CollisionShape2D" parent="."]
 shape = SubResource("5")
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
-visible = false
+[node name="CollisionShape2D_S" type="CollisionShape2D" parent="."]
 position = Vector2(0, 40)
 shape = SubResource("6")
 metadata/_edit_lock_ = true
@@ -248,3 +245,8 @@ collision_mask = 2
 position = Vector2(0, 24)
 target_position = Vector2(0, -50)
 collision_mask = 2
+
+[node name="PlatformClipTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="PlatformClipTimer" to="." method="_on_platform_clip_timer_timeout"]

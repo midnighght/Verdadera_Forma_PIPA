@@ -1,14 +1,15 @@
 extends CharacterBody2D
 #region ----------CONSTANTS & VAR DECLARATIONS----------
 #movement constants
-@export var GRAVITY: 			 int  =   60
-@export var MAX_FALL_SPEED: 	 int  = 1500
-@export var JUMP_FORCE: 		 int  = 1500
+@export var GRAVITY: 			 int  =   80
+@export var MAX_FALL_SPEED: 	 int  = 1700
+@export var JUMP_FORCE: 		 int  = 1700
 @export var WALL_JUMP_FORCE:	 int  = 1000
 @export var MAX_SPEED:			 int  =  680
 @export var ACCELERATION:		 int  =   80
 @export var FRICTION:			float =    0.4
 @export var AIR_FRICTION:		float =    0.05
+@export var PLATFORM_CLIP_TIME: float =    0.1
 const UP = Vector2(0,-1) #gravity
 var motion: Vector2
 
@@ -21,17 +22,26 @@ var is_hidden:		bool = false
 #sanity & moon mechanic constants
 @export var MOON_PATH: NodePath
 @onready var moon = get_node(MOON_PATH)
-@export var MAX_SANITY: int
-@export var SANITY: float
-@export var SANITY_DRAIN_PASSIVE: float
-@export var SANITY_DRAIN_MOON: float
- 
+@export var MAX_SANITY: 			float = 360
+@export var SANITY: 				float = 360
+@export var SANITY_DRAIN_PASSIVE:	float = 0.2
+@export var SANITY_DRAIN_MOON:		float = 1.0
+
+#arrow variables
+@export var ARROW_PATH: PackedScene
+var cursor_angle: float
+#@onready var arrow = get_node(ARROW_PATH)
+
 #animation nodes
 @onready var sprite 			= $Sprite
 @onready var animationPlayer 	= $AnimationPlayer
 @onready var sprite_overlay 	= $SpriteOverlay
 @onready var sprite_underlay 	= $SpriteOverlay/SpriteUnderlay
 @onready var bow_origin 		= $SpriteOverlay/BowOrigin
+#collision nodes
+@onready var collision_S		= $CollisionShape2D_S
+@onready var collision_P		= $CollisionShape2D_P
+@onready var platform_timer 	= $PlatformClipTimer
 
 #endregion
 
@@ -40,10 +50,23 @@ func _input(event):
 		get_tree().quit()
 		
 	if event is InputEventMouseButton and event.is_action_pressed("attack"):
-		if is_on_floor():
+		if is_attacking == true:
+			shoot()
+			is_attacking = false
+		elif is_on_floor():
 			is_attacking = true
 	elif event is InputEventMouseButton and event.is_action_pressed("attack_cancel"):
 		is_attacking = false
+	
+	# Platform Clip Mechanic
+	if event.is_action_pressed("down") and is_on_floor() and global_position.y < 800:
+		collision_P.disabled = true
+		collision_S.disabled = true
+		platform_timer.start(PLATFORM_CLIP_TIME)
+
+func _on_platform_clip_timer_timeout():
+	collision_P.disabled = false
+	collision_S.disabled = false
 
 func _physics_process(_delta):
 #region ---------------------SANITY---------------------
@@ -52,7 +75,7 @@ func _physics_process(_delta):
 	
 	# If not under cover take moon damage every tick
 	if !is_hidden:
-		take_damage(SANITY_DRAIN_MOON)
+		take_damage(SANITY_DRAIN_MOON * moon.LUM)
 
 	# Check if dead
 	if SANITY <= 0:
@@ -90,7 +113,7 @@ func _physics_process(_delta):
 		sprite.flip_h = x_input < 0
 	elif is_on_floor():
 		motion.x = lerp(motion.x, 0.0, FRICTION)
-	
+		
 	# Jumping Mechanincs
 	if Input.is_action_pressed("jump"):
 		if is_on_floor():
@@ -191,9 +214,18 @@ func take_damage(damage: float):
 #	$AnimationPlayer.play("hurt")
 
 func die():
-	#queue_free()
+	queue_free()
+	get_tree().quit()
 	pass
 	
+
+func shoot():
+	var arrow = ARROW_PATH.instantiate()
+	get_tree().current_scene.add_child(arrow)
+	arrow.global_position = bow_origin.global_position
+	
+	arrow.set_direction(cursor_angle)
+
 func handle_dynamic_attack_sprite(state: bool, direction: Vector2, min_rot_DEG: int, max_rot_DEG: int):
 	var flip: int
 	var angle: float = direction.angle()
@@ -205,6 +237,7 @@ func handle_dynamic_attack_sprite(state: bool, direction: Vector2, min_rot_DEG: 
 			angle = clamp(angle, deg_to_rad(-max_rot_DEG), 0)
 		else:
 			angle = clamp(angle, 0, deg_to_rad(-min_rot_DEG))
+		cursor_angle = angle # for arrow
 	else:
 		flip = -1
 		# Limit angle range
@@ -212,9 +245,11 @@ func handle_dynamic_attack_sprite(state: bool, direction: Vector2, min_rot_DEG: 
 			angle = clamp(angle, deg_to_rad(-180), deg_to_rad(max_rot_DEG-180))
 		else:
 			angle = clamp(angle, deg_to_rad(180+min_rot_DEG), deg_to_rad(180))
+		cursor_angle = angle # for arrow
 		angle += deg_to_rad(180-(max_rot_DEG-min_rot_DEG)/2)
 	
 	#print(rad_to_deg(angle))
+	
 	angle += deg_to_rad(20)
 	sprite_overlay.rotation  =  angle
 	sprite_underlay.rotation = -angle

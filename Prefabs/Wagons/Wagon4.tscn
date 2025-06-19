@@ -1,0 +1,44 @@
+[gd_scene load_steps=7 format=3 uid="uid://cgx224rn0ybg"]
+
+[ext_resource type="PackedScene" uid="uid://c7mkfxab57x27" path="res://Prefabs/Bat/Bat.tscn" id="1_meq57"]
+[ext_resource type="PackedScene" uid="uid://7eduktatctps" path="res://Prefabs/Platforms/platformA1.tscn" id="1_rq1hs"]
+[ext_resource type="PackedScene" uid="uid://xbkqp5rf11x0" path="res://Prefabs/Platforms/platformA2.tscn" id="2_meq57"]
+[ext_resource type="PackedScene" uid="uid://bbhbyc5imq54j" path="res://Prefabs/Platforms/platformA3.tscn" id="3_gi1l1"]
+[ext_resource type="PackedScene" uid="uid://dpwjy3dah64mh" path="res://Prefabs/Items/Antidote.tscn" id="4_sflam"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bo8y4"]
+size = Vector2(3200, 256)
+
+[node name="Wagon1" type="Node2D"]
+
+[node name="RigidBody2D" type="StaticBody2D" parent="."]
+position = Vector2(0, 1080)
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+position = Vector2(1536, 8)
+shape = SubResource("RectangleShape2D_bo8y4")
+
+[node name="PlatformA3" parent="." instance=ExtResource("1_rq1hs")]
+position = Vector2(1408, 768)
+
+[node name="PlatformA1" parent="." instance=ExtResource("2_meq57")]
+position = Vector2(384, 704)
+
+[node name="PlatformA2" parent="." instance=ExtResource("3_gi1l1")]
+position = Vector2(1152, 512)
+
+[node name="PlatformA4" parent="." instance=ExtResource("2_meq57")]
+position = Vector2(2048, 512)
+
+[node name="PlatformA5" parent="." instance=ExtResource("2_meq57")]
+position = Vector2(2816, 512)
+
+[node name="Antidote" parent="." instance=ExtResource("4_sflam")]
+position = Vector2(2816, 448)
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(3072, 0)
+
+[node name="Bat" parent="." instance=ExtResource("1_meq57")]
+position = Vector2(448, 192)

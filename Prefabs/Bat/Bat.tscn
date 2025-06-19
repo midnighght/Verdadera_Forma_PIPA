@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://c7mkfxab57x27"]
+[gd_scene load_steps=22 format=3 uid="uid://c7mkfxab57x27"]
 
 [ext_resource type="Script" uid="uid://oyiq6pg486q4" path="res://Prefabs/Bat/bat.gd" id="1_utu46"]
 [ext_resource type="Texture2D" uid="uid://b17j2v7ccrrme" path="res://0/fotosPrueba1/brackeys_platformer_assets/sprites/bat.png" id="2_5386u"]
@@ -121,39 +121,40 @@ radius = 16.5303
 [sub_resource type="CircleShape2D" id="CircleShape2D_iiljc"]
 radius = 24.0
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_okatw"]
-size = Vector2(293, 155)
-
 [node name="Bat" type="CharacterBody2D"]
-collision_layer = 256
-collision_mask = 256
+collision_layer = 272
+collision_mask = 288
 script = ExtResource("1_utu46")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_2mqn1")
-animation = &"flying"
+animation = &"switch"
 autoplay = "default"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="ArrowCollision" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("CircleShape2D_utu46")
+disabled = true
 
 [node name="HurtArea2D" type="Area2D" parent="."]
-collision_layer = 16
+collision_layer = 48
+collision_mask = 48
 
 [node name="HurtCollisionShape2D" type="CollisionShape2D" parent="HurtArea2D"]
 shape = SubResource("CircleShape2D_iiljc")
 debug_color = Color(0.988294, 0, 0.303609, 0.42)
 
-[node name="colisionJugador" type="Area2D" parent="."]
-visible = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="colisionJugador"]
-position = Vector2(-0.5, 4.5)
-shape = SubResource("RectangleShape2D_okatw")
-
 [node name="Sprite2D" type="Sprite2D" parent="."]
 visible = false
 position = Vector2(248, 232)
 texture = ExtResource("5_iiljc")
+
+[node name="Marker2D2" type="Marker2D" parent="."]
+position = Vector2(320, 0)
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(-320, 0)
+
+[node name="DeathTimer" type="Timer" parent="."]

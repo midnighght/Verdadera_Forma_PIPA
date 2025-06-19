@@ -91,3 +91,5 @@ ok={
 2d_physics/layer_3="Walls"
 2d_physics/layer_4="Items"
 2d_physics/layer_5="Enemies"
+2d_physics/layer_6="arrows"
+2d_physics/layer_8="world border"

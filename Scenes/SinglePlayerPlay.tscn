@@ -1,0 +1,36 @@
+[gd_scene load_steps=13 format=3 uid="uid://3vd8ymk6vlgr"]
+
+[ext_resource type="PackedScene" uid="uid://d0kmghqqc55qm" path="res://Prefabs/Player/Player.tscn" id="1_3073f"]
+[ext_resource type="Script" uid="uid://dgtjqsjm1ulre" path="res://Scripts/wagon_spawner.gd" id="2_6bgyf"]
+[ext_resource type="PackedScene" uid="uid://dq7tjq3tcp7cp" path="res://Prefabs/Wagons/Wagon1.tscn" id="3_qp07k"]
+[ext_resource type="PackedScene" uid="uid://4rdtn25frn4b" path="res://Prefabs/Wagons/Wagon2.tscn" id="4_ax3e2"]
+[ext_resource type="PackedScene" uid="uid://wos6f6ddqd55" path="res://Prefabs/Wagons/Wagon3.tscn" id="5_ekhkr"]
+[ext_resource type="PackedScene" uid="uid://cgx224rn0ybg" path="res://Prefabs/Wagons/Wagon4.tscn" id="6_8kss8"]
+[ext_resource type="PackedScene" uid="uid://fvsyjy7d8rgb" path="res://Prefabs/Wagons/Wagon5.tscn" id="7_m30cy"]
+[ext_resource type="PackedScene" uid="uid://djebwt7ypw1we" path="res://Prefabs/Wagons/Wagon6.tscn" id="8_g65sd"]
+[ext_resource type="PackedScene" uid="uid://c6dry4rrq3c6l" path="res://Prefabs/Wagons/Wagon7.tscn" id="9_gegmf"]
+[ext_resource type="PackedScene" uid="uid://cdr76niamfj3e" path="res://Prefabs/Wagons/Wagon8.tscn" id="10_66uw2"]
+[ext_resource type="Script" uid="uid://b4c4gorrcgp1r" path="res://Scripts/world_border.gd" id="11_ax3e2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ekhkr"]
+size = Vector2(512, 2048)
+
+[node name="SinglePlayerPlay" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_3073f")]
+position = Vector2(192, 576)
+
+[node name="Wagon Spawner" type="Node2D" parent="."]
+script = ExtResource("2_6bgyf")
+WAGON_SCENES = Array[PackedScene]([ExtResource("3_qp07k"), ExtResource("4_ax3e2"), ExtResource("5_ekhkr"), ExtResource("6_8kss8"), ExtResource("7_m30cy"), ExtResource("8_g65sd"), ExtResource("9_gegmf"), ExtResource("10_66uw2")])
+PLAYER_PATH = NodePath("../Player")
+
+[node name="World Border" type="StaticBody2D" parent="."]
+collision_layer = 128
+collision_mask = 129
+script = ExtResource("11_ax3e2")
+PLAYER_PATH = NodePath("../Player")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World Border"]
+position = Vector2(-256, 512)
+shape = SubResource("RectangleShape2D_ekhkr")

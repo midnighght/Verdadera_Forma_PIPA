@@ -1,3 +1,44 @@
-[gd_scene format=3 uid="uid://dq7tjq3tcp7cp"]
+[gd_scene load_steps=7 format=3 uid="uid://dq7tjq3tcp7cp"]
+
+[ext_resource type="PackedScene" uid="uid://xbkqp5rf11x0" path="res://Prefabs/Platforms/platformA2.tscn" id="2_bo8y4"]
+[ext_resource type="PackedScene" uid="uid://7eduktatctps" path="res://Prefabs/Platforms/platformA1.tscn" id="2_r6or3"]
+[ext_resource type="PackedScene" uid="uid://bbhbyc5imq54j" path="res://Prefabs/Platforms/platformA3.tscn" id="3_ymmim"]
+[ext_resource type="PackedScene" uid="uid://dpwjy3dah64mh" path="res://Prefabs/Items/Antidote.tscn" id="4_dngc6"]
+[ext_resource type="PackedScene" uid="uid://c7mkfxab57x27" path="res://Prefabs/Bat/Bat.tscn" id="5_ymmim"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bo8y4"]
+size = Vector2(2688, 256)
 
 [node name="Wagon1" type="Node2D"]
+
+[node name="RigidBody2D" type="StaticBody2D" parent="."]
+position = Vector2(0, 1080)
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+position = Vector2(1280, 8)
+shape = SubResource("RectangleShape2D_bo8y4")
+
+[node name="PlatformA3" parent="." instance=ExtResource("2_r6or3")]
+position = Vector2(256, 704)
+
+[node name="PlatformA1" parent="." instance=ExtResource("2_bo8y4")]
+position = Vector2(640, 512)
+
+[node name="PlatformA2" parent="." instance=ExtResource("3_ymmim")]
+position = Vector2(1152, 704)
+
+[node name="PlatformA4" parent="." instance=ExtResource("2_bo8y4")]
+position = Vector2(1600, 448)
+
+[node name="PlatformA5" parent="." instance=ExtResource("2_bo8y4")]
+position = Vector2(2240, 512)
+
+[node name="Antidote" parent="." instance=ExtResource("4_dngc6")]
+position = Vector2(2240, 448)
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(2560, 0)
+
+[node name="Bat" parent="." instance=ExtResource("5_ymmim")]
+position = Vector2(1088, 192)

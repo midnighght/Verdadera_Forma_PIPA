@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://pl26cmw1v6uk"]
+
+[ext_resource type="Texture2D" uid="uid://m6vdnj74dlli" path="res://Assets/sprites/Urlu/arrow.png" id="1_1wnsb"]
+[ext_resource type="Script" uid="uid://dylixb2m3sjrj" path="res://Prefabs/Player/arrow.gd" id="1_t5g4k"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_t5g4k"]
+radius = 2.0
+height = 62.0
+
+[node name="Arrow" type="Node2D"]
+script = ExtResource("1_t5g4k")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(32, 0)
+texture = ExtResource("1_1wnsb")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 48
+collision_mask = 48
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(36, 0)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_t5g4k")
+
+[node name="PlatformRay" type="RayCast2D" parent="."]
+position = Vector2(16, 0)
+target_position = Vector2(64, 0)
+collision_mask = 6

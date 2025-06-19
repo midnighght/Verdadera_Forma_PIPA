@@ -14,15 +14,16 @@ offset_left = -160.0
 offset_top = -280.0
 offset_right = 2120.0
 offset_bottom = 1304.0
+color = Color(0.054902, 0.109804, 0.192157, 1)
 
 [node name="Moon" parent="CanvasLayer -32" instance=ExtResource("1_c4lgr")]
 position = Vector2(250, -1100)
 
-[node name="Player" parent="." instance=ExtResource("2_op78j")]
+[node name="Urlu" parent="." instance=ExtResource("2_op78j")]
 MOON_PATH = NodePath("../CanvasLayer -32/Moon")
 
 [node name="CanvasLayer 32" type="CanvasLayer" parent="."]
 
 [node name="HealthBar" parent="CanvasLayer 32" instance=ExtResource("3_c4lgr")]
 position = Vector2(960, 64)
-PLAYER_PATH = NodePath("../../Player")
+PLAYER_PATH = NodePath("../../Urlu")
