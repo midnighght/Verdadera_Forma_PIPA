@@ -1,7 +1,19 @@
-[gd_scene load_steps=39 format=3 uid="uid://4nd0pv24mqk8"]
+[gd_scene load_steps=41 format=3 uid="uid://4nd0pv24mqk8"]
 
 [ext_resource type="Script" uid="uid://dwymjbe0m5eqo" path="res://Prefabs/Moon/moon.gd" id="1_esaw7"]
 [ext_resource type="Texture2D" uid="uid://dbf1jj0dlw884" path="res://Assets/sprites/Moon/moon_sprite_sheet.png" id="2_esaw7"]
+
+[sub_resource type="Gradient" id="Gradient_xtkht"]
+offsets = PackedFloat32Array(0.9375, 1)
+colors = PackedColorArray(0.188235, 0.290196, 0.380392, 1, 0.188235, 0.290196, 0.380392, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ynedy"]
+gradient = SubResource("Gradient_xtkht")
+width = 160
+height = 160
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
 
 [sub_resource type="Gradient" id="Gradient_esaw7"]
 offsets = PackedFloat32Array(0, 0.162319, 0.518841, 1)
@@ -266,6 +278,10 @@ animations = [{
 
 [node name="Moon" type="Node2D"]
 script = ExtResource("1_esaw7")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1.5, 1294.5)
+texture = SubResource("GradientTexture2D_ynedy")
 
 [node name="Light Dynamics" type="Node2D" parent="."]
 

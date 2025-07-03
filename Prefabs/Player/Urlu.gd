@@ -214,8 +214,8 @@ func take_damage(damage: float):
 #	$AnimationPlayer.play("hurt")
 
 func die():
-	queue_free()
-	get_tree().quit()
+	#queue_free()
+	#get_tree().quit()
 	pass
 	
 

@@ -1,8 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://cdr76niamfj3e"]
+[gd_scene load_steps=9 format=3 uid="uid://cdr76niamfj3e"]
 
+[ext_resource type="Texture2D" uid="uid://b03sw5q4ck5aa" path="res://Assets/sprites/Map/walls.png" id="1_6m8u1"]
 [ext_resource type="PackedScene" uid="uid://c7mkfxab57x27" path="res://Prefabs/Bat/Bat.tscn" id="1_l4uaw"]
 [ext_resource type="PackedScene" uid="uid://7eduktatctps" path="res://Prefabs/Platforms/platformA1.tscn" id="1_lm55g"]
 [ext_resource type="PackedScene" uid="uid://xbkqp5rf11x0" path="res://Prefabs/Platforms/platformA2.tscn" id="2_l4uaw"]
+[ext_resource type="Texture2D" uid="uid://btxddxibj42ui" path="res://Assets/sprites/Map/pillar.png" id="2_ti2wv"]
 [ext_resource type="PackedScene" uid="uid://bbhbyc5imq54j" path="res://Prefabs/Platforms/platformA3.tscn" id="3_vog3d"]
 [ext_resource type="PackedScene" uid="uid://dpwjy3dah64mh" path="res://Prefabs/Items/Antidote.tscn" id="4_6m8u1"]
 
@@ -10,6 +12,50 @@
 size = Vector2(4224, 256)
 
 [node name="Wagon1" type="Node2D"]
+z_index = -16
+
+[node name="walls" type="Node2D" parent="."]
+position = Vector2(0, 670)
+scale = Vector2(1, 0.75)
+
+[node name="Sprite2D" type="Sprite2D" parent="walls"]
+texture = ExtResource("1_6m8u1")
+centered = false
+region_enabled = true
+region_rect = Rect2(768, 0, 512, 320)
+
+[node name="Sprite2D2" type="Sprite2D" parent="walls"]
+position = Vector2(512, 0)
+texture = ExtResource("1_6m8u1")
+centered = false
+
+[node name="Sprite2D3" type="Sprite2D" parent="walls"]
+position = Vector2(1792, 0)
+texture = ExtResource("1_6m8u1")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 1024, 320)
+
+[node name="Sprite2D4" type="Sprite2D" parent="walls"]
+position = Vector2(2816, 0)
+texture = ExtResource("1_6m8u1")
+centered = false
+region_rect = Rect2(0, 0, 512, 320)
+
+[node name="Pillar" type="Sprite2D" parent="walls"]
+position = Vector2(320, -80)
+texture = ExtResource("2_ti2wv")
+centered = false
+
+[node name="Pillar3" type="Sprite2D" parent="walls"]
+position = Vector2(1728, -80)
+texture = ExtResource("2_ti2wv")
+centered = false
+
+[node name="Pillar2" type="Sprite2D" parent="walls"]
+position = Vector2(2752, -80)
+texture = ExtResource("2_ti2wv")
+centered = false
 
 [node name="RigidBody2D" type="StaticBody2D" parent="."]
 position = Vector2(0, 1080)

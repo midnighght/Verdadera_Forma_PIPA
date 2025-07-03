@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://d0kmghqqc55qm"]
+[gd_scene load_steps=5 format=3 uid="uid://d0kmghqqc55qm"]
 
 [ext_resource type="PackedScene" uid="uid://4nd0pv24mqk8" path="res://Prefabs/Moon/Moon.tscn" id="1_c4lgr"]
+[ext_resource type="Texture2D" uid="uid://2kciqgrkij8j" path="res://Assets/sprites/Map/uruk_background.png" id="1_op78j"]
 [ext_resource type="PackedScene" uid="uid://cduiuhtkc03h8" path="res://Prefabs/Player/Urlu.tscn" id="2_op78j"]
 [ext_resource type="PackedScene" uid="uid://t1klvxoc0lvk" path="res://Prefabs/UI/HealthBar.tscn" id="3_c4lgr"]
 
@@ -15,6 +16,10 @@ offset_top = -280.0
 offset_right = 2120.0
 offset_bottom = 1304.0
 color = Color(0.054902, 0.109804, 0.192157, 1)
+
+[node name="UrukBackground" type="Sprite2D" parent="CanvasLayer -32"]
+texture = ExtResource("1_op78j")
+centered = false
 
 [node name="Moon" parent="CanvasLayer -32" instance=ExtResource("1_c4lgr")]
 position = Vector2(250, -1100)
