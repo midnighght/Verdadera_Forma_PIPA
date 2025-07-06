@@ -2,10 +2,10 @@ extends Control
 
 @onready var input_message: LineEdit = $HBoxContainer/InputMessage
 @onready var send_button: Button = $HBoxContainer/SendButton
-
+@onready var volver: Button=$volver
 func _ready():
 	send_button.pressed.connect(_on_send_button_pressed)
-
+	volver.pressed.connect(_on_volver_pressed)
 func _on_send_button_pressed():
 	var nombre = input_message.text.strip_edges()
 	if nombre == "":
@@ -27,6 +27,7 @@ func _on_send_button_pressed():
 	get_tree().call_deferred("set_current_scene", nueva_escena)
 
 
-##func _preguntar_nombre():
+func _on_volver_pressed():
+	get_tree().change_scene_to_file("res://Scenes/MainTitle.tscn")
 	
-	##onready var mi_nombre
+	

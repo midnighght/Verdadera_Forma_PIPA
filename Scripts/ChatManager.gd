@@ -58,10 +58,6 @@ func _on_web_socket_client_message_received(message: String):
 			
 			_addUserToList(mi_nombre)
 			
-			
-			
-
-			
 		"public-message":
 			_sendToChatDisplay("%s: %s" % [response.data.playerName, response.data.playerMsg])
 		"get-connected-players":
@@ -77,8 +73,7 @@ func _on_web_socket_client_message_received(message: String):
 			invitacion_recibida = response.data.playerName
 	
 			# Mostrar botones de aceptar/rechazar
-			$VBoxContainer/AcceptButton.visible = true
-			$VBoxContainer/RejectButton.visible = true
+			$VBoxContainer2.visible=true
 		
 		"match-start":
 			_sendToChatDisplay("¡La partida ha comenzado con %s!" % response.data.opponent.playerName)
@@ -166,3 +161,48 @@ func _deleteUserFromList(userId: String):
 		if(player_list.get_item_text(i) == userId):
 			player_list.remove_item(i)
 			return
+
+
+func _on_invite_button_pressed() -> void:
+	var selected = player_list.get_selected_items()
+	if selected.size() == 0:
+		_sendToChatDisplay("Selecciona un jugador primero.")
+		return
+
+	var target_name = player_list.get_item_text(selected[0])
+	var payload = {
+		"event": "send-match-request",
+		"data": {
+			"playerName": target_name
+
+		}
+	}
+	_client.send(JSON.stringify(payload))
+	_sendToChatDisplay("Solicitud enviada a %s" % target_name)
+
+func _on_accept_button_pressed():
+	var payload = {
+		"event": "accept-match",
+		"data": {
+			"playerName": invitacion_recibida
+		}
+	}
+	_client.send(JSON.stringify(payload))
+	_sendToChatDisplay("Aceptaste la partida con %s" % invitacion_recibida)
+	_ocultar_botones_match()
+
+func _on_reject_button_pressed():
+	var payload = {
+		"event": "reject-match",
+		"data": {
+			"playerName": invitacion_recibida
+		}
+	}
+	_client.send(JSON.stringify(payload))
+	_sendToChatDisplay("Rechazaste la partida con %s" % invitacion_recibida)
+	_ocultar_botones_match()
+	
+func _ocultar_botones_match():
+	$VBoxContainer2.visible = false
+	
+	invitacion_recibida = ""

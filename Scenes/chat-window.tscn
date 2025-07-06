@@ -59,9 +59,30 @@ text = "SEND"
 [node name="WebSocketClient" type="Node" parent="."]
 script = ExtResource("1_17dk5")
 
+[node name="VBoxContainer2" type="VBoxContainer" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 276.988
+offset_top = 194.821
+offset_right = 359.988
+offset_bottom = 260.821
+scale = Vector2(1.23472, 1.17642)
+
+[node name="AcceptButton" type="Button" parent="VBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "ACEPTAR"
+
+[node name="RejectButton" type="Button" parent="VBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "DENEGAR"
+
 [connection signal="toggled" from="VBoxContainer/ConnectButton" to="." method="_on_connect_toggled"]
 [connection signal="text_submitted" from="VBoxContainer/Commands/InputMessage" to="." method="_on_input_submitted"]
 [connection signal="pressed" from="VBoxContainer/Commands/SendButton" to="." method="_on_send_pressed"]
 [connection signal="connected_to_server" from="WebSocketClient" to="." method="_on_web_socket_client_connected_to_server"]
 [connection signal="connection_closed" from="WebSocketClient" to="." method="_on_web_socket_client_connection_closed"]
 [connection signal="message_received" from="WebSocketClient" to="." method="_on_web_socket_client_message_received"]
+[connection signal="pressed" from="VBoxContainer2/AcceptButton" to="." method="_on_accept_button_pressed"]
+[connection signal="pressed" from="VBoxContainer2/RejectButton" to="." method="_on_reject_button_pressed"]

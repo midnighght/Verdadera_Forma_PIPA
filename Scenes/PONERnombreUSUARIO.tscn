@@ -39,3 +39,13 @@ expand_to_text_length = true
 [node name="SendButton" type="Button" parent="HBoxContainer"]
 layout_mode = 2
 text = "ENTER"
+
+[node name="volver" type="Button" parent="."]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 984.0
+offset_right = 74.0
+offset_bottom = 1015.0
+scale = Vector2(3.00281, 2.59095)
+text = "VOLVER
+"
