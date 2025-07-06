@@ -236,8 +236,8 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 0)
 
-[connection signal="pressed" from="CenterContainer/PanelContainer/VBoxContainer/VBoxContainer2/Jugar" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="CenterContainer/PanelContainer/VBoxContainer/VBoxContainer2/Jugar" to="." method="_on_jugar_pressed"]
+[connection signal="pressed" from="CenterContainer/PanelContainer/VBoxContainer/VBoxContainer2/Jugar" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="CenterContainer/PanelContainer/VBoxContainer/VBoxContainer2/Asincronico" to="." method="_on_asincronico_pressed"]
 [connection signal="pressed" from="CenterContainer/PanelContainer/VBoxContainer/VBoxContainer2/Asincronico" to="." method="_on_button_2_pressed"]
 [connection signal="pressed" from="CenterContainer/PanelContainer/VBoxContainer/VBoxContainer2/Configuracion" to="." method="_on_configuracion_pressed"]

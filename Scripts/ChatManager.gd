@@ -2,7 +2,8 @@ extends Control
 var invitacion_recibida = ""
 var match_id = ""
 var oponente = ""
-var mi_nombre = "Ram_UCN"  
+var mi_nombre = ""  
+
 # URL de conexión
 var _host = "ws://ucn-game-server.martux.cl:4010/?gameId=D&playerName=playerA"
 @onready var _client: WebSocketClient = $WebSocketClient
@@ -52,7 +53,15 @@ func _on_web_socket_client_message_received(message: String):
 	match(response.event):
 		"connected-to-server":
 			_sendToChatDisplay("You are connected to the server!")
+
+	# Solo cambiar de escena si no se recibió un nombre al instanciar
+			
 			_addUserToList(mi_nombre)
+			
+			
+			
+
+			
 		"public-message":
 			_sendToChatDisplay("%s: %s" % [response.data.playerName, response.data.playerMsg])
 		"get-connected-players":

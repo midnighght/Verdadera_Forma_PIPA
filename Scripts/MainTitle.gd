@@ -9,7 +9,7 @@ func _on_singleplayer_pressed() -> void:
 	get_tree().change_scene_to_file("res://Scenes/SinglePlayerPlay.tscn")
 
 func _on_multiplayer_pressed() -> void:
-	get_tree().change_scene_to_file("res://Scenes/chat-window.tscn")
+	get_tree().change_scene_to_file("res://Scenes/PONERnombreUSUARIO.tscn")
 
 func _on_config_pressed() -> void:
 	get_tree().change_scene_to_file("res://Prefabs/UI/opciones.tscn")
