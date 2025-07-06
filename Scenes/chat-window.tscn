@@ -9,7 +9,6 @@ layout_mode = 3
 anchors_preset = 0
 scale = Vector2(2.06507, 2.0121)
 script = ExtResource("1_xfcp1")
-mi_nombre = null
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = -10
