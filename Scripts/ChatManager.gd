@@ -2,6 +2,7 @@ extends Control
 var invitacion_recibida = ""
 var match_id = ""
 var oponente = ""
+var jugadores_conectados: Array = []
 @export var mi_nombre: String =""
 
 # URL de conexión
@@ -63,16 +64,21 @@ func _on_web_socket_client_message_received(message: String):
 
 	# Solo cambiar de escena si no se recibió un nombre al instanciar
 			
-			_addUserToList(mi_nombre)
+			if not jugadores_conectados.has(mi_nombre):
+				jugadores_conectados.append(mi_nombre)
+				_updateUserList(jugadores_conectados)
+
 			
 		"public-message":
 			_sendToChatDisplay("%s: %s" % [response.data.playerName, response.data.playerMsg])
-		"get-connected-players":
-			print("DEBUG - Tipo de response.data:", typeof(response.data))
-			print("DEBUG - Contenido:", response.data)
-			_updateUserList(response.data)
 		"player-connected":
-			
+			if typeof(response.data) == TYPE_DICTIONARY and response.data.has("name"):
+				var nuevo_jugador = response.data.name
+				if not jugadores_conectados.has(nuevo_jugador):
+					jugadores_conectados.append(nuevo_jugador)
+					_updateUserList(jugadores_conectados)
+			else:
+				_sendToChatDisplay("[Error] 'player-connected' mal formateado: %s" % str(response.data))
 			if typeof(response.data) == TYPE_DICTIONARY and response.data.has("name"):
 				_addUserToList(response.data.name)
 			else:
@@ -80,7 +86,11 @@ func _on_web_socket_client_message_received(message: String):
 
 			
 		"player-disconnected":
-			_deleteUserFromList(response.data.name)
+			if typeof(response.data) == TYPE_DICTIONARY and response.data.has("name"):
+				var nombre_saliente = response.data.name
+				if jugadores_conectados.has(nombre_saliente):
+					jugadores_conectados.erase(nombre_saliente)
+					_updateUserList(jugadores_conectados)
 		"match-request-received":
 			_sendToChatDisplay("¡%s quiere jugar contigo!" % response.data.name)
 			# Guardar el nombre del jugador que te invitó
