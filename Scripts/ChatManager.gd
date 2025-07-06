@@ -1,7 +1,7 @@
 extends Control
 
 # URL de conexión
-var _host = "ws://ucn-game-server.martux.cl/ws"
+var _host = "ws://ucn-game-server.martux.cl:4010/?gameId=D&playerName=playerA"
 @onready var _client: WebSocketClient = $WebSocketClient
 
 # Referencias a los nodos de la UI
@@ -23,11 +23,19 @@ func _on_web_socket_client_connection_closed():
 
 # Cuando se conecta al servidor
 func _on_web_socket_client_connected_to_server():
-	var login_event = {
+	_sendToChatDisplay("Conexión establecida con el servidor. Enviando login...")
+
+	# Enviar login con gameKey
+	var login_payload = {
 		"event": "login",
-		"data": { "gameKey": "UZ78ZY" }
+		"data": {
+			"gameKey": "UZ78ZY"
+		}
 	}
-	_client.send(JSON.stringify(login_event))
+	print("Payload login → ", JSON.stringify(login_payload))
+	_client.send(JSON.stringify(login_payload))
+
+	_sendGetUserListEvent()
 
 # Gestor de mensajes del servidor
 func _on_web_socket_client_message_received(message: String):
