@@ -240,6 +240,6 @@ color = Color(0, 0, 0, 0)
 [connection signal="pressed" from="CenterContainer/PanelContainer/VBoxContainer/VBoxContainer2/Jugar" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="CenterContainer/PanelContainer/VBoxContainer/VBoxContainer2/Asincronico" to="." method="_on_asincronico_pressed"]
 [connection signal="pressed" from="CenterContainer/PanelContainer/VBoxContainer/VBoxContainer2/Asincronico" to="." method="_on_button_2_pressed"]
-[connection signal="pressed" from="CenterContainer/PanelContainer/VBoxContainer/VBoxContainer2/Configuracion" to="." method="_on_button_3_pressed"]
 [connection signal="pressed" from="CenterContainer/PanelContainer/VBoxContainer/VBoxContainer2/Configuracion" to="." method="_on_configuracion_pressed"]
+[connection signal="pressed" from="CenterContainer/PanelContainer/VBoxContainer/VBoxContainer2/Configuracion" to="." method="_on_button_3_pressed"]
 [connection signal="pressed" from="CenterContainer/PanelContainer/VBoxContainer/VBoxContainer2/Salir" to="." method="_on_salir_pressed"]

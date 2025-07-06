@@ -166,7 +166,7 @@ func _sendGetUserListEvent():
 
 # Actualiza la lista de usuarios de la interfaz gráfica
 func _updateUserList(users: Array):
-	player_list.clear()
+	
 	for user in users:
 		player_list.add_item(user)
 
