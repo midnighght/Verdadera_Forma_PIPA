@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dphosep3b205v"]
 
-[ext_resource type="Script" uid="uid://1l1ajjd1pm67" path="res://nombreUsuarioScript.gd" id="1_nppy0"]
+[ext_resource type="Script" uid="uid://1l1ajjd1pm67" path="res://Scripts/nombreUsuarioScript.gd" id="1_nppy0"]
 [ext_resource type="Texture2D" uid="uid://bqympsgavtk1y" path="res://Assets/sprites/GUI/MainMenuBackground2.png" id="2_ncil4"]
 
 [node name="PoneRnombreUsuario" type="Control"]
