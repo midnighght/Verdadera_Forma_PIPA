@@ -56,7 +56,8 @@ func _on_web_socket_client_message_received(message: String):
 		_sendToChatDisplay("[Error] JSON no válido recibido")
 		return
 	
-
+	print("EVENTO RECIBIDO →", response.event)
+	
 	match(response.event):
 		"connected-to-server":
 			_sendToChatDisplay("You are connected to the server!")
@@ -84,11 +85,11 @@ func _on_web_socket_client_message_received(message: String):
 
 			
 		"player-disconnected":
-			_deleteUserFromList(response.data.playerName)
+			_deleteUserFromList(response.data.name)
 		"match-request-received":
-			_sendToChatDisplay("¡%s quiere jugar contigo!" % response.data.playerName)
+			_sendToChatDisplay("¡%s quiere jugar contigo!" % response.data.name)
 			# Guardar el nombre del jugador que te invitó
-			invitacion_recibida = response.data.playerName
+			invitacion_recibida = response.data.name
 	
 			# Mostrar botones de aceptar/rechazar
 			$VBoxContainer2.visible=true
@@ -98,7 +99,7 @@ func _on_web_socket_client_message_received(message: String):
 			
 			# Guardamos datos si quieres hacer algo más adelante
 			match_id = response.data.matchId
-			oponente = response.data.opponent.playerName
+			oponente = response.data.opponent.name
 			
 			# Cargar el microjuego (ejemplo con tu escena Pescalo)
 			get_tree().change_scene_to_file("res://Scenes/SinglePlayerPlay.tscn")
