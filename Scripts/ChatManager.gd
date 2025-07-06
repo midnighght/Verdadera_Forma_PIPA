@@ -59,6 +59,13 @@ func _on_web_socket_client_message_received(message: String):
 	
 	
 	match(response.event):
+		"login":
+			if typeof(response.data) == TYPE_DICTIONARY and response.data.has("name"):
+				var yo = response.data.name
+				if not jugadores_conectados.has(yo):
+					jugadores_conectados.append(yo)
+					_updateUserList(jugadores_conectados)
+
 		"connected-to-server":
 			_sendToChatDisplay("You are connected to the server!")
 
@@ -79,10 +86,7 @@ func _on_web_socket_client_message_received(message: String):
 					_updateUserList(jugadores_conectados)
 			else:
 				_sendToChatDisplay("[Error] 'player-connected' mal formateado: %s" % str(response.data))
-			if typeof(response.data) == TYPE_DICTIONARY and response.data.has("name"):
-				_addUserToList(response.data.name)
-			else:
-				_sendToChatDisplay("[Error] 'player-connected' mal formateado: %s" % str(response.data))
+
 
 			
 		"player-disconnected":
