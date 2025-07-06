@@ -68,6 +68,7 @@ func _on_web_socket_client_message_received(message: String):
 		"public-message":
 			_sendToChatDisplay("%s: %s" % [response.data.playerName, response.data.playerMsg])
 		"get-connected-players":
+			print("DEBUG - Lista de jugadores recibida:", response.data)
 			_updateUserList(response.data)
 		"player-connected":
 			print("DEBUG - Tipo de response.data:", typeof(response.data))
