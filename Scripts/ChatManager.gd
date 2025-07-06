@@ -25,6 +25,7 @@ func _ready():
 	print("Mi nombre →", mi_nombre)
 
 	_host = "ws://ucn-game-server.martux.cl:4010/?gameId=D&playerName=%s" % mi_nombre
+	_client.connected_to_server.connect(_on_web_socket_client_connected_to_server)
 
 func _on_web_socket_client_connection_closed():
 	var ws = _client.get_socket()
@@ -33,6 +34,7 @@ func _on_web_socket_client_connection_closed():
 # Cuando se conecta al servidor
 func _on_web_socket_client_connected_to_server():
 	_sendToChatDisplay("Conexión establecida con el servidor. Enviando login...")
+	print("DEBUG: conectado al servidor desde cliente")
 
 	# Enviar login con gameKey
 	var login_payload = {
