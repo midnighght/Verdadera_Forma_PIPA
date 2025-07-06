@@ -17,6 +17,7 @@ scale = Vector2(0.482732, 0.497914)
 texture = ExtResource("3_xqjog")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
 offset_left = 76.995
 offset_top = 20.8737
 offset_right = 812.995
@@ -63,6 +64,7 @@ script = ExtResource("1_17dk5")
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="."]
 visible = false
+layout_mode = 0
 offset_left = 622.062
 offset_top = 373.564
 offset_right = 705.062
