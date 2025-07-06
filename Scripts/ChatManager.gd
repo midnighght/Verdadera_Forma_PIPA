@@ -1,5 +1,8 @@
 extends Control
-
+var invitacion_recibida = ""
+var match_id = ""
+var oponente = ""
+var mi_nombre = "Ram_UCN"  
 # URL de conexión
 var _host = "ws://ucn-game-server.martux.cl:4010/?gameId=D&playerName=playerA"
 @onready var _client: WebSocketClient = $WebSocketClient
@@ -40,18 +43,44 @@ func _on_web_socket_client_connected_to_server():
 # Gestor de mensajes del servidor
 func _on_web_socket_client_message_received(message: String):
 	var response = JSON.parse_string(message)
+	print("Mensaje recibido del servidor:", message)
+	if response == null:
+		_sendToChatDisplay("[Error] JSON no válido recibido")
+		return
 	
+
 	match(response.event):
 		"connected-to-server":
 			_sendToChatDisplay("You are connected to the server!")
+			_addUserToList(mi_nombre)
 		"public-message":
-			_sendToChatDisplay("%s: %s" % [response.data.id, response.data.msg])
+			_sendToChatDisplay("%s: %s" % [response.data.playerName, response.data.playerMsg])
 		"get-connected-players":
 			_updateUserList(response.data)
 		"player-connected":
-			_addUserToList(response.data.id)
+			_addUserToList(response.data.playerName)
+			
 		"player-disconnected":
-			_deleteUserFromList(response.data.id)
+			_deleteUserFromList(response.data.playerName)
+		"match-request-received":
+			_sendToChatDisplay("¡%s quiere jugar contigo!" % response.data.playerName)
+			# Guardar el nombre del jugador que te invitó
+			invitacion_recibida = response.data.playerName
+	
+			# Mostrar botones de aceptar/rechazar
+			$VBoxContainer/AcceptButton.visible = true
+			$VBoxContainer/RejectButton.visible = true
+		
+		"match-start":
+			_sendToChatDisplay("¡La partida ha comenzado con %s!" % response.data.opponent.playerName)
+			
+			# Guardamos datos si quieres hacer algo más adelante
+			match_id = response.data.matchId
+			oponente = response.data.opponent.playerName
+			
+			# Cargar el microjuego (ejemplo con tu escena Pescalo)
+			get_tree().change_scene_to_file("res://0/juego.tscn")
+		
 
 # Señales de la UI
 # Cuando se envia un mensaje desde el input
