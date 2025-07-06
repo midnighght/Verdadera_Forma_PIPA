@@ -56,7 +56,6 @@ func _on_web_socket_client_message_received(message: String):
 		_sendToChatDisplay("[Error] JSON no válido recibido")
 		return
 	
-	print("EVENTO RECIBIDO →", response.event)
 	
 	match(response.event):
 		"connected-to-server":
@@ -69,14 +68,10 @@ func _on_web_socket_client_message_received(message: String):
 		"public-message":
 			_sendToChatDisplay("%s: %s" % [response.data.playerName, response.data.playerMsg])
 		"get-connected-players":
-			print("DEBUG - Lista de jugadores recibida:", response.data)
+			print("DEBUG - Tipo de response.data:", typeof(response.data))
+			print("DEBUG - Contenido:", response.data)
 			_updateUserList(response.data)
 		"player-connected":
-			print("DEBUG - Tipo de response.data:", typeof(response.data))
-			print("DEBUG - Contenido de response.data:", response.data)
-			
-			print("Tipo de response.data:", typeof(response.data))
-			print("Contenido de response.data:", response.data)
 			
 			if typeof(response.data) == TYPE_DICTIONARY and response.data.has("name"):
 				_addUserToList(response.data.name)
@@ -95,7 +90,7 @@ func _on_web_socket_client_message_received(message: String):
 			$VBoxContainer2.visible=true
 		
 		"match-start":
-			_sendToChatDisplay("¡La partida ha comenzado con %s!" % response.data.opponent.playerName)
+			_sendToChatDisplay("¡La partida ha comenzado con %s!" % response.data.opponent.name)
 			
 			# Guardamos datos si quieres hacer algo más adelante
 			match_id = response.data.matchId
@@ -165,10 +160,11 @@ func _sendGetUserListEvent():
 
 # Actualiza la lista de usuarios de la interfaz gráfica
 func _updateUserList(users: Array):
-	player_list.clear()
 	for user in users:
-		player_list.add_item(user)
-
+		if typeof(user) == TYPE_DICTIONARY and user.has("name"):
+			player_list.add_item(user.name)
+		else:
+			print("Usuario no válido:", user)
 # Agrega un jugador al listado
 func _addUserToList(user: String):
 	player_list.add_item(user)
