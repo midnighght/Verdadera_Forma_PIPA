@@ -85,7 +85,9 @@ func _on_web_socket_client_message_received(message: String):
 				var msg = response["data"]["playerName"] + ": " + response["data"]["playerMsg"]
 				print("EVENTO RECIBIDO →public-message")
 				_sendToChatDisplay(msg)
-			
+			"get-connected-players":
+				print("EVENTO RECIBIDO →get-connected-players")
+				_updateUserList(response["data"])
 			_:
 				print("Evento desconocido:", event_name)
 	else:
