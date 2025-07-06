@@ -63,7 +63,7 @@ func _on_web_socket_client_message_received(message: String):
 			_sendToChatDisplay("You are connected to the server!")
 
 	# Solo cambiar de escena si no se recibió un nombre al instanciar
-			
+
 			if not jugadores_conectados.has(mi_nombre):
 				jugadores_conectados.append(mi_nombre)
 				_updateUserList(jugadores_conectados)
@@ -170,11 +170,10 @@ func _sendGetUserListEvent():
 
 # Actualiza la lista de usuarios de la interfaz gráfica
 func _updateUserList(users: Array):
+	player_list.clear()
 	for user in users:
-		if typeof(user) == TYPE_DICTIONARY and user.has("name"):
-			player_list.add_item(user.name)
-		else:
-			print("Usuario no válido:", user)
+		player_list.add_item(user)
+
 # Agrega un jugador al listado
 func _addUserToList(user: String):
 	player_list.add_item(user)
