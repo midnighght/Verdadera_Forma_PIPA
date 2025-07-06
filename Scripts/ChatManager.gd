@@ -72,8 +72,17 @@ func _on_web_socket_client_message_received(message: String):
 		"public-message":
 			_sendToChatDisplay("%s: %s" % [response.data.playerName, response.data.playerMsg])
 		"get-connected-players":
-			print("DEBUG - Lista de jugadores recibida:", response.data)
-			_updateUserList(response.data)
+			print("🟣 Evento 'get-connected-players' recibido")
+			print("🟣 Tipo de response.data:", typeof(response.data))
+			print("🟣 Contenido de response.data:", response.data)
+	
+			if typeof(response.data) == TYPE_ARRAY:
+				_updateUserList(response.data)
+			elif typeof(response.data) == TYPE_DICTIONARY and response.data.has("users"):
+				_updateUserList(response.data.users)
+			else:
+				_sendToChatDisplay("[⚠️] Estructura inesperada en 'get-connected-players': %s" % str(response.data))
+
 		"player-connected":
 			print("DEBUG - Tipo de response.data:", typeof(response.data))
 			print("DEBUG - Contenido de response.data:", response.data)
@@ -168,7 +177,7 @@ func _sendGetUserListEvent():
 
 # Actualiza la lista de usuarios de la interfaz gráfica
 func _updateUserList(users: Array):
-	
+	player_list.clear()
 	for user in users:
 		player_list.add_item(user)
 
