@@ -27,6 +27,8 @@ func _ready():
 
 	_host = "ws://ucn-game-server.martux.cl:4010/?gameId=D&playerName=%s" % mi_nombre
 	_client.connected_to_server.connect(_on_web_socket_client_connected_to_server)
+	_client.message_received.connect(_on_web_socket_client_message_received) # ← FALTA ESTA
+	_client.connection_closed.connect(_on_web_socket_client_connection_closed)
 
 func _on_web_socket_client_connection_closed():
 	var ws = _client.get_socket()
