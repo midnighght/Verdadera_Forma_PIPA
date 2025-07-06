@@ -70,7 +70,10 @@ func _on_web_socket_client_message_received(message: String):
 		"player-connected":
 			print("DEBUG - Tipo de response.data:", typeof(response.data))
 			print("DEBUG - Contenido de response.data:", response.data)
-
+			
+			print("Tipo de response.data:", typeof(response.data))
+			print("Contenido de response.data:", response.data)
+			
 			if typeof(response.data) == TYPE_DICTIONARY and response.data.has("playerName"):
 				_addUserToList(response.data.playerName)
 			else:
