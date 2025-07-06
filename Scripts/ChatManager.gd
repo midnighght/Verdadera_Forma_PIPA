@@ -14,6 +14,7 @@ var _host: String = ""
 var invitacion_recibida: String = ""
 var match_id: String = ""
 var oponente: String = ""
+var players_by_id := {}
 
 var current_popup: ConfirmationDialog = null
 
@@ -147,8 +148,16 @@ func _sendGetUserListEvent():
 # Actualizar lista UI usuarios
 func _updateUserList(users: Array):
 	player_list.clear()
+	players_by_id.clear()  # Limpia para recargar
 	for user in users:
-		player_list.add_item(user)
+		if typeof(user) == TYPE_DICTIONARY:
+			players_by_id[user.id] = user.name
+			player_list.add_item(user.name)
+		elif typeof(user) == TYPE_STRING:
+			# Si viene solo un array de strings (nombres)
+			# No tienes id, solo el nombre
+			player_list.add_item(user)
+
 
 func _addUserToList(user: String):
 	player_list.add_item(user)
