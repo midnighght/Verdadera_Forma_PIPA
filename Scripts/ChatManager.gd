@@ -2,10 +2,10 @@ extends Control
 var invitacion_recibida = ""
 var match_id = ""
 var oponente = ""
-var mi_nombre = ""  
+@export var mi_nombre: String 
 
 # URL de conexión
-var _host = "ws://ucn-game-server.martux.cl:4010/?gameId=D&playerName=%s" % mi_nombre
+var _host : String
 @onready var _client: WebSocketClient = $WebSocketClient
 
 # Referencias a los nodos de la UI
@@ -21,6 +21,9 @@ var _host = "ws://ucn-game-server.martux.cl:4010/?gameId=D&playerName=%s" % mi_n
 
 
 # Cuando se cierra la conexión
+func _ready():
+	_host = "ws://ucn-game-server.martux.cl:4010/?gameId=D&playerName=%s" % mi_nombre
+
 func _on_web_socket_client_connection_closed():
 	var ws = _client.get_socket()
 	_sendToChatDisplay("Client just disconnected with code: %s, reason: %s" % [ws.get_close_code(), ws.get_close_reason()])
