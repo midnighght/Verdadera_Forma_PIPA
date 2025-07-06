@@ -5,7 +5,7 @@ var oponente = ""
 var mi_nombre = ""  
 
 # URL de conexión
-var _host = "ws://ucn-game-server.martux.cl:4010/?gameId=D&playerName=playerA" 
+var _host = "ws://ucn-game-server.martux.cl:4010/?gameId=D&playerName=%s" % mi_nombre
 @onready var _client: WebSocketClient = $WebSocketClient
 
 # Referencias a los nodos de la UI
