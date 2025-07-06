@@ -79,7 +79,7 @@ func _on_web_socket_client_message_received(message: String):
 			oponente = response.data.opponent.playerName
 			
 			# Cargar el microjuego (ejemplo con tu escena Pescalo)
-			get_tree().change_scene_to_file("res://0/juego.tscn")
+			get_tree().change_scene_to_file("res://Scenes/SinglePlayerPlay.tscn")
 		
 
 # Señales de la UI
