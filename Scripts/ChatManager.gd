@@ -38,7 +38,7 @@ func _on_web_socket_client_connection_closed():
 func _on_web_socket_client_connected_to_server():
 	_sendToChatDisplay("Conexión establecida con el servidor. Enviando login...")
 	print("DEBUG: conectado al servidor desde cliente")
-
+	
 	# Enviar login con gameKey
 	var login_payload = {
 		"event": "login",
@@ -48,74 +48,49 @@ func _on_web_socket_client_connected_to_server():
 	}
 	print("Payload login → ", JSON.stringify(login_payload))
 	_client.send(JSON.stringify(login_payload))
-
+	
 	_sendGetUserListEvent()
 
 # Gestor de mensajes del servidor
 func _on_web_socket_client_message_received(message: String):
 	var response = JSON.parse_string(message)
-	print("Mensaje recibido del servidor:", message)
-	if response == null:
-		_sendToChatDisplay("[Error] JSON no válido recibido")
-		return
 	
-	print("EVENTO RECIBIDO →", response.event)
-	
-	match(response.event):
-		"connected-to-server":
-			_sendToChatDisplay("You are connected to the server!")
+	if typeof(response) == TYPE_DICTIONARY and response.has("event"):
+		var event_name = response["event"]
+		match event_name:
+			"connected-to-server":
+				_sendToChatDisplay("You are connected to the server!")
+				print("EVENTO RECIBIDO →connected-to-server")
+			
+			"login":
+				_sendToChatDisplay("¡Login exitoso! Obteniendo lista de usuarios...")
+				print("EVENTO RECIBIDO →login")
+				_sendGetUserListEvent()
+			
+			"player-connected":
+				print("EVENTO RECIBIDO →player-connected")
+				print("DEBUG - Tipo de response.data:", typeof(response["data"]))
+				print("DEBUG - Contenido de response.data:", JSON.stringify(response["data"]))
+			
+			"player-status-changed":
+				print("EVENTO RECIBIDO →player-status-changed")
+			
+			"player-disconnected":
+				print("EVENTO RECIBIDO →player-disconnected")
+			
+			"send-public-message":
+				print("EVENTO RECIBIDO →send-public-message")
+			
+			"public-message":
+				var msg = response["data"]["playerName"] + ": " + response["data"]["playerMsg"]
+				print("EVENTO RECIBIDO →public-message")
+				_sendToChatDisplay(msg)
+			
+			_:
+				print("Evento desconocido:", event_name)
+	else:
+		print("Respuesta inválida recibida:", message)
 
-	# Solo cambiar de escena si no se recibió un nombre al instanciar
-			
-			_addUserToList(mi_nombre)
-			
-		"public-message":
-			_sendToChatDisplay("%s: %s" % [response.data.playerName, response.data.playerMsg])
-		"get-connected-players":
-			print("🟣 Evento 'get-connected-players' recibido")
-			print("🟣 Tipo de response.data:", typeof(response.data))
-			print("🟣 Contenido de response.data:", response.data)
-	
-			if typeof(response.data) == TYPE_ARRAY:
-				_updateUserList(response.data)
-			elif typeof(response.data) == TYPE_DICTIONARY and response.data.has("users"):
-				_updateUserList(response.data.users)
-			else:
-				_sendToChatDisplay("[⚠️] Estructura inesperada en 'get-connected-players': %s" % str(response.data))
-
-		"player-connected":
-			print("DEBUG - Tipo de response.data:", typeof(response.data))
-			print("DEBUG - Contenido de response.data:", response.data)
-			
-			print("Tipo de response.data:", typeof(response.data))
-			print("Contenido de response.data:", response.data)
-			
-			if typeof(response.data) == TYPE_DICTIONARY and response.data.has("name"):
-				_addUserToList(response.data.name)
-			else:
-				_sendToChatDisplay("[Error] 'player-connected' mal formateado: %s" % str(response.data))
-
-			
-		"player-disconnected":
-			_deleteUserFromList(response.data.name)
-		"match-request-received":
-			_sendToChatDisplay("¡%s quiere jugar contigo!" % response.data.name)
-			# Guardar el nombre del jugador que te invitó
-			invitacion_recibida = response.data.name
-	
-			# Mostrar botones de aceptar/rechazar
-			$VBoxContainer2.visible=true
-		
-		"match-start":
-			_sendToChatDisplay("¡La partida ha comenzado con %s!" % response.data.opponent.playerName)
-			
-			# Guardamos datos si quieres hacer algo más adelante
-			match_id = response.data.matchId
-			oponente = response.data.opponent.name
-			
-			# Cargar el microjuego (ejemplo con tu escena Pescalo)
-			get_tree().change_scene_to_file("res://Scenes/SinglePlayerPlay.tscn")
-		
 
 # Señales de la UI
 # Cuando se envia un mensaje desde el input
