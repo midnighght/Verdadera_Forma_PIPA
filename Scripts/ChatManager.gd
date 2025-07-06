@@ -57,6 +57,7 @@ func _on_web_socket_client_message_received(message: String):
 		_sendToChatDisplay("[Error] JSON no válido recibido")
 		return
 	
+	print("EVENTO RECIBIDO →", response.event)
 	
 	match(response.event):
 		"login":
@@ -78,7 +79,18 @@ func _on_web_socket_client_message_received(message: String):
 			
 		"public-message":
 			_sendToChatDisplay("%s: %s" % [response.data.playerName, response.data.playerMsg])
+
+		"get-connected-players":
+			print("DEBUG - Lista de jugadores recibida:", response.data)
+			_updateUserList(response.data)
 		"player-connected":
+			print("DEBUG - Tipo de response.data:", typeof(response.data))
+			print("DEBUG - Contenido de response.data:", response.data)
+			
+			print("Tipo de response.data:", typeof(response.data))
+			print("Contenido de response.data:", response.data)
+			
+>>>>>>> parent of ad8e82d (FESH FESH FESH)
 			if typeof(response.data) == TYPE_DICTIONARY and response.data.has("name"):
 				var nuevo_jugador = response.data.name
 				if not jugadores_conectados.has(nuevo_jugador):
@@ -104,7 +116,7 @@ func _on_web_socket_client_message_received(message: String):
 			$VBoxContainer2.visible=true
 		
 		"match-start":
-			_sendToChatDisplay("¡La partida ha comenzado con %s!" % response.data.opponent.name)
+			_sendToChatDisplay("¡La partida ha comenzado con %s!" % response.data.opponent.playerName)
 			
 			# Guardamos datos si quieres hacer algo más adelante
 			match_id = response.data.matchId
