@@ -67,6 +67,12 @@ func _on_web_socket_client_message_received(message: String):
 			
 		"public-message":
 			_sendToChatDisplay("%s: %s" % [response.data.playerName, response.data.playerMsg])
+		
+		"send-public-message":
+			_sendToChatDisplay("Tú: %s" % response.data.message)
+		
+		"public-message":
+			_sendToChatDisplay("%s: %s" % [response.data.playerName, response.data.playerMsg])
 			
 		"get-connected-players", "online-players":
 			if typeof(response.data) == TYPE_ARRAY:
@@ -200,3 +206,6 @@ func _ocultar_botones_match():
 func _sendToChatDisplay(msg: String):
 	print(msg)
 	chat_display.text += msg + "\n"
+
+func _on_volver_pressed() -> void:
+	get_tree().change_scene_to_file("res://Scenes/PONERnombreUSUARIO.tscn")
