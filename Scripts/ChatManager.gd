@@ -206,3 +206,7 @@ func _ocultar_botones_match():
 	$VBoxContainer2.visible = false
 	
 	invitacion_recibida = ""
+
+
+func _on_volver_pressed() -> void:
+	get_tree().change_scene_to_file("res://Scenes/MainTitle.tscn")
