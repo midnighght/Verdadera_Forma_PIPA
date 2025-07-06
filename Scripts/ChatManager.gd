@@ -2,10 +2,10 @@ extends Control
 var invitacion_recibida = ""
 var match_id = ""
 var oponente = ""
-@export var mi_nombre: String 
+@export var mi_nombre: String =""
 
 # URL de conexión
-var _host : String
+var _host : String=""
 @onready var _client: WebSocketClient = $WebSocketClient
 
 # Referencias a los nodos de la UI
@@ -22,6 +22,8 @@ var _host : String
 
 # Cuando se cierra la conexión
 func _ready():
+	print("Mi nombre →", mi_nombre)
+
 	_host = "ws://ucn-game-server.martux.cl:4010/?gameId=D&playerName=%s" % mi_nombre
 
 func _on_web_socket_client_connection_closed():
@@ -66,7 +68,14 @@ func _on_web_socket_client_message_received(message: String):
 		"get-connected-players":
 			_updateUserList(response.data)
 		"player-connected":
-			_addUserToList(response.data.playerName)
+			print("DEBUG - Tipo de response.data:", typeof(response.data))
+			print("DEBUG - Contenido de response.data:", response.data)
+
+			if typeof(response.data) == TYPE_DICTIONARY and response.data.has("playerName"):
+				_addUserToList(response.data.playerName)
+			else:
+				_sendToChatDisplay("[Error] 'player-connected' mal formateado: %s" % str(response.data))
+
 			
 		"player-disconnected":
 			_deleteUserFromList(response.data.playerName)
