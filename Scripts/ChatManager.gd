@@ -74,8 +74,8 @@ func _on_web_socket_client_message_received(message: String):
 			print("Tipo de response.data:", typeof(response.data))
 			print("Contenido de response.data:", response.data)
 			
-			if typeof(response.data) == TYPE_DICTIONARY and response.data.has("playerName"):
-				_addUserToList(response.data.playerName)
+			if typeof(response.data) == TYPE_DICTIONARY and response.data.has("name"):
+				_addUserToList(response.data.name)
 			else:
 				_sendToChatDisplay("[Error] 'player-connected' mal formateado: %s" % str(response.data))
 
