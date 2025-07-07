@@ -1,45 +1,58 @@
-extends Control
+extends Node2D
+
+@export var disabled: bool = false
 
 func _ready():
+	disabled = false
+	# Forzar estado inicial no pausado
+	get_tree().paused = false
 	# Asegurarse que el menú está oculto al inicio
 	hide()
 	# Detener cualquier animación que pueda estar activa
-	$AnimationPlayer.stop(true)
-	# Forzar estado inicial no pausado
-	get_tree().paused = false
+	#$MenuPausa/AnimationPlayer.stop(true)
 	# Resetear la animación sin reproducirla
-	$AnimationPlayer.seek(0, true)
+	#$MenuPausa/AnimationPlayer.seek(0, true)
 
-func resume():
-	get_tree().paused = false
-	$AnimationPlayer.play_backwards("MenuInGame")
-	# Ocultar el menú después de la animación si es necesario
-	await $AnimationPlayer.animation_finished
-	hide()
-
-func pause():
-	# Mostrar el menú antes de la animación
-	show()
-	get_tree().paused = true
-	$AnimationPlayer.play("MenuInGame")
-
-func testEsc():
-	if Input.is_action_just_pressed("escape"):
+func _input(event):
+	if disabled:
+		return
+	if event.is_action_pressed("ui_cancel"):
 		if get_tree().paused:
 			resume()
 		else:
 			pause()
 
-# Resto de tus funciones permanecen igual...
+func disable_pause_menu():
+	disabled = true
+	
+func enable_pause_menu():
+	disabled = false
+
+# Funciones botones
 func _on_continuar_pressed() -> void:
 	resume()
 
 func _on_restart_pressed() -> void:
-	get_tree().paused = false  # Asegurar que no quedó pausado
+	resume()
 	get_tree().reload_current_scene()
 
 func _on_menu_principal_pressed() -> void:
-	get_tree().quit()
+	resume()
+	get_tree().change_scene_to_file("res://Scenes/MainTitle.tscn")
 
-func _process(delta):
-	testEsc()
+func resume():
+	if disabled:
+		return
+	#$MenuPausa/AnimationPlayer.play_backwards("MenuInGame")
+	# Ocultar el menú después de la animación si es necesario
+	#await $MenuPausa/AnimationPlayer.animation_finished
+	hide()
+	get_tree().paused = false
+
+func pause():
+	if disabled:
+		return
+	# Mostrar el menú antes de la animación
+	get_tree().paused = true
+	show()
+	#$MenuPausa/AnimationPlayer.play("MenuInGame")

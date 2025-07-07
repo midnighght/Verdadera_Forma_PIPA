@@ -13,14 +13,23 @@ var dying: bool = false
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var hurt_area: Area2D = $HurtArea2D
 @onready var death_timer 	= $DeathTimer
-@onready var start_position: Vector2 = global_position
+@onready var start_position: Vector2
+
+var marker_right: Vector2
+var marker_left: Vector2
+
+func initialize():
+	start_position = global_position
+	marker_right 	= get_parent().get_node("MarkerRight").global_position
+	marker_left 	= get_parent().get_node("MarkerLeft").global_position
 
 func _ready():
-	$AnimatedSprite2D.play("flying")
-	$AnimatedSprite2D.flip_h = DIRECTION < 0
+	sprite.play("flying")
+	sprite.flip_h = DIRECTION < 0
 	hurt_area.body_entered.connect(_on_body_entered)
 	hurt_area.area_entered.connect(_on_area_entered)
 	death_timer.timeout.connect(_on_death)
+	start_position = global_position
 
 func _physics_process(delta):
 	if switching or dying: return
@@ -32,10 +41,10 @@ func _physics_process(delta):
 	
 	# Change direction when outside range
 	if DIRECTION > 0:
-		if global_position.x - start_position.x > PATROL_RANGE:
+		if global_position.x > marker_right.x:
 			switch_direction()
 	elif DIRECTION < 0:
-		if global_position.x - start_position.x < -PATROL_RANGE:
+		if global_position.x < marker_left.x:
 			switch_direction()
 	
 	# move and slide (movement collisions physics)
@@ -54,7 +63,7 @@ func switch_direction():
 
 func _on_area_entered(area):
 	area.get_parent().queue_free()
-	$AnimatedSprite2D.play("switch")
+	sprite.play("switch")
 	dying = true
 	death_timer.start(1)
 

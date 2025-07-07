@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://d0kmghqqc55qm"]
+[gd_scene load_steps=7 format=3 uid="uid://d0kmghqqc55qm"]
 
 [ext_resource type="PackedScene" uid="uid://4nd0pv24mqk8" path="res://Prefabs/Moon/Moon.tscn" id="1_c4lgr"]
 [ext_resource type="Texture2D" uid="uid://2kciqgrkij8j" path="res://Assets/sprites/Map/uruk_background.png" id="1_op78j"]
 [ext_resource type="PackedScene" uid="uid://cduiuhtkc03h8" path="res://Prefabs/Player/Urlu.tscn" id="2_op78j"]
 [ext_resource type="PackedScene" uid="uid://t1klvxoc0lvk" path="res://Prefabs/UI/HealthBar.tscn" id="3_c4lgr"]
+[ext_resource type="PackedScene" uid="uid://jiqi1qkcoow7" path="res://Prefabs/UI/MenuMuerte.tscn" id="4_5virf"]
+[ext_resource type="PackedScene" uid="uid://cwjnun1tytdmm" path="res://Prefabs/UI/menu_pausa.tscn" id="4_hnr8y"]
 
 [node name="Player" type="Node2D"]
 
@@ -26,9 +28,15 @@ position = Vector2(250, -1100)
 
 [node name="Urlu" parent="." instance=ExtResource("2_op78j")]
 MOON_PATH = NodePath("../CanvasLayer -32/Moon")
+GAMEOVER_PATH = NodePath("../CanvasLayer 32/MenuMuerte")
+PAUSE_PATH = NodePath("../CanvasLayer 32/MenuPausa")
 
 [node name="CanvasLayer 32" type="CanvasLayer" parent="."]
 
+[node name="MenuMuerte" parent="CanvasLayer 32" instance=ExtResource("4_5virf")]
+
+[node name="MenuPausa" parent="CanvasLayer 32" instance=ExtResource("4_hnr8y")]
+
 [node name="HealthBar" parent="CanvasLayer 32" instance=ExtResource("3_c4lgr")]
-position = Vector2(960, 64)
+position = Vector2(1744, 544)
 PLAYER_PATH = NodePath("../../Urlu")

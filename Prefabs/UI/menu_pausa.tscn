@@ -1,42 +1,15 @@
-[gd_scene load_steps=9 format=3 uid="uid://cwjnun1tytdmm"]
+[gd_scene load_steps=7 format=3 uid="uid://cwjnun1tytdmm"]
 
 [ext_resource type="Script" uid="uid://cmghae80vdcu4" path="res://Scripts/menu_pausa.gd" id="1_7dldy"]
-[ext_resource type="Shader" uid="uid://bf6q7j4kt1yux" path="res://Assets/fonts/Menu.gdshader" id="2_pq2yk"]
 [ext_resource type="Texture2D" uid="uid://dh2aa6puaip6t" path="res://Assets/sprites/GUI/button.png" id="3_pq2yk"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_mumad"]
-shader = ExtResource("2_pq2yk")
-shader_parameter/lod = 0.0
+[ext_resource type="Theme" uid="uid://brhg7qm8u6tf" path="res://Assets/MainTitleButtons.tres" id="4_6ky6l"]
 
 [sub_resource type="Animation" id="Animation_6rupy"]
 resource_name = "MenuInGame"
 length = 0.3
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("ColorRect:material:shader_parameter/lod")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [0.0, 0.855]
-}
 
 [sub_resource type="Animation" id="Animation_iefth"]
 length = 0.001
-tracks/0/type = "bezier"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("ColorRect:material:shader_parameter/lod")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0, -0.15, 0, 0.15, 0),
-"times": PackedFloat32Array(0)
-}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_eyy4y"]
 _data = {
@@ -44,11 +17,11 @@ _data = {
 &"RESET": SubResource("Animation_iefth")
 }
 
-[sub_resource type="GDScript" id="GDScript_g3qh8"]
-script/source = "extends AnimationPlayer
-"
+[node name="MenuPausa" type="Node2D"]
+process_mode = 3
+script = ExtResource("1_7dldy")
 
-[node name="MenuPausa" type="Control"]
+[node name="MenuPausa" type="Control" parent="."]
 process_mode = 3
 clip_contents = true
 layout_mode = 3
@@ -57,19 +30,14 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_7dldy")
 
-[node name="ColorRect" type="ColorRect" parent="."]
-material = SubResource("ShaderMaterial_mumad")
-layout_mode = 1
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MenuPausa"]
+active = false
 libraries = {
 &"": SubResource("AnimationLibrary_eyy4y")
 }
-script = SubResource("GDScript_g3qh8")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="MenuPausa"]
 top_level = true
 light_mask = 0
 clip_contents = true
@@ -89,37 +57,37 @@ pivot_offset = Vector2(177, 210)
 size_flags_stretch_ratio = 0.0
 alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="MenuPausa/VBoxContainer"]
 clip_contents = true
 layout_mode = 2
 size_flags_vertical = 3
 texture = ExtResource("3_pq2yk")
 
-[node name="Label" type="Label" parent="VBoxContainer/TextureRect"]
+[node name="Label" type="Label" parent="MenuPausa/VBoxContainer/TextureRect"]
 clip_contents = true
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 2.955
-offset_left = -33.0
-offset_top = -11.0
-offset_right = 15.0
-offset_bottom = -0.240021
+offset_bottom = -250.24
 
-[node name="Continuar" type="Button" parent="VBoxContainer/TextureRect/Label"]
-layout_mode = 2
-offset_left = 23.0
-offset_top = 57.0
-offset_right = 407.0
-offset_bottom = 88.0
+[node name="Continuar" type="Button" parent="MenuPausa/VBoxContainer/TextureRect/Label"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("4_6ky6l")
+theme_override_colors/font_hover_color = Color(0.439216, 0.14902, 0.105882, 1)
 text = "Continuar"
 flat = true
 
-[node name="TextureRect2" type="TextureRect" parent="VBoxContainer"]
+[node name="TextureRect2" type="TextureRect" parent="MenuPausa/VBoxContainer"]
 layout_mode = 2
 texture = ExtResource("3_pq2yk")
 
-[node name="Label2" type="Label" parent="VBoxContainer/TextureRect2"]
+[node name="Label2" type="Label" parent="MenuPausa/VBoxContainer/TextureRect2"]
 clip_contents = true
 layout_mode = 1
 anchors_preset = 15
@@ -128,7 +96,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="restart" type="Button" parent="VBoxContainer/TextureRect2/Label2"]
+[node name="restart" type="Button" parent="MenuPausa/VBoxContainer/TextureRect2/Label2"]
 clip_contents = true
 layout_mode = 1
 anchors_preset = 15
@@ -136,14 +104,16 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("4_6ky6l")
+theme_override_colors/font_hover_color = Color(0.439216, 0.14902, 0.105882, 1)
 text = "Restart"
 flat = true
 
-[node name="TextureRect3" type="TextureRect" parent="VBoxContainer"]
+[node name="TextureRect3" type="TextureRect" parent="MenuPausa/VBoxContainer"]
 layout_mode = 2
 texture = ExtResource("3_pq2yk")
 
-[node name="Label3" type="Label" parent="VBoxContainer/TextureRect3"]
+[node name="Label3" type="Label" parent="MenuPausa/VBoxContainer/TextureRect3"]
 clip_contents = true
 layout_mode = 1
 anchors_preset = 15
@@ -152,15 +122,18 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MenuPrincipal" type="Button" parent="VBoxContainer/TextureRect3/Label3"]
-layout_mode = 2
-offset_left = -7.0
-offset_top = 43.0
-offset_right = 377.0
-offset_bottom = 89.0
-text = "Salir"
+[node name="MenuPrincipal" type="Button" parent="MenuPausa/VBoxContainer/TextureRect3/Label3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("4_6ky6l")
+theme_override_colors/font_hover_color = Color(0.439216, 0.14902, 0.105882, 1)
+text = "Menu Principal"
 flat = true
 
-[connection signal="pressed" from="VBoxContainer/TextureRect/Label/Continuar" to="." method="_on_continuar_pressed"]
-[connection signal="pressed" from="VBoxContainer/TextureRect2/Label2/restart" to="." method="_on_restart_pressed"]
-[connection signal="pressed" from="VBoxContainer/TextureRect3/Label3/MenuPrincipal" to="." method="_on_menu_principal_pressed"]
+[connection signal="pressed" from="MenuPausa/VBoxContainer/TextureRect/Label/Continuar" to="." method="_on_continuar_pressed"]
+[connection signal="pressed" from="MenuPausa/VBoxContainer/TextureRect2/Label2/restart" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="MenuPausa/VBoxContainer/TextureRect3/Label3/MenuPrincipal" to="." method="_on_menu_principal_pressed"]

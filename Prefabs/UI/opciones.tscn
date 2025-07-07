@@ -1,10 +1,10 @@
 [gd_scene load_steps=8 format=3 uid="uid://bbll3u48qqpa6"]
 
 [ext_resource type="Script" uid="uid://d2fugo831y4sh" path="res://Scripts/opciones.gd" id="1_teitx"]
-[ext_resource type="Texture2D" uid="uid://bycrq3i56mrq2" path="res://0/fotosPrueba1/MenuSinPalabras.png" id="2_7srix"]
+[ext_resource type="Texture2D" uid="uid://bycrq3i56mrq2" path="res://Assets/MenuSinPalabras.png" id="2_7srix"]
 [ext_resource type="AudioStream" uid="uid://cctmyfjllvv3h" path="res://Assets/sound/Music/y2mate.com - LOrbrie.mp3" id="2_ecfwv"]
 [ext_resource type="FontFile" uid="uid://c62mqdpg7leya" path="res://Assets/fonts/Fonts/Kenney Pixel.ttf" id="3_ecfwv"]
-[ext_resource type="Script" uid="uid://dxhj3k8s8jgij" path="res://0/versiones antiguas de cosas/SonidoSlider.gd" id="4_1c8bv"]
+[ext_resource type="Script" uid="uid://dxhj3k8s8jgij" path="res://Scripts/SonidoSlider.gd" id="4_1c8bv"]
 [ext_resource type="Script" uid="uid://cavvuyomoncem" path="res://Scripts/BrilloConfiguracion.gd" id="5_1c8bv"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_teitx"]

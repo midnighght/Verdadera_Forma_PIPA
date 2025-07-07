@@ -1,0 +1,119 @@
+[gd_scene load_steps=5 format=3 uid="uid://jiqi1qkcoow7"]
+
+[ext_resource type="Script" uid="uid://dtfhvramlduoh" path="res://Scripts/menu_muerte.gd" id="1_bbfob"]
+[ext_resource type="Texture2D" uid="uid://dh2aa6puaip6t" path="res://Assets/sprites/GUI/button.png" id="2_bbfob"]
+[ext_resource type="Texture2D" uid="uid://bflq5s3lti0rl" path="res://Assets/sprites/GUI/gameover.png" id="2_i6m2j"]
+[ext_resource type="Theme" uid="uid://brhg7qm8u6tf" path="res://Assets/MainTitleButtons.tres" id="4_hekmr"]
+
+[node name="MenuMuerte" type="Node2D"]
+process_mode = 3
+script = ExtResource("1_bbfob")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(960, 256)
+texture = ExtResource("2_i6m2j")
+
+[node name="MenuMuerte" type="Control" parent="."]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MenuMuerte"]
+top_level = true
+light_mask = 0
+clip_contents = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -192.0
+offset_top = -60.0
+offset_right = 192.0
+offset_bottom = 332.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(177, 210)
+size_flags_stretch_ratio = 0.0
+alignment = 1
+
+[node name="TextureRect4" type="TextureRect" parent="MenuMuerte/VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("2_bbfob")
+
+[node name="Label2" type="Label" parent="MenuMuerte/VBoxContainer/TextureRect4"]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Restart" type="Button" parent="MenuMuerte/VBoxContainer/TextureRect4/Label2"]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("4_hekmr")
+theme_override_colors/font_hover_color = Color(0.439216, 0.14902, 0.105882, 1)
+text = "Restart"
+flat = true
+
+[node name="TextureRect5" type="TextureRect" parent="MenuMuerte/VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("2_bbfob")
+
+[node name="Label3" type="Label" parent="MenuMuerte/VBoxContainer/TextureRect5"]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MenuPrincipal" type="Button" parent="MenuMuerte/VBoxContainer/TextureRect5/Label3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("4_hekmr")
+theme_override_colors/font_hover_color = Color(0.439216, 0.14902, 0.105882, 1)
+text = "Menu Principal"
+flat = true
+
+[node name="TextureRect3" type="TextureRect" parent="MenuMuerte/VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("2_bbfob")
+
+[node name="Label3" type="Label" parent="MenuMuerte/VBoxContainer/TextureRect3"]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Salir" type="Button" parent="MenuMuerte/VBoxContainer/TextureRect3/Label3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("4_hekmr")
+theme_override_colors/font_hover_color = Color(0.439216, 0.14902, 0.105882, 1)
+text = "Salir"
+flat = true
+
+[connection signal="pressed" from="MenuMuerte/VBoxContainer/TextureRect4/Label2/Restart" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="MenuMuerte/VBoxContainer/TextureRect5/Label3/MenuPrincipal" to="." method="_on_menu_principal_pressed"]
+[connection signal="pressed" from="MenuMuerte/VBoxContainer/TextureRect3/Label3/Salir" to="." method="_on_salir_pressed"]

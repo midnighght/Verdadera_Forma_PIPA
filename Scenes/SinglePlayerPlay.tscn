@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://3vd8ymk6vlgr"]
+[gd_scene load_steps=14 format=3 uid="uid://3vd8ymk6vlgr"]
 
 [ext_resource type="PackedScene" uid="uid://d0kmghqqc55qm" path="res://Prefabs/Player/Player.tscn" id="1_3073f"]
 [ext_resource type="Script" uid="uid://dgtjqsjm1ulre" path="res://Scripts/wagon_spawner.gd" id="2_6bgyf"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://c6dry4rrq3c6l" path="res://Prefabs/Wagons/Wagon7.tscn" id="9_gegmf"]
 [ext_resource type="PackedScene" uid="uid://cdr76niamfj3e" path="res://Prefabs/Wagons/Wagon8.tscn" id="10_66uw2"]
 [ext_resource type="Script" uid="uid://b4c4gorrcgp1r" path="res://Scripts/world_border.gd" id="11_ax3e2"]
+[ext_resource type="PackedScene" uid="uid://c2xmkk3ye0n4h" path="res://Prefabs/Wagons/Wagon0.tscn" id="12_ekhkr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ekhkr"]
 size = Vector2(512, 2048)
@@ -23,6 +24,7 @@ position = Vector2(192, 576)
 [node name="Wagon Spawner" type="Node2D" parent="."]
 script = ExtResource("2_6bgyf")
 WAGON_SCENES = Array[PackedScene]([ExtResource("3_qp07k"), ExtResource("4_ax3e2"), ExtResource("5_ekhkr"), ExtResource("6_8kss8"), ExtResource("7_m30cy"), ExtResource("8_g65sd"), ExtResource("9_gegmf"), ExtResource("10_66uw2")])
+FIRST_WAGON_SCENE = ExtResource("12_ekhkr")
 PLAYER_PATH = NodePath("../Player")
 
 [node name="World Border" type="StaticBody2D" parent="."]

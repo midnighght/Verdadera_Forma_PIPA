@@ -1,6 +1,7 @@
 extends Node2D
 
 @export var WAGON_SCENES: Array[PackedScene]
+@export var FIRST_WAGON_SCENE: PackedScene
 
 var wagons = []
 var last_spawn_x = 0
@@ -10,8 +11,7 @@ var last_spawn_x = 0
 @onready var player = get_node(PLAYER_PATH).get_node("Urlu")
 
 func _ready():
-	var first_wagon_scene = WAGON_SCENES.pick_random()
-	var first_wagon = first_wagon_scene.instantiate()
+	var first_wagon = FIRST_WAGON_SCENE.instantiate()
 	get_parent().add_child.call_deferred(first_wagon)
 	first_wagon.global_position = Vector2.ZERO
 	wagons.append(first_wagon)
@@ -43,6 +43,14 @@ func spawn_wagon():
 	get_parent().add_child(wagon)
 	wagon.global_position = Vector2(last_spawn_x, 0)
 	wagons.append(wagon)
+	
+	await get_tree().process_frame
+	if wagon.has_node("Bat"):
+		var bat_container = wagon.get_node("Bat")
+		if bat_container.get_child_count() > 0:
+			var bat = bat_container.get_child(0)
+			if bat.has_method("initialize"):
+				bat.initialize()
 
 	# Update spawn point based on wagon width
 	var width = wagon.get_node("Marker2D").position.x if wagon.has_node("Marker2D") else 2560

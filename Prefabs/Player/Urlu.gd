@@ -22,6 +22,10 @@ var is_hidden:		bool = false
 #sanity & moon mechanic constants
 @export var MOON_PATH: NodePath
 @onready var moon = get_node(MOON_PATH)
+@export var GAMEOVER_PATH: NodePath
+@onready var gameover = get_node(GAMEOVER_PATH)
+@export var PAUSE_PATH: NodePath
+@onready var pause_menu = get_node(PAUSE_PATH)
 @export var MAX_SANITY: 			float = 360
 @export var SANITY: 				float = 360
 @export var SANITY_DRAIN_PASSIVE:	float = 0.2
@@ -46,8 +50,8 @@ var cursor_angle: float
 #endregion
 
 func _input(event):
-	if event.is_action_pressed("ui_cancel"):
-		get_tree().quit()
+	#if event.is_action_pressed("ui_cancel"):
+		#get_tree().quit()
 		
 	if event is InputEventMouseButton and event.is_action_pressed("attack"):
 		if is_attacking == true:
@@ -162,7 +166,7 @@ func _physics_process(_delta):
 	sprite_overlay.visible = false
 	if is_on_floor():
 		if x_input == 0:
-			animationPlayer.play("Idle")
+			animationPlayer.play("Idle_Still")
 		else:
 			animationPlayer.play("Runing")
 	elif not nextToWall():
@@ -173,7 +177,7 @@ func _physics_process(_delta):
 		elif motion.y > 200:
 			animationPlayer.play("Falling")
 	else:
-		animationPlayer.play("Idle")
+		animationPlayer.play("Idle_Still")
 		
 	if nextToWall():
 		if on_wall_right:
@@ -214,10 +218,8 @@ func take_damage(damage: float):
 #	$AnimationPlayer.play("hurt")
 
 func die():
-	#queue_free()
-	#get_tree().quit()
-	pass
-	
+	pause_menu.call("disable_pause_menu")
+	gameover.call("death")
 
 func shoot():
 	var arrow = ARROW_PATH.instantiate()
