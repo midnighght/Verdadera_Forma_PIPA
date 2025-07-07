@@ -80,29 +80,34 @@ func _on_web_socket_client_message_received(message: String):
 			
 		"get-connected-players":
 			print("DEBUG players list → ", response.data)
-
 			var raw = response.data
 			var list = []
-			# Si el payload es un diccionario con lista en “users” o “players”
 			if typeof(raw) == TYPE_DICTIONARY:
 				if raw.has("users"):
 					list = raw.users
 				elif raw.has("players"):
 					list = raw.players
 				else:
-			# fallback: convertir todo el diccionario a array de valores
 					for key in raw.keys():
 						list.append(raw[key])
 			elif typeof(raw) == TYPE_ARRAY:
 				list = raw
-
-	# Ahora sí procesar el listado uniforme
 			players_by_id.clear()
 			var names = []
 			for entry in list:
-				players_by_id[entry.id] = entry.name
-				names.append(entry.name)
+				if typeof(entry) == TYPE_DICTIONARY and entry.has("id") and entry.has("name"):
+					players_by_id[entry.id] = entry.name
+					names.append(entry.name)
+				elif typeof(entry) == TYPE_STRING:
+					names.append(entry)
+				else:
+					print("⚠️ Entrada inesperada en lista de jugadores:", entry)
+
+	# Asegúrate de incluirte si estás ausente
+			if not names.has(mi_nombre):
+				names.insert(0, mi_nombre)
 			_updateUserList(names)
+
 
 
 			
