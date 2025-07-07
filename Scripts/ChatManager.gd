@@ -346,3 +346,4 @@ func _on_volver_pressed() -> void:
 func _on_actualizar_pressed() -> void:
 	_sendToChatDisplay("Solicitando lista actual de jugadores...")
 	_sendGetUserListEvent()
+	_sendToChatDisplay("Lista actualizada!!!!")
