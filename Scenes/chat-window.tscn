@@ -30,6 +30,10 @@ layout_mode = 2
 toggle_mode = true
 text = "CONNECT TO SERVER"
 
+[node name="Actualizar" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Actualizar"
+
 [node name="MainPanel" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
@@ -90,6 +94,7 @@ offset_bottom = 534.0
 text = "VOLVER"
 
 [connection signal="toggled" from="VBoxContainer/ConnectButton" to="." method="_on_connect_toggled"]
+[connection signal="pressed" from="VBoxContainer/Actualizar" to="." method="_on_actualizar_pressed"]
 [connection signal="text_submitted" from="VBoxContainer/Commands/InputMessage" to="." method="_on_input_submitted"]
 [connection signal="pressed" from="VBoxContainer/Commands/SendButton" to="." method="_on_send_pressed"]
 [connection signal="connected_to_server" from="WebSocketClient" to="." method="_on_web_socket_client_connected_to_server"]
