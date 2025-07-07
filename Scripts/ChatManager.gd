@@ -1,6 +1,13 @@
 extends Control
 
-@export var mi_nombre: String = ""
+var invitacion_recibida = ""
+var match_id = ""
+var oponente = ""
+var my_id = ""
+var players_by_id = {}
+
+@export var mi_nombre: String =""
+
 
 var _host: String = ""
 @onready var _client: WebSocketClient = $WebSocketClient
@@ -11,10 +18,7 @@ var _host: String = ""
 @onready var input_message: LineEdit = $VBoxContainer/Commands/InputMessage
 @onready var send_button: Button = $VBoxContainer/Commands/SendButton
 
-var invitacion_recibida: String = ""
-var match_id: String = ""
-var oponente: String = ""
-var players_by_id := {}
+
 
 var current_popup: ConfirmationDialog = null
 
@@ -54,12 +58,20 @@ func _on_web_socket_client_message_received(message: String):
 		_sendToChatDisplay("[Error] JSON no válido recibido")
 		return
 	
+
 	print("Evento recibido: %s | Datos: %s" % [response.event, str(response.data)])
+
+	
+	match(response.event):
+		"connected-to-server":
+			my_id = response.data.id
+			_sendToChatDisplay("You are connected to the server!")
 
 	match response.event:
 		"connected-to-server":
 			_sendToChatDisplay("Conectado al servidor correctamente.")
 			
+
 		"login":
 			# Aquí puedes hacer algo con response.data si lo necesitas
 			_sendToChatDisplay("Login exitoso.")
@@ -89,6 +101,33 @@ func _on_web_socket_client_message_received(message: String):
 			else:
 				_sendToChatDisplay("[Error] 'player-connected' mal formateado: %s" % str(response.data))
 				
+			_addUserToList(mi_nombre)
+		"send-public-message":
+			_sendToChatDisplay("Tú: %s" % response.data.message)
+			
+		"public-message":
+			_sendToChatDisplay("%s: %s" % [response.data.playerName, response.data.playerMsg])
+		"get-connected-players":
+			var names = []
+			players_by_id.clear()
+			for data in response.data:
+				var id = data.id
+				var name = data.name
+				print(name)
+				players_by_id[id] = name
+				names.append(name)
+			_updateUserList(names)
+		"player-data":
+			var names = []
+			for user in response.data:
+				names.append(user.name)
+			_updateUserList(names)
+		"player-connected":
+			
+			_addUserToList(response.data.name)
+			players_by_id[response.data.id] = response.data.name
+			
+
 		"player-disconnected":
 			if typeof(response.data) == TYPE_DICTIONARY and response.data.has("name"):
 				_deleteUserFromList(response.data.name)
@@ -107,7 +146,7 @@ func _on_web_socket_client_message_received(message: String):
 			
 			get_tree().change_scene_to_file("res://Scenes/SinglePlayerPlay.tscn")
 		
-		_:
+		
 			_sendToChatDisplay("Evento no manejado: %s" % response.event)
 
 func _on_web_socket_client_connection_closed():
