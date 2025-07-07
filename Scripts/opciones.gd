@@ -1,8 +1,8 @@
 extends Node2D
 
 @onready var fondo_brillo = $ColorRect  # Nodo que controla brillo
-@onready var slider_volumen = $VBoxContainer3/Sonido
-@onready var slider_brillo = $VBoxContainer4/Brillo
+@onready var slider_volumen = $VBoxSonido/Sonido
+@onready var slider_brillo = $VBoxBrillo/Brillo
 
 func _ready():
 	slider_volumen.value = GlobalConfig.volumen
