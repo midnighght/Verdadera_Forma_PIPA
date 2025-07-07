@@ -78,7 +78,7 @@ func _on_web_socket_client_message_received(message: String):
 		"send-public-message":
 			_sendToChatDisplay("You: %s" % response.data.message)
 			
-		"get-connected-players":
+		"online-players":
 			print("DEBUG players list → ", response.data)
 			var raw = response.data
 			var list = []
@@ -197,7 +197,7 @@ func _sendMessage(message: String, userId: String = ''):
 # Solicita la lista de usuarios activos al servidor
 func _sendGetUserListEvent():
 	var dataToSend = {
-		"event": 'get-connected-players'
+		"event": 'online-players'
 	}
 	_client.send(JSON.stringify(dataToSend))
 
