@@ -2,6 +2,8 @@ extends Control
 var invitacion_recibida = ""
 var match_id = ""
 var oponente = ""
+var my_id = ""
+var players_by_id = {}
 @export var mi_nombre: String =""
 
 # URL de conexión
@@ -59,28 +61,49 @@ func _on_web_socket_client_message_received(message: String):
 	
 	match(response.event):
 		"connected-to-server":
-			_sendToChatDisplay("You are connected to the server!")
+			my_id = response.data.id
+			mi_nombre = response.data.name             # opcional si confías en el servidor
+			# Construimos la lista inicial sólo contigo
+			var names = [mi_nombre]
+			players_by_id.clear()
+			players_by_id[my_id] = mi_nombre
+			_updateUserList(names)
 
+			_sendToChatDisplay("You are connected to the server!")
+			
 	# Solo cambiar de escena si no se recibió un nombre al instanciar
 			
-			_addUserToList(mi_nombre)
 			
 		"public-message":
 			_sendToChatDisplay("%s: %s" % [response.data.playerName, response.data.playerMsg])
-		"get-connected-players":
-			print("DEBUG - Tipo de response.data:", typeof(response.data))
-			print("DEBUG - Contenido:", response.data)
-			_updateUserList(response.data)
-		"player-connected":
+		"send-public-message":
+			_sendToChatDisplay("You: %s" % response.data.message)
 			
-			if typeof(response.data) == TYPE_DICTIONARY and response.data.has("name"):
-				_addUserToList(response.data.name)
-			else:
-				_sendToChatDisplay("[Error] 'player-connected' mal formateado: %s" % str(response.data))
+		"get-connected-players":
+			var names = []
+			players_by_id.clear()
+			for data in response.data:
+				players_by_id[data.id] = data.name
+				names.append(data.name)
+	# Añadimos local si falta
+			if not names.has(mi_nombre):
+				players_by_id[my_id] = mi_nombre
+				names.insert(0, mi_nombre)
+			_updateUserList(names)
 
 			
+		"player-connected":
+			_addUserToList(response.data.name)
+			players_by_id[response.data.id] = response.data.name
+		"player-data":
+			var names = []
+			for user in response.data:
+				names.append(user.name)
+			_updateUserList(names)
+		"login":
+			_sendGetUserListEvent()
 		"player-disconnected":
-			_deleteUserFromList(response.data.name)
+			_deleteUserFromList(response.data.id)
 		"match-request-received":
 			_sendToChatDisplay("¡%s quiere jugar contigo!" % response.data.name)
 			# Guardar el nombre del jugador que te invitó
@@ -160,11 +183,9 @@ func _sendGetUserListEvent():
 
 # Actualiza la lista de usuarios de la interfaz gráfica
 func _updateUserList(users: Array):
+	player_list.clear()
 	for user in users:
-		if typeof(user) == TYPE_DICTIONARY and user.has("name"):
-			player_list.add_item(user.name)
-		else:
-			print("Usuario no válido:", user)
+		player_list.add_item(user)
 # Agrega un jugador al listado
 func _addUserToList(user: String):
 	player_list.add_item(user)
