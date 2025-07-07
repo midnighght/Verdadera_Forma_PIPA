@@ -48,7 +48,6 @@ func _on_web_socket_client_connected_to_server():
 	print("Payload login → ", JSON.stringify(login_payload))
 	_client.send(JSON.stringify(login_payload))
 
-	_sendGetUserListEvent()
 
 # Gestor de mensajes del servidor
 func _on_web_socket_client_message_received(message: String):
@@ -79,17 +78,32 @@ func _on_web_socket_client_message_received(message: String):
 		"send-public-message":
 			_sendToChatDisplay("You: %s" % response.data.message)
 			
-		"get-connected-players":
-			var names = []
+		"get-connected-players", "online-players":
+			print("DEBUG players list → ", response.data)
+
+			var raw = response.data
+			var list = []
+			# Si el payload es un diccionario con lista en “users” o “players”
+			if typeof(raw) == TYPE_DICTIONARY:
+				if raw.has("users"):
+					list = raw.users
+				elif raw.has("players"):
+					list = raw.players
+				else:
+			# fallback: convertir todo el diccionario a array de valores
+					for key in raw.keys():
+						list.append(raw[key])
+			elif typeof(raw) == TYPE_ARRAY:
+				list = raw
+
+	# Ahora sí procesar el listado uniforme
 			players_by_id.clear()
-			for data in response.data:
-				players_by_id[data.id] = data.name
-				names.append(data.name)
-	# Añadimos local si falta
-			if not names.has(mi_nombre):
-				players_by_id[my_id] = mi_nombre
-				names.insert(0, mi_nombre)
+			var names = []
+			for entry in list:
+				players_by_id[entry.id] = entry.name
+				names.append(entry.name)
 			_updateUserList(names)
+
 
 			
 		"player-connected":
@@ -101,6 +115,7 @@ func _on_web_socket_client_message_received(message: String):
 				names.append(user.name)
 			_updateUserList(names)
 		"login":
+			_sendToChatDisplay("Login exitoso.")
 			_sendGetUserListEvent()
 		"player-disconnected":
 			_deleteUserFromList(response.data.id)
