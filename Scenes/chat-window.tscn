@@ -93,6 +93,14 @@ offset_right = 75.0
 offset_bottom = 534.0
 text = "VOLVER"
 
+[node name="Invitar" type="Button" parent="."]
+layout_mode = 0
+offset_left = 858.0
+offset_top = 502.0
+offset_right = 923.0
+offset_bottom = 533.0
+text = "Invitar"
+
 [connection signal="toggled" from="VBoxContainer/ConnectButton" to="." method="_on_connect_toggled"]
 [connection signal="pressed" from="VBoxContainer/Actualizar" to="." method="_on_actualizar_pressed"]
 [connection signal="text_submitted" from="VBoxContainer/Commands/InputMessage" to="." method="_on_input_submitted"]
@@ -103,3 +111,4 @@ text = "VOLVER"
 [connection signal="pressed" from="VBoxContainer2/AcceptButton" to="." method="_on_accept_button_pressed"]
 [connection signal="pressed" from="VBoxContainer2/RejectButton" to="." method="_on_reject_button_pressed"]
 [connection signal="pressed" from="VOLVER" to="." method="_on_volver_pressed"]
+[connection signal="pressed" from="Invitar" to="." method="_on_invitar_pressed"]

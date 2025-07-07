@@ -347,3 +347,8 @@ func _on_actualizar_pressed() -> void:
 	_sendToChatDisplay("Solicitando lista actual de jugadores...")
 	_sendGetUserListEvent()
 	_sendToChatDisplay("Lista actualizada!!!!")
+
+
+func _on_invitar_pressed() -> void:
+	
+	_on_invite_button_pressed()
