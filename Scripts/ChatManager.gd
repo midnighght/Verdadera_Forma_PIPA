@@ -78,7 +78,7 @@ func _on_web_socket_client_message_received(message: String):
 		"send-public-message":
 			_sendToChatDisplay("You: %s" % response.data.message)
 			
-		"get-connected-players", "online-players":
+		"get-connected-players":
 			print("DEBUG players list → ", response.data)
 
 			var raw = response.data
