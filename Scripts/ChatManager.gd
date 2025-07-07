@@ -154,8 +154,8 @@ func _on_web_socket_client_message_received(message: String):
 			if get_tree().current_scene.has_method("apply_remote_event"):
 				get_tree().current_scene.apply_remote_event(received_data)
 				
-		"send-match-request":
-			$VBoxContainer2.visible = true
+		##"send-match-request":
+			
 		"cancel-match-request":
 			$VBoxContainer2.visible=true
 			_sendToChatDisplay("El jugador %s canceló la solicitud de partida." % response.data.playerId)
