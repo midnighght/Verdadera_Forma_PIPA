@@ -4,6 +4,8 @@ var match_id = ""
 var oponente = ""
 var my_id = ""
 var players_by_id = {}
+var current_popup: ConfirmationDialog = null
+var verdaderaForma_instance: Node = null
 @export var mi_nombre: String =""
 
 # URL de conexión
@@ -124,27 +126,100 @@ func _on_web_socket_client_message_received(message: String):
 			_sendGetUserListEvent()
 		"player-disconnected":
 			_deleteUserFromList(response.data.id)
+		#match making
 		"match-request-received":
-			_sendToChatDisplay("¡%s quiere jugar contigo!" % response.data.name)
-			# Guardar el nombre del jugador que te invitó
-			invitacion_recibida = response.data.name
-	
-			# Mostrar botones de aceptar/rechazar
-			$VBoxContainer2.visible=true
-		
+			var from_player = response.data.playerId
+			_show_ready_popup(from_player)
+		"match-rejected":
+			var from = players_by_id[response.data.playerId]
+			_sendToChatDisplay("%s rechazó tu solicitud de partida." % from)
+			$VBoxContainer2.visible=false
+		"match-accepted":
+			var connect_event = {
+			"event": "connect-match"
+			}
+			_client.send(JSON.stringify(connect_event))
+		"players-ready":
+			print("Jugadores listos, enviando ping...")
+			var ping_event = {
+				"event": "ping-match"
+			}
+			_client.send(JSON.stringify(ping_event))		
 		"match-start":
-			_sendToChatDisplay("¡La partida ha comenzado con %s!" % response.data.opponent.name)
+			_sendToChatDisplay("Partida iniciada.")
+			_start_game()
+		"receive-game-data":
+			var received_data = response.data
 			
-			# Guardamos datos si quieres hacer algo más adelante
-			match_id = response.data.matchId
-			oponente = response.data.opponent.name
-			
-			# Cargar el microjuego (ejemplo con tu escena Pescalo)
-			get_tree().change_scene_to_file("res://Scenes/SinglePlayerPlay.tscn")
+			if get_tree().current_scene.has_method("apply_remote_event"):
+				get_tree().current_scene.apply_remote_event(received_data)
+				
+		"send-match-request":
+			$VBoxContainer2.visible = true
+		"cancel-match-request":
+			$VBoxContainer2.visible=true
+			_sendToChatDisplay("El jugador %s canceló la solicitud de partida." % response.data.playerId)
+			if current_popup:
+				current_popup.queue_free()
+				current_popup = null
+				
+		"match-rejected":
+			_sendToChatDisplay("%s rechazó tu solicitud de partida." % response.data.playerId)
+			if current_popup:
+				current_popup.queue_free()
+				current_popup = null
+		"finish-game":
+			verdaderaForma_instance.show_victory_screen()
+		"game-ended":
+			print(response.msg)
+			_sendToChatDisplay(response.msg)
+			verdaderaForma_instance.show_end_popup(false)
+		"close-match":
+			print(response.msg)
+
+func _start_game():
+	var juego = preload("res://Scenes/SinglePlayerPlay.tscn").instantiate()
+	juego.multijugador = true
+	juego.chat_instance = self
+	get_tree().root.add_child(juego)
+	self.visible = false
+	get_tree().current_scene = juego
+
+func _show_ready_popup(from_player: String):
+	var popup = ConfirmationDialog.new()
+	popup.dialog_text = "%s quiere comenzar una partida. ¿Aceptar?" % players_by_id[from_player]
+	popup.get_ok_button().text = "Aceptar"
+	popup.get_cancel_button().text = "Rechazar"
+	
+	popup.connect("confirmed", func ():
+		var accept_event = {
+			"event": "accept-match",
+			"data": {
+				"id": from_player
+			}
+		}
+		_client.send(JSON.stringify(accept_event))
 		
+		var connect_event = {
+			"event": "connect-match"
+		}
+		_client.send(JSON.stringify(connect_event))
+	)
+	popup.connect("canceled", func ():
+		var reject_event = {
+			"event": "reject-match"
+		}
+		_client.send(JSON.stringify(reject_event))
+	)
+	current_popup = popup
+	add_child(popup)
+	popup.popup_centered()
+
+
 
 # Señales de la UI
 # Cuando se envia un mensaje desde el input
+
 func _on_input_submitted(message:String): 
 	if input_message.text == "":
 		return
