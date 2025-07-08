@@ -231,13 +231,15 @@ func die():
 	
 	print(get_tree().current_scene.scene_file_path)
 	if get_tree().current_scene.scene_file_path == "res://Scenes/MultiPlayerPlay.tscn":
-		var chat_instance = get_node("res://Scenes/chat-window.tscn")
-		
-		not_sent=false
-		chat_instance._send_death()
-		print("muerte enviada")
-		get_tree().change_scene_to_file("res://Scenes/FinalPerder.tscn")
-		
+		var chat_instance = get_node("/root/chat-window")
+		if chat_instance != null:
+			not_sent = false
+			chat_instance._send_death()
+			print("muerte enviada")
+		else:
+			print("⚠️ No se encontró el nodo 'chat-window'")
+
+
 	else:
 		pause_menu.call("disable_pause_menu")
 		gameover.call("death") # Esto llama a la función de tu nodo "Gameover"
