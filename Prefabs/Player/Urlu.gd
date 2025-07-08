@@ -226,7 +226,7 @@ func die():
 	var current_scene_path = get_tree().current_scene.scene_file_path
 	var multiplayer_scene_path = "res://Scenes/MultiPlayerPlay.tscn" # Asegúrate de que esta ruta sea correcta
 
-	if current_scene_path == multiplayer_scene_path:
+	if main_control_ref and current_scene_path == multiplayer_scene_path:
 		print("DEBUG: Jugador murió en la escena multijugador. Notificando al servidor.")
 		# Envía un evento de juego indicando que ESTE jugador ha muerto
 		main_control_ref.sendGameData({"is_dead": true, "player_id": main_control_ref.my_id})
