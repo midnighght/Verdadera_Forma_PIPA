@@ -296,8 +296,14 @@ func _deleteUserFromList(userId: String):
 
 
 func _on_invite_button_pressed() -> void:
-	oponent_id = player_list.get_selected_items()
 	
+	var selected = player_list.get_selected_items()
+	
+	if selected.size() == 0:
+		_sendToChatDisplay("Selecciona un jugador primero.")
+		return
+
+	oponent_id = player_list.get_item_text
 	if oponent_id != "":
 		send_ready_request(oponent_id)
 
