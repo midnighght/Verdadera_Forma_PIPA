@@ -1,4 +1,6 @@
 extends Node2D
+var chat_instance: Control
+
 func _ready():
 	print("🚀 El juego se ha cargado correctamente")
 

@@ -6,6 +6,7 @@ var my_id = ""
 var players_by_id = {}
 var current_popup: ConfirmationDialog = null
 var verdaderaForma_instance: Node = null
+
 @export var mi_nombre: String =""
 
 # URL de conexión
