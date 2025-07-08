@@ -296,22 +296,11 @@ func _deleteUserFromList(userId: String):
 
 
 func _on_invite_button_pressed() -> void:
-	var selected = player_list.get_selected_items()
+	oponent_id = player_list.get_selected_items()
 	
-	if selected.size() == 0:
-		_sendToChatDisplay("Selecciona un jugador primero.")
-		return
+	if oponent_id != "":
+		send_ready_request(oponent_id)
 
-	var target_name = player_list.get_item_text(selected[0])
-	var payload = {
-		"event": "send-match-request",
-		"data": {
-			"playerName": target_name
-
-		}
-	}
-	_client.send(JSON.stringify(payload))
-	_sendToChatDisplay("Solicitud enviada a %s" % target_name)
 
 func _on_accept_button_pressed():
 	var payload = {
@@ -360,6 +349,5 @@ func send_ready_request(oponent_id: String):
 	_client.send(JSON.stringify(dataToSend))
 	
 func _on_invitar_pressed() -> void:
+	_on_invite_button_pressed()
 	
-	if oponent_id != "":
-		send_ready_request(oponent_id)
