@@ -154,7 +154,7 @@ func _on_web_socket_client_message_received(message: String):
 		"receive-game-data":
 			var received_data = response.data
 			
-			if verdaderaForma_instance and urlu.has_method("apply_remote_event"):
+			if urlu.has_method("apply_remote_event"):
 				urlu.apply_remote_event(response.data)
 			
 			#if received_data.has("subEvent") and received_data.subEvent == "defeat":

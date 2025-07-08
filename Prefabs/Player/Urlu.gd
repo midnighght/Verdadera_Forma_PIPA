@@ -245,13 +245,21 @@ func die():
 		pause_menu.call("disable_pause_menu")
 		gameover.call("death") # Esto llama a la función de tu nodo "Gameover"
 	
-func apply_remote_event(data):
-	match (data):
-		
-		"death":
-			chat_instance.on_opponent_defeated()
-		"surrender":
-			chat_instance.on_opponent_defeated()
+func apply_remote_event(data: Dictionary):
+	if not data.has("subEvent"):
+		print("⚠️ subEvent no incluido en el paquete:", data)
+		return
+
+	var tipo = data.subEvent
+	match tipo:
+		"death", "surrender":
+			if chat_instance and chat_instance.has_method("on_opponent_defeated"):
+				chat_instance.on_opponent_defeated()
+			else:
+				print("⚠️ chat_instance no conectado")
+		_:
+			print("subEvent no reconocido:", tipo)
+
 	
 func shoot():
 	var arrow = ARROW_PATH.instantiate()
