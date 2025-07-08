@@ -156,6 +156,8 @@ func _on_web_socket_client_message_received(message: String):
 			
 			if verdaderaForma_instance and verdaderaForma_instance.has_method("apply_remote_event"):
 				verdaderaForma_instance.apply_remote_event(response.data)
+			if received_data == "defeat":
+				receiveData(received_data)
 				
 		"send-match-request":
 			$VBoxContainer2/RejectButton.visible=true
@@ -184,6 +186,19 @@ func _on_web_socket_client_message_received(message: String):
 		"close-match":
 			print(response.msg)
 
+func receiveData(datos):
+	var msg = ""
+	if datos.has("defeat"):
+		msg = {
+			"event": "finish-game"
+	}
+	_client.send(JSON.stringify(msg))
+	if datos.has("rocket"):
+		get_parent().player.energy -= datos["rocket"]
+	if datos.has("HP"):
+		get_parent().get_node("UI/enemy").set_energy(datos["HP"])
+		
+		
 
 func _start_game():
 	var juego = preload("res://Scenes/MultiPlayerPlay.tscn").instantiate()
@@ -200,7 +215,7 @@ func _send_death():
 	var message = {
 		"event": "send-game-data",
 		"data": {
-			"subEvent": "death"
+			"data": "defeat"
 		}
 	}
 	_client.send(JSON.stringify(message))
