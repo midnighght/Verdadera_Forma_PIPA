@@ -252,13 +252,14 @@ func apply_remote_event(data: Dictionary):
 
 	var tipo = data.subEvent
 	match tipo:
-		"death", "surrender":
+		"death", "surrender", "defeat":
 			if chat_instance and chat_instance.has_method("on_opponent_defeated"):
 				chat_instance.on_opponent_defeated()
 			else:
-				print("⚠️ chat_instance no conectado")
+				print("⚠️ chat_instance no definido o no tiene método")
 		_:
 			print("subEvent no reconocido:", tipo)
+
 
 	
 func shoot():
