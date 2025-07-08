@@ -38,5 +38,6 @@ PAUSE_PATH = NodePath("../CanvasLayer 32/MenuPausa")
 [node name="MenuPausa" parent="CanvasLayer 32" instance=ExtResource("4_hnr8y")]
 
 [node name="HealthBar" parent="CanvasLayer 32" instance=ExtResource("3_c4lgr")]
-position = Vector2(1744, 544)
+position = Vector2(1807, 375)
+scale = Vector2(0.645, 0.645)
 PLAYER_PATH = NodePath("../../Urlu")
