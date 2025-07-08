@@ -170,14 +170,27 @@ func _on_web_socket_client_message_received(message: String):
 				current_popup.queue_free()
 				current_popup = null
 		"finish-game":
-			
-			verdaderaForma_instance.show_victory_screen()
+			# Este evento lo recibes cuando ERES el ganador
+			_handle_game_end(true, response.msg)
 		"game-ended":
-			print(response.msg)
-			_sendToChatDisplay(response.msg)
-			verdaderaForma_instance.show_end_popup(false)
+			#print(response.msg)
+			#_sendToChatDisplay(response.msg)
+			#verdaderaForma_instance.show_end_popup(false)
+			
+			# Este evento lo recibes cuando ERES el perdedor
+			_handle_game_end(false, response.msg)
+			
 		"close-match":
 			print(response.msg)
+			_sendToChatDisplay(response.msg)
+			
+			# La limpieza y vuelta al lobby se manejará aquí
+			if verdaderaForma_instance:
+				verdaderaForma_instance.queue_free() # Liberar la escena del juego
+				verdaderaForma_instance = null
+			self.visible = true # Mostrar el UI del chat
+			get_tree().change_scene_to_file("res://Scenes/PONERnombreUSUARIO.tscn") # Vuelve a la escena de selección de nombre
+
 
 func _start_game():
 	var juego = preload("res://Scenes/MultiPlayerPlay.tscn").instantiate()
@@ -363,6 +376,34 @@ func _on_accept_button_pressed():
 	_sendToChatDisplay("Aceptaste la partida con %s" % invitacion_recibida)
 	_ocultar_botones_match()
 
+# En ChatManager.gd, después de tus funciones existentes, pero al mismo nivel de indentación:
+
+func _handle_game_end(is_winner: bool, message: String):
+	_sendToChatDisplay(message)
+	print("DEBUG: Partida terminada. Ganador:", is_winner, " Mensaje:", message)
+
+	if verdaderaForma_instance:
+		if is_winner:
+			if verdaderaForma_instance.has_method("show_victory_screen"):
+				verdaderaForma_instance.show_victory_screen()
+			else:
+				print("ADVERTENCIA: verdaderaForma_instance no tiene el método 'show_victory_screen'.")
+		else: # Es el perdedor
+			if verdaderaForma_instance.has_method("show_end_popup"):
+				verdaderaForma_instance.show_end_popup(false) # false indica que no es el ganador
+			else:
+				print("ADVERTENCIA: verdaderaForma_instance no tiene el método 'show_end_popup'.")
+	else:
+		print("ADVERTENCIA: verdaderaForma_instance es null al intentar manejar el fin de la partida.")
+
+	# Opcional: Después de mostrar las pantallas, podrías añadir un retardo
+	# y luego volver al lobby o liberar la escena del juego.
+	# Por ahora, se mantiene la lógica de "close-match" para la limpieza y vuelta al lobby.
+
+
+
+
+
 func _on_reject_button_pressed():
 	var payload = {
 		"event": "reject-match",
@@ -400,4 +441,6 @@ func send_ready_request(oponent_id: String):
 	
 func _on_invitar_pressed() -> void:
 	_on_invite_button_pressed()
+	
+	
 	
