@@ -226,7 +226,7 @@ func die():
 		not_sent=false
 		chat_instance
 		print("muerte enviada")
-	#cargar escena gameover
+	get_tree().change_scene_to_file("res://Scenes/FinalPerder.tscn")
 func apply_remote_event(data):
 	match (data.subEvent):
 		
