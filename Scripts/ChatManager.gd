@@ -170,6 +170,7 @@ func _on_web_socket_client_message_received(message: String):
 				current_popup.queue_free()
 				current_popup = null
 		"finish-game":
+			
 			verdaderaForma_instance.show_victory_screen()
 		"game-ended":
 			print(response.msg)
@@ -188,7 +189,20 @@ func _start_game():
 	get_tree().current_scene = juego
 
 	
-	
+func _send_death():
+	var message = {
+		"event": "send-game-data",
+		"data": {
+			"subEvent": "death"
+		}
+	}
+	_client.send(JSON.stringify(message))
+
+func on_opponent_defeated():
+	var event = {
+		"event": "finish-game"
+	}
+	_client.send(JSON.stringify(event))
 	
 	
 func _show_ready_popup(from_player: String):
@@ -220,7 +234,18 @@ func _show_ready_popup(from_player: String):
 	current_popup = popup
 	add_child(popup)
 	popup.popup_centered()
+func _send_rematch_request():
+	var event = {
+		"event": "send-rematch-request"
+	}
+	_client.send(JSON.stringify(event))
 
+func _send_quit_match():
+	var event = {
+		"event": "quit-match"
+	}
+	_client.send(JSON.stringify(event))
+	
 
 
 # Señales de la UI
