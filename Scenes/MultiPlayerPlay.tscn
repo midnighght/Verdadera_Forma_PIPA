@@ -1,5 +1,6 @@
-[gd_scene load_steps=14 format=3 uid="uid://ejgetdj6bmd1"]
+[gd_scene load_steps=15 format=3 uid="uid://c5lehfnge3m37"]
 
+[ext_resource type="Script" uid="uid://ca2y0xvpytlv8" path="res://Scenes/multi_player_play.gd" id="1_p7kg0"]
 [ext_resource type="PackedScene" uid="uid://d0kmghqqc55qm" path="res://Prefabs/Player/Player.tscn" id="1_r7qyx"]
 [ext_resource type="Script" uid="uid://dgtjqsjm1ulre" path="res://Scripts/wagon_spawner.gd" id="2_p7kg0"]
 [ext_resource type="PackedScene" uid="uid://dq7tjq3tcp7cp" path="res://Prefabs/Wagons/Wagon1.tscn" id="3_tp2qj"]
@@ -17,6 +18,7 @@
 size = Vector2(512, 2048)
 
 [node name="SinglePlayerPlay" type="Node2D"]
+script = ExtResource("1_p7kg0")
 
 [node name="Player" parent="." instance=ExtResource("1_r7qyx")]
 position = Vector2(192, 576)
