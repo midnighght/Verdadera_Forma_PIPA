@@ -213,7 +213,7 @@ func inShadow():
 
 #region ----------------Other  Functions----------------
 func take_damage(damage: float):
-	SANITY -= damage
+	SANITY -= damage*0.75
 	SANITY = clamp(SANITY, 0, MAX_SANITY) #keep value in range
 #	$AnimationPlayer.play("hurt")
 
