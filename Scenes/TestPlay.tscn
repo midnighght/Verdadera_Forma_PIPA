@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://de1dg1tfntqd0"]
+[gd_scene load_steps=10 format=3 uid="uid://de1dg1tfntqd0"]
 
 [ext_resource type="PackedScene" uid="uid://bbhbyc5imq54j" path="res://Prefabs/Platforms/platformA3.tscn" id="1_tnq4l"]
 [ext_resource type="PackedScene" uid="uid://xbkqp5rf11x0" path="res://Prefabs/Platforms/platformA2.tscn" id="2_wqdgv"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://c7mkfxab57x27" path="res://Prefabs/Bat/Bat.tscn" id="6_g0num"]
 [ext_resource type="PackedScene" uid="uid://dpwjy3dah64mh" path="res://Prefabs/Items/Antidote.tscn" id="7_bv12a"]
 [ext_resource type="PackedScene" uid="uid://cwjnun1tytdmm" path="res://Prefabs/UI/menu_pausa.tscn" id="7_hqhcl"]
+[ext_resource type="AudioStream" uid="uid://cctmyfjllvv3h" path="res://Assets/sound/Music/y2mate.com - LOrbrie.mp3" id="8_hqhcl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tnq4l"]
 size = Vector2(136, 25.4509)
@@ -85,3 +86,7 @@ process_mode = 3
 
 [node name="MenuPausa" parent="CanvasLayer" instance=ExtResource("7_hqhcl")]
 metadata/_edit_use_anchors_ = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_hqhcl")
+autoplay = true

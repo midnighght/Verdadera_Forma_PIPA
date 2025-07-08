@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://c5lehfnge3m37"]
+[gd_scene load_steps=16 format=3 uid="uid://c5lehfnge3m37"]
 
 [ext_resource type="Script" uid="uid://ca2y0xvpytlv8" path="res://Scenes/multi_player_play.gd" id="1_p7kg0"]
 [ext_resource type="PackedScene" uid="uid://d0kmghqqc55qm" path="res://Prefabs/Player/Player.tscn" id="1_r7qyx"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://cdr76niamfj3e" path="res://Prefabs/Wagons/Wagon8.tscn" id="10_tlrc0"]
 [ext_resource type="PackedScene" uid="uid://c2xmkk3ye0n4h" path="res://Prefabs/Wagons/Wagon0.tscn" id="11_2f2ya"]
 [ext_resource type="Script" uid="uid://b4c4gorrcgp1r" path="res://Scripts/world_border.gd" id="12_4dlpg"]
+[ext_resource type="AudioStream" uid="uid://dmwdp2e08ga2t" path="res://Assets/sound/Music/Sin título.mp3" id="14_tp2qj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ekhkr"]
 size = Vector2(512, 2048)
@@ -38,3 +39,7 @@ PLAYER_PATH = NodePath("../Player")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="World Border"]
 position = Vector2(-256, 512)
 shape = SubResource("RectangleShape2D_ekhkr")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("14_tp2qj")
+autoplay = true
