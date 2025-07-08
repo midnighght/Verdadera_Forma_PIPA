@@ -76,6 +76,7 @@ offset_bottom = 439.564
 scale = Vector2(1.23472, 1.17642)
 
 [node name="AcceptButton" type="Button" parent="VBoxContainer2"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 4
 text = "ACEPTAR"
@@ -83,7 +84,7 @@ text = "ACEPTAR"
 [node name="RejectButton" type="Button" parent="VBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 4
-text = "DENEGAR"
+text = "CANCELAR"
 
 [node name="VOLVER" type="Button" parent="."]
 layout_mode = 2

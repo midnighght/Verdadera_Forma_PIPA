@@ -133,7 +133,7 @@ func _on_web_socket_client_message_received(message: String):
 		"match-rejected":
 			var from = players_by_id[response.data.playerId]
 			_sendToChatDisplay("%s rechazó tu solicitud de partida." % from)
-			$VBoxContainer2.visible=false
+			
 		"match-accepted":
 			var connect_event = {
 			"event": "connect-match"
@@ -144,7 +144,8 @@ func _on_web_socket_client_message_received(message: String):
 			var ping_event = {
 				"event": "ping-match"
 			}
-			_client.send(JSON.stringify(ping_event))		
+			_client.send(JSON.stringify(ping_event))
+			
 		"match-start":
 			_sendToChatDisplay("Partida iniciada.")
 			_start_game()
@@ -154,10 +155,9 @@ func _on_web_socket_client_message_received(message: String):
 			if get_tree().current_scene.has_method("apply_remote_event"):
 				get_tree().current_scene.apply_remote_event(received_data)
 				
-		##"send-match-request":
-			
+		"send-match-request":
+			$VBoxContainer2/RejectButton.visible=true
 		"cancel-match-request":
-			$VBoxContainer2.visible=true
 			_sendToChatDisplay("El jugador %s canceló la solicitud de partida." % response.data.playerId)
 			if current_popup:
 				current_popup.queue_free()
