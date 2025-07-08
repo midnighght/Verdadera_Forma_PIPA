@@ -69,6 +69,7 @@ position = Vector2(2816, 512)
 
 [node name="Antidote" parent="." instance=ExtResource("4_sflam")]
 position = Vector2(2816, 448)
+BAT_PATH = NodePath("../Bat")
 
 [node name="Marker2D" type="Marker2D" parent="."]
 position = Vector2(3072, 0)

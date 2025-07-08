@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://dpwjy3dah64mh"]
 
 [ext_resource type="Script" uid="uid://bsmgeu8eefr86" path="res://Prefabs/Items/antidote.gd" id="1_kx3b2"]
-[ext_resource type="Texture2D" uid="uid://cttojxl4uvx3v" path="res://Assets/sprites/sprites.png" id="2_42koc"]
+[ext_resource type="Texture2D" uid="uid://mftugvkyp5o1" path="res://Assets/sprites/Misc/antidote.png" id="2_kx3b2"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ygctu"]
 
@@ -10,11 +10,9 @@ script = ExtResource("1_kx3b2")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
-scale = Vector2(4, 4)
-texture = ExtResource("2_42koc")
-hframes = 8
-vframes = 5
-frame = 27
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_kx3b2")
+offset = Vector2(96.22, -81.595)
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 8

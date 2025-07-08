@@ -57,9 +57,6 @@ collision_layer = 2
 position = Vector2(1792, 8)
 shape = SubResource("RectangleShape2D_bo8y4")
 
-[node name="Bat" parent="RigidBody2D" instance=ExtResource("1_ngmv8")]
-position = Vector2(1536, -888)
-
 [node name="PlatformA3" parent="." instance=ExtResource("1_mojvh")]
 position = Vector2(2304, 256)
 
@@ -77,9 +74,13 @@ position = Vector2(3136, 576)
 
 [node name="Antidote" parent="." instance=ExtResource("4_fqe46")]
 position = Vector2(2304, 192)
+BAT_PATH = NodePath("../Bat")
 
 [node name="PlatformA6" parent="." instance=ExtResource("1_mojvh")]
 position = Vector2(320, 256)
+
+[node name="Bat" parent="." instance=ExtResource("1_ngmv8")]
+position = Vector2(1536, 192)
 
 [node name="Marker2D" type="Marker2D" parent="."]
 position = Vector2(3584, 0)

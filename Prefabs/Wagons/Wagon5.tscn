@@ -61,10 +61,10 @@ position = Vector2(2752, 704)
 
 [node name="Antidote" parent="." instance=ExtResource("4_ckl6g")]
 position = Vector2(320, 896)
+BAT_PATH = NodePath("../Bat")
 
 [node name="Marker2D" type="Marker2D" parent="."]
 position = Vector2(3072, 0)
 
 [node name="Bat" parent="." instance=ExtResource("1_mmb4j")]
 position = Vector2(1536, 128)
-PATROL_RANGE = 400

@@ -35,7 +35,7 @@ var main_control_ref: Control = null
 @onready var pause_menu = get_node(PAUSE_PATH)
 @export var MAX_SANITY: 			float = 360
 @export var SANITY: 				float = 360
-@export var SANITY_DRAIN_PASSIVE:	float = 0.2
+@export var SANITY_DRAIN_PASSIVE:	float = 0.18
 @export var SANITY_DRAIN_MOON:		float = 1.0
 
 #arrow variables
@@ -221,7 +221,7 @@ func inShadow():
 
 #region ----------------Other  Functions----------------
 func take_damage(damage: float):
-	SANITY -= damage*2
+	SANITY -= damage
 	SANITY = clamp(SANITY, 0, MAX_SANITY) #keep value in range
 #	$AnimationPlayer.play("hurt")
 var not_sent=true

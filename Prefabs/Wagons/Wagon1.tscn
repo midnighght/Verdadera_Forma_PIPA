@@ -57,6 +57,7 @@ position = Vector2(2240, 512)
 
 [node name="Antidote" parent="." instance=ExtResource("4_dngc6")]
 position = Vector2(2240, 448)
+BAT_PATH = NodePath("../Bat")
 
 [node name="Marker2D" type="Marker2D" parent="."]
 position = Vector2(2560, 0)

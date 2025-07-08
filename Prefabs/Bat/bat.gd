@@ -18,6 +18,8 @@ var dying: bool = false
 var marker_right: Vector2
 var marker_left: Vector2
 
+signal death
+
 func initialize():
 	start_position = global_position
 	marker_right 	= get_parent().get_node("MarkerRight").global_position
@@ -68,6 +70,7 @@ func _on_area_entered(area):
 	death_timer.start(1)
 
 func _on_death():
+	emit_signal("death")
 	queue_free()
 
 func _on_body_entered(body):

@@ -61,6 +61,7 @@ position = Vector2(256, 768)
 
 [node name="Antidote" parent="." instance=ExtResource("4_pxfrc")]
 position = Vector2(2560, 320)
+BAT_PATH = NodePath("../Bat")
 
 [node name="PlatformA1" parent="." instance=ExtResource("1_f5540")]
 position = Vector2(704, 640)
