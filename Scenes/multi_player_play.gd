@@ -1,4 +1,7 @@
 extends Node2D
+func _ready():
+	print("🚀 El juego se ha cargado correctamente")
+
 func show_victory_screen():
 	print("¡Victoria!")
 
