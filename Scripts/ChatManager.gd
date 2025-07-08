@@ -154,7 +154,7 @@ func _on_web_socket_client_message_received(message: String):
 		"receive-game-data":
 			var received_data = response.data
 			
-			if urlu.has_method("apply_remote_event"):
+			if verdaderaForma_instance and urlu.has_method("apply_remote_event"):
 				urlu.apply_remote_event(response.data)
 			
 			#if received_data.has("subEvent") and received_data.subEvent == "defeat":
@@ -182,7 +182,7 @@ func _on_web_socket_client_message_received(message: String):
 		"game-ended":
 			print(response.msg)
 			_sendToChatDisplay(response.msg)
-			verdaderaForma_instance.show_end_popup(false)
+		
 			
 		"close-match":
 			print(response.msg)
@@ -224,10 +224,12 @@ func _send_death():
 	var message = {
 		"event": "send-game-data",
 		"data": {
-			"data": "defeat"
+			"subEvent": "defeat"
 		}
 	}
 	_client.send(JSON.stringify(message))
+
+
 
 func on_opponent_defeated():
 	var event = {
