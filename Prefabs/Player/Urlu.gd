@@ -216,17 +216,22 @@ func inShadow():
 
 #region ----------------Other  Functions----------------
 func take_damage(damage: float):
-	SANITY -= damage*0.75
+	SANITY -= damage*5
 	SANITY = clamp(SANITY, 0, MAX_SANITY) #keep value in range
 #	$AnimationPlayer.play("hurt")
 var not_sent=true
 func die():
 	
-	if chat_instance and not_sent:
+	if get_tree().current_scene.scene_file_path == "res://Scenes/multi_player_play.tscn":
 		not_sent=false
 		chat_instance
 		print("muerte enviada")
-	get_tree().change_scene_to_file("res://Scenes/FinalPerder.tscn")
+		get_tree().change_scene_to_file("res://Scenes/FinalPerder.tscn")
+		
+	else:
+		pause_menu.call("disable_pause_menu")
+		gameover.call("death") # Esto llama a la función de tu nodo "Gameover"
+	
 func apply_remote_event(data):
 	match (data.subEvent):
 		
