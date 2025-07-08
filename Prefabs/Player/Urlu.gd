@@ -35,8 +35,8 @@ var main_control_ref: Control = null
 @onready var pause_menu = get_node(PAUSE_PATH)
 @export var MAX_SANITY: 			float = 360
 @export var SANITY: 				float = 360
-@export var SANITY_DRAIN_PASSIVE:	float = 0.1
-@export var SANITY_DRAIN_MOON:		float = 0.5
+@export var SANITY_DRAIN_PASSIVE:	float = 0.06
+@export var SANITY_DRAIN_MOON:		float = 0.4
 
 #arrow variables
 @export var ARROW_PATH: PackedScene
