@@ -236,6 +236,8 @@ func die():
 			not_sent = false
 			chat_instance._send_death()
 			print("muerte enviada")
+			chat_instance.on_opponent_defeated()
+			get_tree().change_scene_to_file("res://Scenes/FinalPerder.tscn")
 		else:
 			print("⚠️ No se encontró el nodo 'chat-window'")
 
