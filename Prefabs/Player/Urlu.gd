@@ -1,4 +1,9 @@
 extends CharacterBody2D
+@onready var _client: WebSocketClient = $WebSocketClient
+
+
+
+
 #region ----------CONSTANTS & VAR DECLARATIONS----------
 #movement constants
 @export var GRAVITY: 			 int  =   80
@@ -220,11 +225,16 @@ func take_damage(damage: float):
 	SANITY = clamp(SANITY, 0, MAX_SANITY) #keep value in range
 #	$AnimationPlayer.play("hurt")
 var not_sent=true
+
 func die():
+	
+	
 	print(get_tree().current_scene.scene_file_path)
 	if get_tree().current_scene.scene_file_path == "res://Scenes/MultiPlayerPlay.tscn":
+		var chat_instance = get_node("res://Scenes/chat-window.tscn")
+		
 		not_sent=false
-		chat_instance
+		chat_instance._send_death()
 		print("muerte enviada")
 		get_tree().change_scene_to_file("res://Scenes/FinalPerder.tscn")
 		

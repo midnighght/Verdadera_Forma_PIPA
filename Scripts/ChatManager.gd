@@ -174,6 +174,7 @@ func _on_web_socket_client_message_received(message: String):
 				current_popup = null
 		"finish-game":
 			# Este evento lo recibes cuando ERES el ganador
+			
 			verdaderaForma_instance.show_victory_screen()
 		"game-ended":
 			print(response.msg)
@@ -182,7 +183,6 @@ func _on_web_socket_client_message_received(message: String):
 			
 		"close-match":
 			print(response.msg)
-
 
 
 func _start_game():
