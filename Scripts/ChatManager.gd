@@ -303,7 +303,7 @@ func _on_invite_button_pressed() -> void:
 		_sendToChatDisplay("Selecciona un jugador primero.")
 		return
 
-	oponent_id = player_list.get_item_text
+	oponent_id = player_list.get_item_text(selected[0])
 	if oponent_id != "":
 		send_ready_request(oponent_id)
 
