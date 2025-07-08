@@ -6,7 +6,7 @@ var my_id = ""
 var players_by_id = {}
 var current_popup: ConfirmationDialog = null
 var verdaderaForma_instance: Node = null
-
+var urlu: Node = null
 @export var mi_nombre: String =""
 
 # URL de conexión
@@ -154,8 +154,8 @@ func _on_web_socket_client_message_received(message: String):
 		"receive-game-data":
 			var received_data = response.data
 			
-			if verdaderaForma_instance and verdaderaForma_instance.has_method("apply_remote_event"):
-				verdaderaForma_instance.apply_remote_event(response.data)
+			if verdaderaForma_instance and urlu.has_method("apply_remote_event"):
+				urlu.apply_remote_event(response.data)
 			if received_data.has("subEvent") and received_data.subEvent == "defeat":
 				receiveData(received_data)
 				
@@ -201,14 +201,17 @@ func receiveData(datos):
 		
 
 func _start_game():
-	var juego = preload("res://Scenes/MultiPlayerPlay.tscn").instantiate()
-	verdaderaForma_instance = juego  # Ahora guardas la referencia
+	var escena_mp := preload("res://Scenes/MultiPlayerPlay.tscn").instantiate()
+	verdaderaForma_instance = escena_mp  # Guardamos la raíz de la escena
 
-	juego.chat_instance = self  # Si quieres que el juego tenga acceso al chat
-
-	get_tree().root.add_child(juego)
+	get_tree().root.add_child(escena_mp)
 	self.visible = false
-	get_tree().current_scene = juego
+	get_tree().current_scene = escena_mp
+
+# Ahora accedemos a Urlu dentro del nuevo árbol
+	var urlu := escena_mp.get_node("Player/Urlu")
+	urlu.chat_instance = self  # Si Urlu tiene acceso al chat
+
 
 	
 func _send_death():
