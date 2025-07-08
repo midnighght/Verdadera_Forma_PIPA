@@ -246,7 +246,7 @@ func die():
 		gameover.call("death") # Esto llama a la función de tu nodo "Gameover"
 	
 func apply_remote_event(data):
-	match (data.subEvent):
+	match (data):
 		
 		"death":
 			chat_instance.on_opponent_defeated()
