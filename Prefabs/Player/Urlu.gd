@@ -18,6 +18,8 @@ var on_wall_right:	bool = false
 var on_wall_left:	bool = false
 var is_attacking:	bool = false
 var is_hidden:		bool = false
+var main_control_ref: Control = null
+
 
 #sanity & moon mechanic constants
 @export var MOON_PATH: NodePath
@@ -218,8 +220,24 @@ func take_damage(damage: float):
 #	$AnimationPlayer.play("hurt")
 
 func die():
+	print("DEBUG: Player has died.")
+	
+	# --- NUEVO: Revisa si el jugador está en la escena multijugador ---
+	var current_scene_path = get_tree().current_scene.scene_file_path
+	var multiplayer_scene_path = "res://Scenes/MultiPlayerPlay.tscn" # Asegúrate de que esta ruta sea correcta
+
+	if main_control_ref and current_scene_path == multiplayer_scene_path:
+		print("DEBUG: Jugador murió en la escena multijugador. Notificando al servidor.")
+		# Envía un evento de juego indicando que ESTE jugador ha muerto
+		main_control_ref.sendGameData({"is_dead": true, "player_id": main_control_ref.my_id})
+	elif main_control_ref:
+		print("DEBUG: Jugador murió, pero no en la escena multijugador. No se envía al servidor.")
+	else:
+		print("ADVERTENCIA: main_control_ref es null. No se puede notificar al servidor.")
+	
+	# Lógica de muerte local (siempre se ejecuta, independientemente de si es multijugador o no)
 	pause_menu.call("disable_pause_menu")
-	gameover.call("death")
+	gameover.call("death") # Esto llama a la función de tu nodo "Gameover"
 
 func shoot():
 	var arrow = ARROW_PATH.instantiate()
