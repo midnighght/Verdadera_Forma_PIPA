@@ -179,13 +179,17 @@ func _on_web_socket_client_message_received(message: String):
 			print(response.msg)
 
 func _start_game():
-	var juego = preload("res://Scenes/SinglePlayerPlay.tscn").instantiate()
-	juego.multijugador = true
-	juego.chat_instance = self
-	get_tree().root.add_child(juego)
-	self.visible = false
-	get_tree().current_scene = juego
-
+	#var juego = preload("res://Scenes/MultiPlayerPlay.tscn").instantiate()
+	#juego.multijugador = true
+	#juego.chat_instance = self
+	#get_tree().root.add_child(juego)
+	#self.visible = false
+	#get_tree().current_scene = juego
+	get_tree().change_scene_to_file("res://Scenes/MultiPlayerPlay.tscn")
+	
+	
+	
+	
 func _show_ready_popup(from_player: String):
 	var popup = ConfirmationDialog.new()
 	popup.dialog_text = "%s quiere comenzar una partida. ¿Aceptar?" % players_by_id[from_player]
