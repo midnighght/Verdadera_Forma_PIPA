@@ -1,0 +1,73 @@
+[gd_scene load_steps=7 format=3 uid="uid://clpjhlfn2ftoi"]
+
+[ext_resource type="Script" uid="uid://cbekbiaq1j32n" path="res://Scenes/final_perder.gd" id="1_3g000"]
+[ext_resource type="Texture2D" uid="uid://bqympsgavtk1y" path="res://Assets/sprites/GUI/MainMenuBackground2.png" id="2_5b38c"]
+[ext_resource type="FontFile" uid="uid://d3ac0w56tjm5m" path="res://Assets/fonts/Fonts/bloodcrow.ttf" id="2_asi8g"]
+[ext_resource type="Theme" uid="uid://brhg7qm8u6tf" path="res://Assets/MainTitleButtons.tres" id="4_crf2u"]
+[ext_resource type="Texture2D" uid="uid://dh2aa6puaip6t" path="res://Assets/sprites/GUI/button.png" id="5_byksc"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_q8h3o"]
+font = ExtResource("2_asi8g")
+font_size = 80
+
+[node name="FinalPerder" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 15.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_3g000")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(954, 533)
+texture = ExtResource("2_5b38c")
+
+[node name="Label2" type="Label" parent="."]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 694.0
+offset_top = 259.0
+offset_right = -757.0
+offset_bottom = -619.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Has Perdido"
+label_settings = SubResource("LabelSettings_q8h3o")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainerLeft" type="VBoxContainer" parent="."]
+offset_left = 1493.0
+offset_top = 762.0
+offset_right = 1898.0
+offset_bottom = 1054.0
+size_flags_horizontal = 4
+size_flags_vertical = 3
+alignment = 1
+
+[node name="volver" type="Button" parent="VBoxContainerLeft"]
+layout_mode = 2
+theme = ExtResource("4_crf2u")
+theme_override_colors/font_hover_color = Color(0.439216, 0.14902, 0.105882, 1)
+text = "Volver"
+icon = ExtResource("5_byksc")
+flat = true
+icon_alignment = 1
+
+[node name="Quit" type="Button" parent="VBoxContainerLeft"]
+layout_mode = 2
+theme = ExtResource("4_crf2u")
+theme_override_colors/font_hover_color = Color(0.439216, 0.14902, 0.105882, 1)
+text = "Salir"
+icon = ExtResource("5_byksc")
+flat = true
+icon_alignment = 1
+
+[connection signal="pressed" from="VBoxContainerLeft/volver" to="." method="_on_volver_pressed"]
+[connection signal="pressed" from="VBoxContainerLeft/Quit" to="." method="_on_quit_pressed"]

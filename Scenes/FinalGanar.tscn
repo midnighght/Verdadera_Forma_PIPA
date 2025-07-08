@@ -1,0 +1,73 @@
+[gd_scene load_steps=7 format=3 uid="uid://d2fdq5ljvuxjq"]
+
+[ext_resource type="Script" uid="uid://d4l2r8qtit8eo" path="res://Scenes/final_ganar.gd" id="1_llbjr"]
+[ext_resource type="Texture2D" uid="uid://bqympsgavtk1y" path="res://Assets/sprites/GUI/MainMenuBackground2.png" id="2_63jsa"]
+[ext_resource type="FontFile" uid="uid://d3ac0w56tjm5m" path="res://Assets/fonts/Fonts/bloodcrow.ttf" id="2_gh8d4"]
+[ext_resource type="Theme" uid="uid://brhg7qm8u6tf" path="res://Assets/MainTitleButtons.tres" id="4_7l3iw"]
+[ext_resource type="Texture2D" uid="uid://dh2aa6puaip6t" path="res://Assets/sprites/GUI/button.png" id="5_6jrqg"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ds3rh"]
+font = ExtResource("2_gh8d4")
+font_size = 80
+
+[node name="FinalGanar" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 25.0
+offset_bottom = 15.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_llbjr")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(968, 544)
+texture = ExtResource("2_63jsa")
+
+[node name="Label2" type="Label" parent="."]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 726.0
+offset_top = 275.0
+offset_right = -734.0
+offset_bottom = -680.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Ganaste"
+label_settings = SubResource("LabelSettings_ds3rh")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainerLeft" type="VBoxContainer" parent="."]
+offset_left = 1500.0
+offset_top = 772.0
+offset_right = 1892.0
+offset_bottom = 1048.0
+size_flags_horizontal = 4
+size_flags_vertical = 3
+alignment = 1
+
+[node name="volver" type="Button" parent="VBoxContainerLeft"]
+layout_mode = 2
+theme = ExtResource("4_7l3iw")
+theme_override_colors/font_hover_color = Color(0.439216, 0.14902, 0.105882, 1)
+text = "Volver"
+icon = ExtResource("5_6jrqg")
+flat = true
+icon_alignment = 1
+
+[node name="Quit" type="Button" parent="VBoxContainerLeft"]
+layout_mode = 2
+theme = ExtResource("4_7l3iw")
+theme_override_colors/font_hover_color = Color(0.439216, 0.14902, 0.105882, 1)
+text = "Salir"
+icon = ExtResource("5_6jrqg")
+flat = true
+icon_alignment = 1
+
+[connection signal="pressed" from="VBoxContainerLeft/volver" to="." method="_on_volver_pressed"]
+[connection signal="pressed" from="VBoxContainerLeft/Quit" to="." method="_on_quit_pressed"]
