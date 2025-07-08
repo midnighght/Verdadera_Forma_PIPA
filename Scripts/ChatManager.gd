@@ -158,6 +158,8 @@ func _on_web_socket_client_message_received(message: String):
 				
 		"send-match-request":
 			$VBoxContainer2/RejectButton.visible=true
+			
+		
 		"cancel-match-request":
 			_sendToChatDisplay("El jugador %s canceló la solicitud de partida." % response.data.playerId)
 			if current_popup:
@@ -381,7 +383,8 @@ func _on_accept_button_pressed():
 func _handle_game_end(is_winner: bool, message: String):
 	_sendToChatDisplay(message)
 	print("DEBUG: Partida terminada. Ganador:", is_winner, " Mensaje:", message)
-
+	verdaderaForma_instance.show_victory_screen()
+	
 	if verdaderaForma_instance:
 		if is_winner:
 			if verdaderaForma_instance.has_method("show_victory_screen"):
