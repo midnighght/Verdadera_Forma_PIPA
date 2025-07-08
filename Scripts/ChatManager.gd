@@ -1,7 +1,7 @@
 extends Control
 var invitacion_recibida = ""
 var match_id = ""
-var oponente = ""
+var oponent_id = ""
 var my_id = ""
 var players_by_id = {}
 var current_popup: ConfirmationDialog = null
@@ -129,6 +129,7 @@ func _on_web_socket_client_message_received(message: String):
 		#match making
 		"match-request-received":
 			var from_player = response.data.playerId
+			
 			_show_ready_popup(from_player)
 		"match-rejected":
 			var from = players_by_id[response.data.playerId]
@@ -296,6 +297,7 @@ func _deleteUserFromList(userId: String):
 
 func _on_invite_button_pressed() -> void:
 	var selected = player_list.get_selected_items()
+	
 	if selected.size() == 0:
 		_sendToChatDisplay("Selecciona un jugador primero.")
 		return
@@ -348,7 +350,16 @@ func _on_actualizar_pressed() -> void:
 	_sendGetUserListEvent()
 	_sendToChatDisplay("Lista actualizada!!!!")
 
-
+func send_ready_request(oponent_id: String):
+	var dataToSend = {
+		"event": 'send-match-request',
+		"data": {
+			"playerId": oponent_id
+		}
+	}
+	_client.send(JSON.stringify(dataToSend))
+	
 func _on_invitar_pressed() -> void:
 	
-	_on_invite_button_pressed()
+	if oponent_id != "":
+		send_ready_request(oponent_id)
