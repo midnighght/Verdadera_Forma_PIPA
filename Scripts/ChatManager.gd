@@ -175,7 +175,7 @@ func _on_web_socket_client_message_received(message: String):
 		"finish-game":
 			# Este evento lo recibes cuando ERES el ganador
 			
-			verdaderaForma_instance.show_victory_screen()
+			get_tree().change_scene_to_file("res://Scenes/FinalGanar.tscn")
 		"game-ended":
 			print(response.msg)
 			_sendToChatDisplay(response.msg)
