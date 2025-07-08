@@ -197,7 +197,8 @@ func _on_web_socket_client_message_received(message: String):
 func _start_game():
 	var juego = preload("res://Scenes/MultiPlayerPlay.tscn").instantiate()
 	verdaderaForma_instance = juego  # Ahora guardas la referencia
-	#juego.chat_instance = self  # Si quieres que el juego tenga acceso al chat
+
+	juego.chat_instance = self  # Si quieres que el juego tenga acceso al chat
 
 	get_tree().root.add_child(juego)
 	self.visible = false
