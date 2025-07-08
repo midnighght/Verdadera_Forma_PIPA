@@ -65,12 +65,12 @@ func switch_direction():
 
 func _on_area_entered(area):
 	area.get_parent().queue_free()
+	emit_signal("death")
 	sprite.play("switch")
 	dying = true
-	death_timer.start(1)
+	death_timer.start(0.5)
 
 func _on_death():
-	emit_signal("death")
 	queue_free()
 
 func _on_body_entered(body):

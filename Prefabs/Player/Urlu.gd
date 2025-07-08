@@ -35,8 +35,8 @@ var main_control_ref: Control = null
 @onready var pause_menu = get_node(PAUSE_PATH)
 @export var MAX_SANITY: 			float = 360
 @export var SANITY: 				float = 360
-@export var SANITY_DRAIN_PASSIVE:	float = 0.18
-@export var SANITY_DRAIN_MOON:		float = 1.0
+@export var SANITY_DRAIN_PASSIVE:	float = 0.15
+@export var SANITY_DRAIN_MOON:		float = 0.8
 
 #arrow variables
 @export var ARROW_PATH: PackedScene
@@ -227,8 +227,6 @@ func take_damage(damage: float):
 var not_sent=true
 
 func die():
-	
-	
 	print(get_tree().current_scene.scene_file_path)
 	if get_tree().current_scene.scene_file_path == "res://Scenes/MultiPlayerPlay.tscn":
 		var chat_instance = get_node("/root/chat-window")
@@ -240,10 +238,9 @@ func die():
 		else:
 			print("⚠️ No se encontró el nodo 'chat-window'")
 
-
 	else:
 		pause_menu.call("disable_pause_menu")
-		gameover.call("death") # Esto llama a la función de tu nodo "Gameover"
+		gameover.call("death") # Esto llama a la función de "Gameover"
 	
 func apply_remote_event(data: Dictionary):
 	if not data.has("subEvent"):

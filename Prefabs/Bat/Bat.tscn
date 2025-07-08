@@ -103,7 +103,7 @@ animations = [{
 radius = 16.5303
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_iiljc"]
-radius = 24.0
+radius = 33.0606
 
 [node name="Bat" type="Node2D"]
 

@@ -4,9 +4,9 @@ extends Node2D
 
 @export var LUM: float = 0.0
 
-@export var idle_min_time: float = 40.0
-@export var idle_max_time: float = 80.0
-var full_moon_duration: float = 10.0
+@export var idle_min_time: float = 30.0
+@export var idle_max_time: float = 40.0
+var full_moon_duration: float = 7.0
 @export var energy_transition_speed: float = 0.8
 
 @onready var timer = $Timer

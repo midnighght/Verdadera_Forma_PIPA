@@ -4,13 +4,14 @@
 [ext_resource type="Texture2D" uid="uid://mftugvkyp5o1" path="res://Assets/sprites/Misc/antidote.png" id="2_kx3b2"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ygctu"]
+radius = 15.0333
 
 [node name="Antidote" type="Node2D"]
 script = ExtResource("1_kx3b2")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
-scale = Vector2(0.4, 0.4)
+scale = Vector2(0.3, 0.3)
 texture = ExtResource("2_kx3b2")
 offset = Vector2(96.22, -81.595)
 
