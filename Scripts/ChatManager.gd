@@ -173,25 +173,15 @@ func _on_web_socket_client_message_received(message: String):
 				current_popup = null
 		"finish-game":
 			# Este evento lo recibes cuando ERES el ganador
-			_handle_game_end(true, response.msg)
+			verdaderaForma_instance.show_victory_screen()
 		"game-ended":
-			#print(response.msg)
-			#_sendToChatDisplay(response.msg)
-			#verdaderaForma_instance.show_end_popup(false)
-			
-			# Este evento lo recibes cuando ERES el perdedor
-			_handle_game_end(false, response.msg)
+			print(response.msg)
+			_sendToChatDisplay(response.msg)
+			verdaderaForma_instance.show_end_popup(false)
 			
 		"close-match":
 			print(response.msg)
-			_sendToChatDisplay(response.msg)
-			
-			# La limpieza y vuelta al lobby se manejará aquí
-			if verdaderaForma_instance:
-				verdaderaForma_instance.queue_free() # Liberar la escena del juego
-				verdaderaForma_instance = null
-			self.visible = true # Mostrar el UI del chat
-			get_tree().change_scene_to_file("res://Scenes/PONERnombreUSUARIO.tscn") # Vuelve a la escena de selección de nombre
+
 
 
 func _start_game():
