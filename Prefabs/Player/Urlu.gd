@@ -216,13 +216,13 @@ func inShadow():
 
 #region ----------------Other  Functions----------------
 func take_damage(damage: float):
-	SANITY -= damage*5
+	SANITY -= damage*2
 	SANITY = clamp(SANITY, 0, MAX_SANITY) #keep value in range
 #	$AnimationPlayer.play("hurt")
 var not_sent=true
 func die():
-	
-	if get_tree().current_scene.scene_file_path == "res://Scenes/multi_player_play.tscn":
+	print(get_tree().current_scene.scene_file_path)
+	if get_tree().current_scene.scene_file_path == "res://Scenes/MultiPlayerPlay.tscn":
 		not_sent=false
 		chat_instance
 		print("muerte enviada")
