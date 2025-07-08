@@ -156,8 +156,9 @@ func _on_web_socket_client_message_received(message: String):
 			
 			if verdaderaForma_instance and urlu.has_method("apply_remote_event"):
 				urlu.apply_remote_event(response.data)
-			if received_data.has("subEvent") and received_data.subEvent == "defeat":
-				receiveData(received_data)
+			
+			#if received_data.has("subEvent") and received_data.subEvent == "defeat":
+			#	receiveData(received_data)
 				
 		"send-match-request":
 			$VBoxContainer2/RejectButton.visible=true
@@ -186,17 +187,17 @@ func _on_web_socket_client_message_received(message: String):
 		"close-match":
 			print(response.msg)
 
-func receiveData(datos):
-	var msg = ""
-	if datos.has("defeat"):
-		msg = {
-			"event": "finish-game"
-	}
-	_client.send(JSON.stringify(msg))
-	if datos.has("rocket"):
-		get_parent().player.energy -= datos["rocket"]
-	if datos.has("HP"):
-		get_parent().get_node("UI/enemy").set_energy(datos["HP"])
+#func receiveData(datos):
+#	var msg = ""
+#	if datos.has("defeat"):
+#		msg = {
+#			"event": "finish-game"
+#	}
+#	_client.send(JSON.stringify(msg))
+#	if datos.has("rocket"):
+#		get_parent().player.energy -= datos["rocket"]
+#	if datos.has("HP"):
+#		get_parent().get_node("UI/enemy").set_energy(datos["HP"])
 		
 		
 
@@ -209,8 +210,13 @@ func _start_game():
 	get_tree().current_scene = escena_mp
 
 # Ahora accedemos a Urlu dentro del nuevo árbol
-	var urlu := escena_mp.get_node("Player/Urlu")
-	urlu.chat_instance = self  # Si Urlu tiene acceso al chat
+	urlu = escena_mp.get_node("Player/Urlu")
+	if urlu:
+		urlu.chat_instance = self
+	else:
+		print("⚠️ No se encontró el nodo 'Player/Urlu' dentro de MultiPlayerPlay")
+
+	  # Si Urlu tiene acceso al chat
 
 
 	
