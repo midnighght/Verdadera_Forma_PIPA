@@ -296,16 +296,30 @@ func _deleteUserFromList(userId: String):
 
 
 func _on_invite_button_pressed() -> void:
+	var selected_indices = player_list.get_selected_items() # Esto devuelve los índices seleccionados
 	
-	var selected = player_list.get_selected_items()
-	
-	if selected.size() == 0:
+	if selected_indices.size() == 0:
 		_sendToChatDisplay("Selecciona un jugador primero.")
 		return
 
-	oponent_id = player_list.get_item_text(selected[0])
-	if oponent_id != "":
-		send_ready_request(oponent_id)
+	var selected_item_index = selected_indices[0]
+	var target_name = player_list.get_item_text(selected_item_index) # Obtiene el nombre del jugador
+
+	# --- AQUÍ ES DONDE CAMBIA LA LÓGICA ---
+	# Buscar el ID real del oponente usando el nombre que acabamos de obtener.
+	var target_id: String = ""
+	for id_key in players_by_id.keys(): # Iterar sobre las claves (IDs) del diccionario
+		if players_by_id[id_key] == target_name: # Si el nombre asociado a este ID coincide con el nombre objetivo
+			target_id = id_key # Hemos encontrado el ID
+			break # Salir del bucle una vez encontrado
+
+	if target_id.is_empty():
+		_sendToChatDisplay("Error: No se pudo encontrar el ID del jugador '%s'. La lista de IDs puede estar desactualizada." % target_name)
+		return
+
+	# Ahora que tenemos el ID correcto, lo enviamos.
+	send_ready_request(target_id)
+	_sendToChatDisplay("Solicitud de partida enviada a %s (ID: %s)" % [target_name, target_id])
 
 
 func _on_accept_button_pressed():
