@@ -6,7 +6,7 @@ extends Node2D
 
 @export var idle_min_time: float = 30.0
 @export var idle_max_time: float = 40.0
-var full_moon_duration: float = 7.0
+var full_moon_duration: float = 5.0
 @export var energy_transition_speed: float = 0.8
 
 @onready var timer = $Timer
@@ -41,7 +41,7 @@ func _process(delta):
 		if light_cast.energy >= MAX_ENERGY:
 			light_cast.energy = MAX_ENERGY
 			transitioning_up = false
-			timer.start(full_moon_duration + randf_range(0.0, 6.0))
+			timer.start(full_moon_duration + randf_range(0.0, 3.0))
 	elif transitioning_down:
 		light_cast.energy -= energy_transition_speed * delta
 		if light_cast.energy <= 0.0:
