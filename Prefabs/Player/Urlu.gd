@@ -48,7 +48,8 @@ var cursor_angle: float
 @onready var collision_S		= $CollisionShape2D_S
 @onready var collision_P		= $CollisionShape2D_P
 @onready var platform_timer 	= $PlatformClipTimer
-
+#multi
+var chat_instance: Node
 #endregion
 
 func _input(event):
@@ -218,27 +219,22 @@ func take_damage(damage: float):
 	SANITY -= damage*0.75
 	SANITY = clamp(SANITY, 0, MAX_SANITY) #keep value in range
 #	$AnimationPlayer.play("hurt")
-
+var not_sent=true
 func die():
-	print("DEBUG: Player has died.")
 	
-	# --- NUEVO: Revisa si el jugador está en la escena multijugador ---
-	var current_scene_path = get_tree().current_scene.scene_file_path
-	var multiplayer_scene_path = "res://Scenes/MultiPlayerPlay.tscn" # Asegúrate de que esta ruta sea correcta
-
-	if main_control_ref and current_scene_path == multiplayer_scene_path:
-		print("DEBUG: Jugador murió en la escena multijugador. Notificando al servidor.")
-		# Envía un evento de juego indicando que ESTE jugador ha muerto
-		main_control_ref.sendGameData({"is_dead": true, "player_id": main_control_ref.my_id})
-	elif main_control_ref:
-		print("DEBUG: Jugador murió, pero no en la escena multijugador. No se envía al servidor.")
-	else:
-		print("ADVERTENCIA: main_control_ref es null. No se puede notificar al servidor.")
+	if chat_instance and not_sent:
+		not_sent=false
+		chat_instance
+		print("muerte enviada")
+	#cargar escena gameover
+func apply_remote_event(data):
+	match (data.subEvent):
+		
+		"death":
+			chat_instance.on_opponent_defeated()
+		"surrender":
+			chat_instance.on_opponent_defeated()
 	
-	# Lógica de muerte local (siempre se ejecuta, independientemente de si es multijugador o no)
-	pause_menu.call("disable_pause_menu")
-	gameover.call("death") # Esto llama a la función de tu nodo "Gameover"
-
 func shoot():
 	var arrow = ARROW_PATH.instantiate()
 	get_tree().current_scene.add_child(arrow)
