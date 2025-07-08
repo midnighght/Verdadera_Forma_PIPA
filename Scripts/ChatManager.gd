@@ -156,7 +156,7 @@ func _on_web_socket_client_message_received(message: String):
 			
 			if verdaderaForma_instance and verdaderaForma_instance.has_method("apply_remote_event"):
 				verdaderaForma_instance.apply_remote_event(response.data)
-			if received_data == "defeat":
+			if received_data.has("subEvent") and received_data.subEvent == "defeat":
 				receiveData(received_data)
 				
 		"send-match-request":
